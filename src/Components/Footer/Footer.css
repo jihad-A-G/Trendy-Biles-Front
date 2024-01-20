@@ -50,13 +50,24 @@
     text-align: center;
   }
   
+  .links-column a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .links-column a:hover {
+    color: #69a05d;
+  }
+  
+  
   footer h2 {
     margin: 0 0 10px;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: rgb(#717274 / 96%);
+
   }
   
   footer p {
@@ -75,16 +86,9 @@
   .legal > span {
     margin-right: 10px;
   }
-  
+
   footer.top .socials {
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    translate: -50% 0;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    height: 56px;
+    width: 20%;
   }
   
   footer.top .socials > a {
