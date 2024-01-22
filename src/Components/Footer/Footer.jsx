@@ -1,5 +1,5 @@
-import React from 'react';
-import './Footer.css'; 
+import React from "react";
+import "./Footer.css";
 import Logo from "../../assets/FullLogo2.jpg";
 import Facebook from "../../assets/facebook.svg";
 import Twitter from "../../assets/twitter.svg";
@@ -9,8 +9,9 @@ import Linkedin from "../../assets/linkedin.svg";
 const Footer = () => {
   return (
     <section>
+      <div className="line"></div>
+      <img className="FooterFullLogo" src={Logo} alt="Logo" />
       <footer className="top">
-        <img className='FullLogo' src={Logo} alt="Logo" />
         <div className="links">
           <div className="links-column">
             <h2>NAVIGATE</h2>
@@ -36,10 +37,18 @@ const Footer = () => {
               progress.
             </p>
             <div className="socials">
-              <a className="facebook" href="https://www.facebook.com"><img src={Facebook} alt="" /></a>
-              <a className="instagram" href="https://www.instagram.com"><img src={Instagram} alt="" /></a>
-              <a className="linkedin" href="https://www.linkedin.com"><img src={Linkedin} alt="" /></a>
-              <a className="Twitter" href="https://www.twitter.com"><img src={Twitter} alt="" /></a>
+              <a className="facebook" href="https://www.facebook.com">
+                <img className="img" src={Facebook} alt="" />
+              </a>
+              <a className="instagram" href="https://www.instagram.com">
+                <img className="img" src={Instagram} alt="" />
+              </a>
+              <a className="linkedin" href="https://www.linkedin.com">
+                <img className="img" src={Linkedin} alt="" />
+              </a>
+              <a className="Twitter" href="https://www.twitter.com">
+                <img className="img" src={Twitter} alt="" />
+              </a>
             </div>
           </div>
         </div>

@@ -1,0 +1,26 @@
+/* CustomerSupportPage.css */
+
+.customer-support-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1, h2 {
+    color: #333;
+  }
+  
+  .confidence-message {
+    margin-bottom: 20px;
+  }
+  
+  .warranty-section, .return-policy-section {
+    margin-bottom: 30px;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  /* Add more styling as needed */
+  

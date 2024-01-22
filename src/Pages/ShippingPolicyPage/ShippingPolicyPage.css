@@ -1,0 +1,21 @@
+/* ShippingPolicyPage.css */
+
+.shipping-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+.shipping-policy-container 
+     h1, h2, h3 {
+    color: #333;
+  }
+  
+.shipping-policy-container 
+     ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+
+  
