@@ -12,7 +12,8 @@ import ShippingPolicy from "./Pages/ShippingPolicyPage/ShippingPolicyPage.jsx";
 import CustomerSupport from "./Pages/CustomerSupportPage/CustomerSupportPage.jsx";
 import PriceMatchingPolicy from "./Pages/PriceMatchingPolicyPage/PriceMatchingPolicyPage.jsx";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage.jsx";
-import NotFoundPage from "./Pages/NotFoundPage/NotFound.jsx";
+// import NotFoundPage from "./Pages/NotFoundPage/NotFound.jsx";
+import ContactUs from './Pages/ContactUs/ContactUs.jsx'
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
         <Route path="Customer-Support" element={<CustomerSupport />} />
         <Route path="Price-Matching-Policy" element={<PriceMatchingPolicy />} />
         {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="contact" element={<ContactUs />} />
+
       </Routes>
       <Footer/>
     </Router>
