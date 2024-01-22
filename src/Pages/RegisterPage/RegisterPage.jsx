@@ -22,11 +22,11 @@ const RegisterLogin = () => {
               <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
             </div> */}
             <span>or use your email for registration</span>
-            <input type="text" placeholder="UserName" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <input type="text" placeholder="PhoneNumber" />
-            <input type="text" placeholder="Address" />
+            <input className='Registerinput' type="text" placeholder="UserName" />
+            <input className='Registerinput' type="email" placeholder="Email" />
+            <input className='Registerinput' type="password" placeholder="Password" />
+            <input className='Registerinput' type="text" placeholder="PhoneNumber" />
+            <input className='Registerinput' type="text" placeholder="Address" />
             <button>Sign Up</button>
           </form>
         </div>
@@ -39,8 +39,8 @@ const RegisterLogin = () => {
               <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
             </div> */}
             <span> use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input className='Registerinput' type="email" placeholder="Email" />
+            <input className='Registerinput' type="password" placeholder="Password" />
             <a href="#">Forgot your password?</a>
             <button>Sign In</button>
           </form>
