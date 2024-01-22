@@ -49,7 +49,7 @@ function ContactUs() {
 
   return (
     <>
-<div className="content-wrapper"> {/* This wrapper will prevent overlap */}
+<div className="content-wrapper"> 
     <div className="Home-Parent">    <img className="Home-Parent-Image" src={FullLogo} alt="Trendy Biles logo" />
     <form className="Home-Parent-Form" onSubmit={handleSubmit}>
       <h1 className="Form-Header">CONTACT US</h1>

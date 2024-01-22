@@ -14,7 +14,7 @@
 }
 
 .Home-Parent-Form {
-    width: 60%; /* Adjusted for better balance */
+    width: 50%; /* Adjusted for better balance */
     padding: 40px;
     display: flex;
     flex-direction: column;
