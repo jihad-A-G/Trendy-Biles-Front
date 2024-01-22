@@ -1,8 +1,14 @@
 import React from "react";
 import "./NotFound.css"
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 const App = () => {
+  const navigate = useNavigate();
+
+  const handleGoHomeClick = () => {
+    navigate("/");
+  };
   return (
-    <a href="https://codepen.io/uiswarup/full/vYPxywO" target="_blank">
+     <div className="NotFoundPage">
       <header className="top-header"></header>
 
       {/* Dust particles */}
@@ -13,19 +19,6 @@ const App = () => {
         <div className="starfifth"></div>
       </div>
       {/* Dust particles end */}
-
-      {/* Lamp */}
-      <div className="lamp__wrap">
-        <div className="lamp">
-          <div className="cable"></div>
-          <div className="cover"></div>
-          <div className="in-cover">
-            <div className="bulb"></div>
-          </div>
-          <div className="light"></div>
-        </div>
-      </div>
-
       <section className="error">
         <div className="error__content">
           <div className="error__message message">
@@ -37,15 +30,14 @@ const App = () => {
             </p>
           </div>
           <div className="error__nav e-nav">
-            <a
-              href="http://www.thedresscounter.com"
-              target="_blank"
-              className="e-nav__link"
-            ></a>
+          <button onClick={handleGoHomeClick} className="e-nav__link">
+        
+            </button>
           </div>
         </div>
       </section>
-    </a>
+    
+    </div> 
   );
 };
 

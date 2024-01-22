@@ -48,7 +48,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="dropdown">
-          <Link to="/customer-service">
+          <Link>
             Customer Service
             <img src={chevron} alt="Chevron" />
           </Link>
