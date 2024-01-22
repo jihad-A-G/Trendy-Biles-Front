@@ -1,0 +1,23 @@
+/* PriceMatchingPolicyPage.css */
+
+.price-matching-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .price-matching-policy-container h1, h2 {
+    color: #333;
+  }
+  
+ .price-matching-policy-container ul {
+    list-style-type: square;
+    margin-left: 20px;
+  }
+  
+  strong {
+    color: #e44d26; /* Adjust the color as needed */
+  }
+  
+  /* Add more styling as needed */
+  
