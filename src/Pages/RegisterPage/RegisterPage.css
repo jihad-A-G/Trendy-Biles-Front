@@ -1,16 +1,16 @@
 
-h1 {
+.RegisterLoginPage h1 {
 	font-weight: bold;
 	margin-bottom: 4px;
     color: #231f20;
 }
 
-h2 {
+.RegisterLoginPage h2 {
 	text-align: center;
     color: #231f20;
 }
 
-p {
+.RegisterLoginPage p {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
@@ -19,7 +19,7 @@ p {
     color: #231f20;
 }
 
-span {
+.RegisterLoginPage span {
 	font-size: 12px;
     color: #231f20;
 }
@@ -31,7 +31,7 @@ span {
 	margin: 15px 0;
 }
 
-button {
+.RegisterLoginPage button {
 	border-radius: 20px;
 	border: 1px solid #231f20;
 	background-color: #FFFFFF;
@@ -45,20 +45,20 @@ button {
 	transition: transform 80ms ease-in;
 }
 
-button:active {
+.RegisterLoginPage button:active {
 	transform: scale(0.95);
 }
 
-button:focus {
+.RegisterLoginPage button:focus {
 	outline: none;
 }
 
-button.ghost {
+.RegisterLoginPage button.ghost {
 	background-color: transparent;
 	border-color: #221e1f;
 }
 
-form {
+.RegisterLoginPage form {
 	background-color: #689f5c;
 	display: flex;
 	align-items: center;
@@ -69,7 +69,7 @@ form {
 	text-align: center;
 }
 
-input {
+.Registerinput {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
@@ -78,7 +78,7 @@ input {
     border-radius: 33px;
 }
 
-.container {
+.RegisterLoginPage .container {
 	background-color: #57585a;
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
