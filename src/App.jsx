@@ -1,13 +1,14 @@
 import './App.css'
+import ProductComponent from './components/productComponent/productComponent.jsx'
 
-function App() {
+const  App = () => {
 
   return (
-    <>
+    
       <div>
-      
+        <ProductComponent></ProductComponent>
       </div>
-    </>
+    
   )
 }
 
