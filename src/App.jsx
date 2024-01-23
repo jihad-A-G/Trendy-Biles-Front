@@ -11,6 +11,7 @@ import CustomerSupport from "./Pages/CustomerSupportPage/CustomerSupportPage.jsx
 import PriceMatchingPolicy from "./Pages/PriceMatchingPolicyPage/PriceMatchingPolicyPage.jsx";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage.jsx";
 import NotFoundPage from "./Pages/NotFoundPage/NotFound.jsx";
+import ContactUs from "./Pages/ContactUs/ContactUs.jsx";
 import "./App.css";
 
 const DefaultRoutes = () => {
@@ -40,6 +41,7 @@ const DefaultRoutes = () => {
           element={<PriceMatchingPolicy />}
           onEnter={handleNavigationError}
         />
+      <Route path="/contact" element ={<ContactUs/>}/> 
       </Routes>
       <Footer />
     </div>
