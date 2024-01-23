@@ -53,9 +53,9 @@ const Navbar = () => {
             <img src={chevron} alt="Chevron" />
           </Link>
           <div className="menu">
-            <Link to="/Customer-Support">Customer Support</Link>
+            <Link to="/customer-support">Customer Support</Link>
             <Link to="/shipping-policy">Shipping Policy</Link>
-            <Link to="/Price-Matching-Policy">Price Matching Policy</Link>
+            <Link to="/price-matching-policy">Price Matching Policy</Link>
           </div>
         </div>
       </div>
