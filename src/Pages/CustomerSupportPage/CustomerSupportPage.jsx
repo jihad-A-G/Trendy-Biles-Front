@@ -3,8 +3,9 @@ import "./CustomerSupportPage.css";
 
 const CustomerSupportPage = () => {
   return (
-    <div className="customer-support-container">
+    <div className="SupportHeading">
       <h1>Customer Support</h1>
+    <div className="customer-support-container">
       <p className="confidence-message">
         Shop with 100% Confidence. We want you to be confident that you will
         receive the type of customer service you’ve come to expect from Trendy-Biles.
@@ -53,6 +54,7 @@ const CustomerSupportPage = () => {
           <li>The serial number on the product is unknown.</li>
           <li>The item has been repaired by a third party.</li>
         </ul>
+      </div>
       </div>
     </div>
   );

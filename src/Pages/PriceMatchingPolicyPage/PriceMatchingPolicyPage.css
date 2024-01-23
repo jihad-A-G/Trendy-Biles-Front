@@ -1,23 +1,111 @@
-/* PriceMatchingPolicyPage.css */
+.matchingpolicy {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 
-.price-matching-policy-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  color: #333;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+}
+.price-matching-policy-container2 {
+  margin-left: 100px;
+}
+
+.Heading h1 {
+  color: #e44d26;
+  transition: background 0.3s ease, color 0.3s ease;
+  margin-top:  20px;
+  margin-left: 550px;
+}
+
+.matchingpolicy h1, 
+.price-matching-policy-container h2 {
+  color: #69a05d; /* Modern blue color, adjust as needed */
+  transition: color 0.3s ease;
+}
+
+.matchingpolicy p {
+  line-height: 1.6;
+  transition: color 0.3s ease;
+
+}
+
+.matchingpolicy ul {
+  list-style-type: none;
+  padding-left: 20px;
+  transition: color 0.3s ease;
+}
+
+.matchingpolicy ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.matchingpolicy ul li::before {
+  content: '\2022'; /* Bullet point character */
+  position: absolute;
+  left: 0;
+  color: #e74c3c; /* Adjust the color as needed */
+  transition: color 0.3s ease;
+}
+
+.matchingpolicy strong {
+  color: #e44d26; /* Adjust the color as needed */
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Hover effects */
+.matchingpolicy a {
+  color: #69a05d;
+  transition: color 0.3s ease;
+}
+
+.matchingpolicy a:hover {
+  color: #69a05d; /* Darker blue on hover, adjust as needed */
+}
+
+/* Add more styling and animations as needed */
+/* Add your existing styles here */
+
+/* Mobile-first styles */
+.matchingpolicy {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Adjust for mobile layout */
+  align-items: center;
+  justify-content: center;
+}
+
+.price-matching-policy-container2 {
+  margin-left: 0; /* Adjust for mobile layout */
+}
+
+.Heading h1 {
+  margin-left: 0; /* Adjust for mobile layout */
+}
+
+@media (min-width: 738px) {
+  /* Tablet and larger screens */
+  .matchingpolicy {
+    flex-direction: row; /* Adjust for larger screens */
+    justify-content: space-between;
+    align-items: flex-start;
   }
-  
-  .price-matching-policy-container h1, h2 {
-    color: #333;
+
+  .price-matching-policy-container2 {
+    margin-left: 100px; /* Adjust for larger screens */
   }
-  
- .price-matching-policy-container ul {
-    list-style-type: square;
-    margin-left: 20px;
+
+  .Heading h1 {
+    margin-left: 550px; /* Adjust for larger screens */
   }
-  
-  strong {
-    color: #e44d26; /* Adjust the color as needed */
-  }
-  
-  /* Add more styling as needed */
-  
+}
