@@ -1,5 +1,6 @@
 import {Card,Button} from 'react-bootstrap'
 import test from '../../assets/images/pexels-luis-quintero-3689532.jpg'
+// eslint-disable-next-line react/prop-types
 const ProductCard = ({status}) =>{
     return(
         <>
@@ -9,7 +10,7 @@ const ProductCard = ({status}) =>{
         <Card.Title>Card Title</Card.Title>
         <Card.Text>
           Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          bulk of the cards content.
         </Card.Text>
             {
                 status ==='new'?<div className="d-flex justify-content-center w-100"><Button className='bg-dark green-hover w-100 border-0'>Publish</Button></div> : status === 'accepted'?
