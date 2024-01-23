@@ -7,3 +7,11 @@ export default function HomePage() {
     <div>{data.aboutusContent.content}</div>
   )
 }
+//  import React from 'react'
+ 
+//  export default function HomePage() {
+//    return (
+//      <div>HomePage</div>
+//    )
+//  }
+ 
