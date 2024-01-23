@@ -11,6 +11,8 @@ import CustomerSupport from "./Pages/CustomerSupportPage/CustomerSupportPage.jsx
 import PriceMatchingPolicy from "./Pages/PriceMatchingPolicyPage/PriceMatchingPolicyPage.jsx";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage.jsx";
 import NotFoundPage from "./Pages/NotFoundPage/NotFound.jsx";
+import ProductComponent from "./Components/ProductComponent/ProductComponent.jsx";
+import ProductPage from "./Pages/ProductPage/ProductPage.jsx";
 import "./App.css";
 
 const DefaultRoutes = () => {
@@ -26,11 +28,16 @@ const DefaultRoutes = () => {
       <Navbar />
       <Routes>
         <Route
+          path="/"
+          element={<ProductPage />}
+          onEnter={handleNavigationError}
+        />
+          <Route
           path="/Shipping-Policy"
           element={<ShippingPolicy />}
           onEnter={handleNavigationError}
         />
-        <Route
+        <Route  
           path="/Customer-Support"
           element={<CustomerSupport />}
           onEnter={handleNavigationError}
