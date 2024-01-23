@@ -10,7 +10,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <RouterProvider router={router}/> */}
+    <RouterProvider router={router}/>
     <ToastContainer />
   </React.StrictMode>,
 );
