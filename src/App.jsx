@@ -5,14 +5,14 @@ import Footer from "./Components/Footer/Footer.jsx";
 
 import "./App.css";
 
-const App= ()=> {
+const App = () => {
   return (
     <div>
       <Navbar />
-     <Outlet/>
+      <Outlet />
       <Footer />
     </div>
   );
-}
+};
 
 export default App;
