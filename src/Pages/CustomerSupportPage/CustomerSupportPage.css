@@ -28,4 +28,11 @@
     padding-left: 20px;
   }
 
+
+  @media only screen and (max-width: 960px)  {
+    .SupportHeading h1 {
+      margin-left: 80px;
+     }
+  }
+
   
