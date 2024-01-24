@@ -138,10 +138,8 @@ footer.top .socials > img {
   }
 }
 
-@media (width >= 640px) {
+@media (width >= 976px) {
   footer {
-    /* margin: 0 auto;
-      max-width: 580px; */
     padding: 0;
   }
 
@@ -161,3 +159,22 @@ footer.top .socials > img {
     display: block;
   }
 }
+
+@media only screen and (max-width: 960px) {
+  .top {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+  }
+
+  .FooterFullLogo {
+     display: none !important;
+  }
+
+  .socials .img { 
+    width: 80%;
+  }
+}
+
+
+
