@@ -5,8 +5,11 @@ import './PriceMatchingPolicyPage.css';
 
 const PriceMatchingPolicyPage = () => {
   return (
-    <div className="price-matching-policy-container">
-      <h1>Price Matching Policy</h1>
+    <div className="Heading"> <h1>Price Matching Policy</h1>
+    <div className="matchingpolicy">
+     
+    <div className="price-matching-policy-container1">
+    <h2>What we want</h2>
       <p>
         Trendy-Biles is committed to providing low prices every day, on everything. If you find a lower price from an online retailer in Lebanon on an identical, in-stock product, tell us, and we'll match it.
       </p>
@@ -19,6 +22,9 @@ const PriceMatchingPolicyPage = () => {
         <li>We will not offer rain-checks for items that are not currently in stock.</li>
         <li>The item must be sold and fulfilled by companies that are registered in Lebanon and sell online.</li>
       </ul>
+      </div>
+
+      <div className="price-matching-policy-container2">
 
       <p><strong>Sorry, we don't match:</strong></p>
       <ul>
@@ -26,7 +32,6 @@ const PriceMatchingPolicyPage = () => {
         <li>Prices from, or on behalf of Marketplace and third-party sellers.</li>
         <li>Special Discounts applied in checkout.</li>
       </ul>
-
       <h2>How to Match a Trendy-Biles.COM Price to Another Online Retailer:</h2>
       <p>
         If you think you are eligible based on the above, contact us on +961-71-222667 or sales@Trendy-Biles.com before you place your order. We will verify the item eligibility. Trendy-Biles has the final decision for matching an online price.
@@ -38,6 +43,8 @@ const PriceMatchingPolicyPage = () => {
       </p>
 
       <p>Feel free to contact us anytime on 70-777638.</p>
+      </div>
+      </div>
     </div>
   );
 }
