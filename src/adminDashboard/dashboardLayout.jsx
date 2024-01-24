@@ -1,9 +1,8 @@
 import {Col,Row,Container} from 'react-bootstrap'
 import AdminNavBar from './components/navBar';
 import AdminSideBar from './components/sideBar';
-// import ProductsPage from './productsPage';
-import AboutusPage from './aboutUsPage';
 import './admin-style.css'
+import { Outlet } from 'react-router-dom';
 const AdminLayout = () =>{
     return(
 
@@ -15,8 +14,7 @@ const AdminLayout = () =>{
           <AdminSideBar />
         </Col>
         <Col xs={10} id="page-content-wrapper" className='py-4 px-3'>
-          {/* <ProductsPage/> */}
-          <AboutusPage/>
+         <Outlet/>
         </Col>
       </Row>
     </Container>
