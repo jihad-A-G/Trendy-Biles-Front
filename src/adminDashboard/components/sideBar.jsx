@@ -1,4 +1,5 @@
 import { Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 const AdminSideBar = () => {
   const hoverLinks = {
@@ -14,11 +15,11 @@ const AdminSideBar = () => {
      {/* <Nav.Link>Products</Nav.Link> */}
     <Nav.Link style={{hoverLinks}} data-bs-toggle="collapse" href="#productCollapse" role="button">Products</Nav.Link>
     <div className="collapse" id='productCollapse'>
-    <Nav.Link style={{hoverLinks}} href="/home">Published</Nav.Link>
-    <Nav.Link style={{hoverLinks}} href="/home">Pending</Nav.Link>
+    <NavLink className='nav-link' style={{hoverLinks}} to='products'>Published</NavLink>
+    <NavLink className='nav-link' style={{hoverLinks}} to="products">Pending</NavLink>
     </div>
-    <Nav.Link style={hoverLinks} eventKey="link-1">Orders</Nav.Link>
-    <Nav.Link style={hoverLinks} eventKey="link-2">About us</Nav.Link>
+    <NavLink className={'nav-link'} style={hoverLinks} to={'orders'}>Orders</NavLink>
+    <NavLink className={'nav-link'} to={'/admin-dashboard/aboutus'} style={hoverLinks}>About us</NavLink>
     {/* Add more Nav.Link as needed */}
   </Nav>
   );

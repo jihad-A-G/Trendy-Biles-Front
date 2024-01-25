@@ -1,6 +1,8 @@
 import {Button, Container} from 'react-bootstrap'
 import ProductCard from './components/productCard'
+import { useLoaderData } from 'react-router-dom'
 const ProductsPage = () =>{
+  const data = useLoaderData()
     return(
         <>
         <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
@@ -44,16 +46,11 @@ const ProductsPage = () =>{
             </div>
         </Container>
         <Container fluid className='d-flex justify-content-center flex-row flex-wrap column-gap-4 row-gap-4'>
-            <ProductCard status={'new'}/>
-            <ProductCard status={'accepted'}/>
-            <ProductCard status={'pending'}/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-
-
+          {data?data.map(product =>{
+            return <ProductCard key={product._id} data={product}/>
+          }):<div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>}
         </Container>
         
         </>

@@ -1,12 +1,10 @@
 import {Image, Navbar, Container } from 'react-bootstrap';
-import logo from '../../assets/images/WhatsApp Image 2024-01-18 at 12.44.36 AM.jpeg'
-import logoTitle from '../../assets/images/WhatsApp Image 2024-01-18 at 12.44.35 AM.jpeg'
+import logo from '../../assets/FullLogo2.jpg'
 import profile from '../../assets/images/user.png'
 const AdminNavBar = () => (
   <Navbar bg="white" expand='lg' className='border-bottom px-2'>
     <Container className='' fluid>
-      <Navbar.Brand href="#home"><Image className='d-none d-md-inline-block' src={logo} style={{ width: '65px', height: '65px' }}/> 
-      <Image src={logoTitle} style={{ width: '150px' }}/> 
+      <Navbar.Brand href="#home"><Image className='d-none d-md-inline-block' src={logo} style={{ width: '65px', height: '65px' }}/>  
       </Navbar.Brand>
       <div className="nav-item dropdown">
   <a

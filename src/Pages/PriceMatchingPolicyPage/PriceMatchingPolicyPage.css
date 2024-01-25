@@ -109,3 +109,10 @@
     margin-left: 550px; /* Adjust for larger screens */
   }
 }
+
+@media only screen and (max-width: 960px) {
+  .Heading  h1 {
+    margin-left: 50px;
+    padding: 10px;
+  }
+}
