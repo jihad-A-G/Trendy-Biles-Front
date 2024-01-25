@@ -22,8 +22,7 @@ const NewNavbar = () => {
       // Increment the cart count
       setCartCount(cartCount + 1);
     };
-  
-    // Reset the cart count to 0 only on the initial page load
+
     useEffect(() => {
       setCartCount(0);
     }, []);
@@ -76,7 +75,7 @@ const NewNavbar = () => {
             </a>{" "}
           </Link>
           <Link
-            to="/#Contact"
+            to="/contact"
             name={"contactUs"}
             onClick={executeScroll}
             className="N-contact"
@@ -92,7 +91,7 @@ const NewNavbar = () => {
             </a>
           </Link>
           <div className="dropdown">
-          <Link to="/categories">
+          <Link to="/Category">
             Categories
             <img src={chevron} alt="Chevron" />
           </Link>
@@ -104,7 +103,7 @@ const NewNavbar = () => {
           </div>
         </div>
         <div className="dropdown">
-          <Link>
+          <Link to= "/customer-support" >
             Customer Service
             <img src={chevron} alt="Chevron" />
           </Link>
@@ -153,7 +152,7 @@ const NewNavbar = () => {
               </a>
             </Link>
             <Link
-              to="/#Contact"
+              to="/Contact"
               name={"contactUs"}
               onClick={executeScroll}
               className="N-contact"
@@ -169,7 +168,7 @@ const NewNavbar = () => {
               </a>
             </Link>
             <div className="Mobiledropdown">
-          <Link to="/categories">
+          <Link to="/Category">
             Categories
             <img src={chevron} alt="Chevron" />
           </Link>

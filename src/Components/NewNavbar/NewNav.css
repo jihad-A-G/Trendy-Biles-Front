@@ -184,14 +184,12 @@ a.join-link:hover {
     width: 25%;
     margin-top: 30px;
     margin-left: 150px;
-    
+
     color: #f9f9f9;
     background: #57585a;
     text-decoration: none;
     transition: background 0.3s;
-
   }
-
 
   .MobileCart {
     font-size: 30px;
@@ -233,7 +231,6 @@ a.join-link:hover {
     color: #57585a;
     position: relative;
   }
-
 
   a.Mobile-join-link:hover {
     background: #69a05d; /* Change the background color on hover */
