@@ -12,6 +12,16 @@ import { IoCartOutline } from "react-icons/io5";
 const NewNavbar = () => {
     const initialCartCount = parseInt(localStorage.getItem('cartCount')) || 0;
     const [cartCount, setCartCount] = useState(initialCartCount);
+    const [activeLink, setActiveLink] = useState("");
+    const location = useLocation();
+
+    useEffect(() => {
+      // Update the active link when the location changes
+      setActiveLink(location.pathname);
+    }, [location.pathname]);
+
+    const isLinkActive = (link) => link === activeLink;
+
   
     // Update localStorage when cartCount changes
     useEffect(() => {
@@ -56,7 +66,7 @@ const NewNavbar = () => {
         <div className="header_Links">
           <Link
             to="/"
-            className="N-home"
+            className={`N-home ${isLinkActive("/") ? "active" : ""}`}
             onClick={() => {
               scrollToTop;
             }}
@@ -64,7 +74,7 @@ const NewNavbar = () => {
             <a>Home</a>
           </Link>
 
-          <Link to="/#About" name={"aboutus"} onClick={executeScroll}>
+          <Link to="/About" name={"aboutus"} onClick={executeScroll}>
             <a
               onClick={() => {
                 navigate("/", { replace: true });
@@ -76,17 +86,16 @@ const NewNavbar = () => {
             </a>{" "}
           </Link>
           <Link
-            to="/#Contact"
+            to="/contact"
             name={"contactUs"}
             onClick={executeScroll}
-            className="N-contact"
+            className={`N-Contact ${isLinkActive("/contact") ? "active" : ""}`}
           >
             <a
               onClick={() => {
                 navigate("/", { replace: true });
                 executeScroll();
               }}
-              className="N-contact"
             >
               ContactUs
             </a>

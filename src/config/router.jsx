@@ -5,7 +5,7 @@ import CustomerSupportPage from "../Pages/CustomerSupportPage/CustomerSupportPag
 import ShippingPolicyPage from "../Pages/ShippingPolicyPage/ShippingPolicyPage";
 import PriceMatchingPolicyPage from "../Pages/PriceMatchingPolicyPage/PriceMatchingPolicyPage";
 import RegisterLogin from "../Pages/RegisterPage/RegisterPage";
-// import ContactUs from "../Pages/ContactUs/ContactUs";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 import AdminLayout from "../adminDashboard/dashboardLayout";
 import axios from "axios";
 import App from "../App";
@@ -35,10 +35,10 @@ const router = createBrowserRouter([
       path:'price-matching-policy',
       element:<PriceMatchingPolicyPage/>
     }
-    // ,{
-    //   path:'/contact',
-    //   element:<ContactUs/>
-    // }
+    ,{
+      path:'contact',
+      element:<ContactUs/>
+    }
   ]
     },
     //End of application main layout
