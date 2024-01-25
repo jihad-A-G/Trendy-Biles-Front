@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductComponent from '../../Components/ProductComponent/ProductComponent.jsx';
 import './ProductPage.css';
-import ProductViewComponent from '../../Components/ProductView/ProductView.jsx';
+import ProductViewComponent from '../../Components/ProductViewComponent/ProductViewCoponent.jsx'; // Correct import
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -47,7 +47,7 @@ const ProductPage = () => {
         ))}
       </div>
       <div className='productViewComponentMain'>
-        {productDetails.map((item, index) => (
+        {products.map((item, index) => (
           <ProductViewComponent key={index} product={item} />
         ))}
       </div>
