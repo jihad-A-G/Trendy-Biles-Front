@@ -63,7 +63,7 @@ const NewNavbar = () => {
             <a>Home</a>
           </Link>
 
-          <Link to="/#About" name={"aboutus"} onClick={executeScroll}>
+          <Link to="/AboutUsMain" name={"aboutus"} onClick={executeScroll}>
             <a
               onClick={() => {
                 navigate("/", { replace: true });
