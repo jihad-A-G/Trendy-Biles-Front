@@ -1,9 +1,10 @@
 import React from "react";
 import "./CustomerSupportPage.css";
-
+import { Link } from "react-router-dom";
 const CustomerSupportPage = () => {
   return (
     <div className="SupportHeading">
+       <div className="Links"> <Link to="/">Home / <Link to="/customer-support">customer-support</Link></Link></div>
       <h1>Customer Support</h1>
     <div className="customer-support-container">
       <p className="confidence-message">

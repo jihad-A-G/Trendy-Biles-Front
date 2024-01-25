@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import Logo from "../../assets/Logo3.jpg";
 import Facebook from "../../assets/facebook.svg";
@@ -11,24 +12,24 @@ const Footer = () => {
     <section className="FooterSection">
       <div className="line"></div>
       <footer className="top">
-      <img className="FooterFullLogo" src={Logo} alt="Logo" />
+        <img className="FooterFullLogo" src={Logo} alt="Logo" />
         <div className="links">
           <div className="links-column">
             <h2>NAVIGATE</h2>
-            <a href="/">Home</a>
-            <a href="/products">Products</a>
-            <a href="/categories">Categories</a>
-            <a href="/contact">ContactUs</a>
-            <a href="/about">AboutUs</a>
-            <a href="/register">Register</a>
+            <Link to="/">Home</Link>
+            <Link to="/products">Products</Link>
+            <Link to="/Category">Categories</Link>
+            <Link to="/contact">ContactUs</Link>
+            <Link to="/about">AboutUs</Link>
+            <Link to="/Register">Register</Link>
           </div>
           <div className="links-column">
             <h2>CATEGORIES</h2>
-            <a href="/deals">DEALS</a>
-            <a href="/laptops">LAPTOPS</a>
-            <a href="/phones">PHONES</a>
-            <a href="/accessories">Accessories</a>
-            <a href="/pc">PC</a>
+            <Link to="/deals">DEALS</Link>
+            <Link to="/laptops">LAPTOPS</Link>
+            <Link to="/phones">PHONES</Link>
+            <Link to="/accessories">Accessories</Link>
+            <Link to="/pc">PC</Link>
           </div>
           <div className="links-column socials-column">
             <h2>Social Media</h2>
@@ -56,9 +57,9 @@ const Footer = () => {
       <footer className="bottom">
         <p className="copyright">© 2023 All rights reserved</p>
         <div className="legal">
-          <a href="/license">License</a>
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
+          <Link to="/license">License</Link>
+          <Link to="/terms">Terms</Link>
+          <Link to="/privacy">Privacy</Link>
         </div>
       </footer>
     </section>

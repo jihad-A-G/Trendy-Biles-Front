@@ -83,6 +83,7 @@
   font-size: 20px;
   border-radius: 0 3px 3px 0;
   user-select: none;
+  text-decoration: none;
 }
 
 /* Position the "next button" to the right */
@@ -107,7 +108,6 @@
 
 .slider-container {
   position: relative;
-  background: #f1f1f1f1;
 }
 
 /* The dots/bullets/indicators */

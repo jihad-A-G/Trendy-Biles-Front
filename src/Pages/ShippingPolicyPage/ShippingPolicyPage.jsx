@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ShippingPolicyPage.css';
-
+import { Link } from 'react-router-dom';
 const ShippingPolicyPage = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
 
@@ -18,7 +18,7 @@ const ShippingPolicyPage = () => {
         return (
           <div className="H3Ul1">
             <h3>Delivery Within 24 - 48 Hours:</h3>
-            <ul>
+            <ul className='three-per-line-list'>
               <li>Beirut</li>
               <li>Baabda</li>
               <li>Matn</li>
@@ -35,7 +35,7 @@ const ShippingPolicyPage = () => {
         return (
           <div className="H3Ul2">
             <h3>Delivery Within 24 - 72 Hours:</h3>
-            <ul>
+            <ul className='three-per-line-list'>
               <li>Aley</li>
               <li>Batroun</li>
               <li>Bsharri</li>
@@ -50,7 +50,7 @@ const ShippingPolicyPage = () => {
         return (
           <div className="H3Ul3">
             <h3>Delivery Within 3 - 5 Business Days:</h3>
-            <ul>
+            <ul className='three-per-line-list'>
               <li>Akkar</li>
               <li>Baalbek</li>
               <li>Bint Jbeil</li>
@@ -71,6 +71,7 @@ const ShippingPolicyPage = () => {
 
   return (
     <div className="ShippingHeading">
+     <div className="Links"> <Link to="/">Home / <Link to="/shipping-policy">Shipping-Policy</Link></Link></div>
       <h1>Shipping Policy</h1>
       <div className="shipping-policy-container">
         <p>

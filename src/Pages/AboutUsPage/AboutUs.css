@@ -1,0 +1,34 @@
+.AboutUsPage {
+    display: flex ;
+    flex-wrap: wrap;
+    gap: 100px;
+    padding-top: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.AboutUsHeading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #69a05d;
+    padding-top: 30px;
+}
+
+.AboutUsText {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 30px 150px;
+}
+
+@media only screen and (max-width: 960px) {
+    .AboutUsText {
+        font-size: 18px;
+        padding: 3px 20px;
+        border: #69a05d 1px solid;
+        max-height: 300px; 
+        overflow: scroll;
+
+    }
+}
