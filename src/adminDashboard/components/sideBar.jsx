@@ -16,9 +16,9 @@ const AdminSideBar = () => {
     <Nav.Link style={{hoverLinks}} data-bs-toggle="collapse" href="#productCollapse" role="button">Products</Nav.Link>
     <div className="collapse" id='productCollapse'>
     <NavLink className='nav-link' style={{hoverLinks}} to='products'>Published</NavLink>
-    <NavLink className='nav-link' style={{hoverLinks}} to="/admin-dashboard/products">Pending</NavLink>
+    <NavLink className='nav-link' style={{hoverLinks}} to="products">Pending</NavLink>
     </div>
-    <Nav.Link style={hoverLinks} eventKey="link-1">Orders</Nav.Link>
+    <NavLink className={'nav-link'} style={hoverLinks} to={'orders'}>Orders</NavLink>
     <NavLink className={'nav-link'} to={'/admin-dashboard/aboutus'} style={hoverLinks}>About us</NavLink>
     {/* Add more Nav.Link as needed */}
   </Nav>

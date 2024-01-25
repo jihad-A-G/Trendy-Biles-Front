@@ -11,6 +11,8 @@ import axios from "axios";
 import App from "../App";
 import ProductsPage from "../adminDashboard/productsPage";
 import AboutusPage from "../adminDashboard/aboutUsPage";
+import NotFound from "../Pages/NotFoundPage/NotFound";
+import OrdersTable from "../adminDashboard/orders/ordersTable";
 
 const router = createBrowserRouter([
 //Application main layout
@@ -49,17 +51,54 @@ const router = createBrowserRouter([
       children:[
         {
           path:'products',
-          element:<ProductsPage/>
+          element:<ProductsPage/>,
+          loader: async () =>{
+            const response = await axios.get('http://localhost:4000/api/products/')
+            return response.data
+          }
         },
         {
           path:'aboutus',
-          element:<AboutusPage/>
+          element:<AboutusPage/>,
+          loader: async () =>{
+            const response = await axios.get('http://localhost:4000/api/aboutus/')
+            console.log(response.data);
+            return response.data.aboutus
+          },
+          action: async({request})=>{
+            const formData = await request.formData()
+            const data = Object.fromEntries(formData)
+            console.log(data);
+
+            const response = await axios.put('http://localhost:4000/api/aboutus/',{...data})
+
+
+            return response
+          }
+
+
+        },
+        {
+          path:'orders',
+          element:<OrdersTable/>,
+          // loader: async () =>{
+          //   const response = await axios.get('http://localhost:4000/api/orders/')
+          //   console.log(response.data);
+          //   return response.data
+          // }
+
+
         }
       ]
     },
+    //End admin layout 
     {
       path:'/register',
       element:<RegisterLogin/>
+    },
+    {
+      path:'*',
+      element:<NotFound/>
     }
 ])
 
