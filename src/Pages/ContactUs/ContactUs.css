@@ -1,4 +1,4 @@
-.Home-Parent {
+.Contact-Home-Parent {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,12 +6,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.Home-Parent-Image {
+.Contact-Home-Parent-Image {
     width: 40%; /* Adjusted for better balance */
     height: auto;
 }
 
-.Home-Parent-Form {
+.Contact-Home-Parent-Form {
     width: 50%; /* Adjusted for better balance */
     padding-left: 40px;
     padding-right: 40px;
@@ -24,7 +24,7 @@
     border-radius: 16px; /* Rounded corners */
 }
 
-.Home-Form-Input, .Home-Form-TextArea {
+.Contact-Home-Form-Input, .Contact-Home-Form-TextArea {
     background-color: #f9f9f9;
     width: 100%; /* Full width of parent */
     margin: 10px 0; /* More vertical space */
@@ -35,14 +35,14 @@
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
 }
 
-.Input-Label {
+.Contact-Input-Label {
     text-align: left; /* Align to the left for natural reading flow */
     margin: 10px 0;
     font-size: 18px; /* Larger font size for readability */
     color: #333; /* Darker color for better readability */
 }
 
-.Home-Form-Button {
+.Contact-Home-Form-Button {
     margin-top: 15px; /* More space above the button */
     width: 100%; /* Full width for a more modern look */
     border-radius: 8px;
@@ -55,11 +55,11 @@
     transition: background-color 0.3s ease; /* Transition for smoother hover effect */
 }
 
-.Home-Form-Button:hover {
+.Contact-Home-Form-Button:hover {
     background-color: #5d8a57; /* Darker shade on hover for feedback */
 }
 
-.Form-Header {
+.Contact-Form-Header {
     margin-bottom: 20px; /* More space above the form */
     color: #333; /* Darker color for contrast */
     font-size: 36px; /* Larger font size for importance */
@@ -68,31 +68,31 @@
 
 /* Add this media query for responsiveness */
 @media (max-width: 768px) {
-    .Home-Parent {
+    .Contact-Home-Parent {
         flex-direction: column; /* Stack the logo and form on smaller screens */
         justify-content: flex-start; /* Align to the start */
         height: auto; /* Height auto for smaller screens */
         padding: 20px; /* Add some padding */
     }
 
-    .Home-Parent-Image {
+    .Contact-Home-Parent-Image {
         width: 80%; /* Adjust image width on smaller screens */
         margin-bottom: 20px; /* Add space between image and form */
     }
 
-    .Home-Parent-Form {
+    .Contact-Home-Parent-Form {
         width: 100%; /* Form takes full width on smaller screens */
         padding: 20px; /* Adjust padding */
     }
 }
 
 /* Modify the text area height */
-.Home-Form-TextArea {
+.Contact-Home-Form-TextArea {
     height: 200px; /* Make the text area larger */
 }
 
 /* Ensure the content doesn't overlap with the navbar or footer */
-.content-wrapper {
+.Contact-Main {
     padding-top: 70px; /* Adjust top padding to not overlap the navbar */
     padding-bottom: 70px; /* Adjust bottom padding to not overlap the footer */
     min-height: calc(100vh - 140px); /* Adjust the min-height */

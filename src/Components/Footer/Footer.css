@@ -174,7 +174,15 @@ footer.top .socials > img {
   .socials .img { 
     width: 80%;
   }
+  /* .bottom  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  } */
 }
+
+
 
 
 

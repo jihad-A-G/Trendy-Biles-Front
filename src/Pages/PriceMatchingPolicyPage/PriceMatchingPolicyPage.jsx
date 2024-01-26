@@ -1,10 +1,11 @@
 // PriceMatchingPolicyPage.jsx
-
+import { Link } from 'react-router-dom';
 import React from 'react';
 import './PriceMatchingPolicyPage.css';
-
 const PriceMatchingPolicyPage = () => {
   return (
+    <>
+    <div className="Links"> <Link to="/">Home / <Link to="/price-matching-policy">PriceMatchingPolicy</Link></Link></div>
     <div className="Heading"> <h1>Price Matching Policy</h1>
     <div className="matchingpolicy">
      
@@ -46,6 +47,7 @@ const PriceMatchingPolicyPage = () => {
       </div>
       </div>
     </div>
+    </>
   );
 }
 

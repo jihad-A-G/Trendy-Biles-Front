@@ -3,6 +3,17 @@
   display: flex;
   border-bottom: 1px solid #e1e1e1; /* Add a line under the navigation bar */
 }
+
+.N-home.active,
+.N-about.active,
+.N-Contact.active,
+.N-aboutUsMain
+/* Add other active link classes as needed */
+{
+  color: #69a05d;
+  background-color: white;
+}
+
 .Navbar {
   display: flex;
   align-items: center;
@@ -16,7 +27,7 @@
 
 .N-home {
   text-decoration: none;
-  color: #57585a;
+  color: #57585a; 
 }
 .N-categories {
   text-decoration: none;
@@ -322,3 +333,6 @@ a.join-link:hover {
     background: #f5f5f5;
   }
 }
+
+
+
