@@ -3,20 +3,18 @@
   margin-top: 10px; 
   margin-left: 5rem;
 }
-section {
-  /* position: fixed; */
+.FooterSection {
   left: 0;
   bottom: 12px;
   width: 100%;
   background: #ffffff;
-  padding-right: 200px;
+  padding-right: 90px;
 }
 
  .FooterFullLogo {
-  width: 30%;
-  height: 160px;
-  margin-left: 30rem;
-  /* margin-top: 7rem; */
+  width: 20%;
+  height: 200px;
+  margin-left: 90px;
 }
 
 footer {
@@ -26,7 +24,7 @@ footer {
 }
 
 footer.top {
-  /* display: grid; */
+ display: flex;
   border-bottom: 2px solid rgb(#717274 / 20%);
   padding-bottom: 40px;
 }
@@ -37,7 +35,6 @@ footer.bottom {
   justify-content: space-between;
   flex-direction: column-reverse;
   gap: 8px;
-  padding: 70px 0;
   margin-left: 33rem;
   text-align: center;
 }
@@ -46,7 +43,8 @@ footer.top .links {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 30px;
-  margin-bottom: 30px;
+  margin-top: 30px;
+  margin-left: 100px;
 }
 
 .links-column {
@@ -98,12 +96,17 @@ footer.top .socials {
   margin: 1px;
 }
 
-footer.top .socials > a {
-  font-size: 24px;
+footer.top .socials > img {
+  font-size: 54px;
 }
 
 .socials-column :is(h2, p) {
   display: none;
+}
+.socials {
+  display: grid;
+  grid-template-columns: repeat(5, 100%);
+  margin-top: 30px;
 }
 
 @media (width > 400px) {
@@ -131,14 +134,12 @@ footer.top .socials > a {
   }
 
   footer.top > img {
-    margin: 0 0 50px;
+    margin-top: 30px;
   }
 }
 
-@media (width >= 640px) {
+@media (width >= 976px) {
   footer {
-    /* margin: 0 auto;
-      max-width: 580px; */
     padding: 0;
   }
 
@@ -158,3 +159,22 @@ footer.top .socials > a {
     display: block;
   }
 }
+
+@media only screen and (max-width: 960px) {
+  .top {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+  }
+
+  .FooterFullLogo {
+     display: none !important;
+  }
+
+  .socials .img { 
+    width: 80%;
+  }
+}
+
+
+

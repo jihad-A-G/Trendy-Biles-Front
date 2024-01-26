@@ -1,7 +1,7 @@
 import React from "react";
 import "./NotFound.css"
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-const App = () => {
+const NotFound = () => {
   const navigate = useNavigate();
 
   const handleGoHomeClick = () => {
@@ -41,4 +41,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default NotFound;

@@ -1,13 +1,19 @@
 /* CustomerSupportPage.css */
-
+ .SupportHeading h1 {
+  color: #e44d26;
+  transition: background 0.3s ease, color 0.3s ease;
+  margin-top:  30px;
+  margin-left: 590px;
+ }
 .customer-support-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  h1, h2 {
-    color: #333;
+ .customer-support-container h1, h2 {
+    color: #e45138;
+
   }
   
   .confidence-message {
@@ -18,9 +24,15 @@
     margin-bottom: 30px;
   }
   
-  ul {
+  .customer-support-container ul {
     padding-left: 20px;
   }
-  
-  /* Add more styling as needed */
+
+
+  @media only screen and (max-width: 960px)  {
+    .SupportHeading h1 {
+      margin-left: 80px;
+     }
+  }
+
   

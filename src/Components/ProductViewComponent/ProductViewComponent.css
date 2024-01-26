@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .mainProductView {
+    background-color: white;
+    display: flex;
+    border: 1px solid #4cd964;
+    width: 100%;
+    margin: 20px 0;
+    height: 600px;
+  }
+  
+  .mainImageView {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .imageViewComponent {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .DetailsAndButtonsView {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mainDetailsView {
+    display: grid;
+    grid-template-columns: column; 
+    justify-content: center;
+    height: 80%;
+  }
+  
+  .titleProductName {
+    display: grid;
+    justify-content: center ;
+  }
+  
+  .detailsAlone {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    justify-content: center;
+    align-items: start;
+    
+
+  }
+
+  .detailsText {    
+    margin: 0;
+  }
+  
+  .priceText {
+    margin: 0;
+    position: relative;
+  }
+  
+  .dealPriceText {
+    color: #f55858; /* Red color for deal price */
+  }
+  
+  .regularPriceText {
+    text-decoration: line-through;
+    margin-left: 10px;
+  }
+  
+  .mainButtonsView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .addCartButtonView,
+  .buyButtonView {
+    width: 30%;
+    padding: 15px;
+    margin-left: 15px;
+    background-color: #4cd964;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .addCartButtonView:hover,
+  .buyButtonView:hover {
+    background-color: #45c754;
+  }
+  

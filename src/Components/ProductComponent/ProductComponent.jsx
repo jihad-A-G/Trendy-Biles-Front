@@ -1,8 +1,12 @@
 // ProductComponent.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./ProductComponent.css";
 
 const ProductComponent = ({ product }) => {
+  const [productId, setProductId] = useState("")
+  
+
+
   // Add a check for the existence of 'product'
   if (!product || !product.details || !product.categories || !product.brand) {
     return null; // or handle the case when product or product.details is not available
@@ -39,7 +43,7 @@ const ProductComponent = ({ product }) => {
       )}
 
       <div className="descriptionProductComponent">
-        <ul className="productDescription productName">{productName}</ul>
+        <ul className="productDescription productName"><h3>{productName}</h3> </ul>
         <ul className="productDescription productDeal">{brand}</ul>
         <ul className="productDescription">{categoryName}</ul>
         <ul className={`productDescription productPrice${deal ? " deal" : ""}`}>

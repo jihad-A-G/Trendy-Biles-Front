@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import Logo from "../../assets/FullLogo2.jpg";
+import Logo from "../../assets/Logo3.jpg";
 import Facebook from "../../assets/facebook.svg";
 import Twitter from "../../assets/twitter.svg";
 import Instagram from "../../assets/instagram.svg";
@@ -8,10 +8,10 @@ import Linkedin from "../../assets/linkedin.svg";
 
 const Footer = () => {
   return (
-    <section>
+    <section className="FooterSection">
       <div className="line"></div>
-      <img className="FooterFullLogo" src={Logo} alt="Logo" />
       <footer className="top">
+      <img className="FooterFullLogo" src={Logo} alt="Logo" />
         <div className="links">
           <div className="links-column">
             <h2>NAVIGATE</h2>
