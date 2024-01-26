@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "./Navbar.css";
-import Logo from "../../assets/FullLogo2.jpg";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
 import axios from 'axios';

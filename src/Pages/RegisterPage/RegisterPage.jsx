@@ -1,7 +1,8 @@
 import React from "react";
 import "./RegisterPage.css";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import FullLogo from "../../assets/FullLogo2.jpg";
+
 const RegisterLogin = () => {
   const navigate = useNavigate();
 
@@ -14,7 +15,6 @@ const RegisterLogin = () => {
   };
 
   const handleGoHomeClick = () => {
-    // Use the navigate function to go back to the homepage
     navigate("/");
   };
 
@@ -27,17 +27,12 @@ const RegisterLogin = () => {
         <div className="container" id="container">
           <div className="form-container sign-up-container">
             <form action="#">
-              <h1>Create Account</h1>
-              {/* <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-            </div> */}
+              <h2>Create Account</h2>
               <span>or use your email for registration</span>
               <input
                 className="Registerinput"
                 type="text"
-                placeholder="UserName"
+                placeholder="Username"
               />
               <input
                 className="Registerinput"
@@ -64,12 +59,7 @@ const RegisterLogin = () => {
           </div>
           <div className="form-container sign-in-container">
             <form action="#">
-              <h1>Sign in</h1>
-              {/* <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-            </div> */}
+              <h2>Sign in</h2>
               <span> use your account</span>
               <input
                 className="Registerinput"
@@ -88,18 +78,16 @@ const RegisterLogin = () => {
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">
-                <img className="FullLogo" src={FullLogo}></img>
-                <h1>Welcome Back!</h1>
-                <p>
-                  To keep connected with us please login with your personal info
-                </p>
+                <img className="FullLogo" src={FullLogo} alt="Logo" />
+                <h2>Welcome Back!</h2>
+                <p>To keep connected with us please login with your personal info</p>
                 <button className="ghost" onClick={handleSignInClick}>
                   Sign In
                 </button>
               </div>
               <div className="overlay-panel overlay-right">
-                <img className="FullLogo" src={FullLogo}></img>
-                <h1>Hello, Friend!</h1>
+                <img className="FullLogo" src={FullLogo} alt="Logo" />
+                <h2>Hello, Friend!</h2>
                 <p>Enter your personal details and start the journey with us</p>
                 <button className="ghost" onClick={handleSignUpClick}>
                   Sign Up

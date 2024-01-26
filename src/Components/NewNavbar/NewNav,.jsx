@@ -1,4 +1,4 @@
-import React , { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -8,24 +8,32 @@ import "../NewNavbar/NewNav.css";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
 
-
 const NewNavbar = () => {
-    const initialCartCount = parseInt(localStorage.getItem('cartCount')) || 0;
-    const [cartCount, setCartCount] = useState(initialCartCount);
-  
-    // Update localStorage when cartCount changes
-    useEffect(() => {
-      localStorage.setItem('cartCount', cartCount.toString());
-    }, [cartCount]);
-  
-    const handleClickCart = () => {
-      // Increment the cart count
-      setCartCount(cartCount + 1);
-    };
+  const initialCartCount = parseInt(localStorage.getItem("cartCount")) || 0;
+  const [cartCount, setCartCount] = useState(initialCartCount);
+  const [activeLink, setActiveLink] = useState("");
+  const location = useLocation();
 
-    useEffect(() => {
-      setCartCount(0);
-    }, []);
+  useEffect(() => {
+    // Update the active link when the location changes
+    setActiveLink(location.pathname);
+  }, [location.pathname]);
+
+  const isLinkActive = (link) => link === activeLink;
+
+  // Update localStorage when cartCount changes
+  useEffect(() => {
+    localStorage.setItem("cartCount", cartCount.toString());
+  }, [cartCount]);
+
+  const handleClickCart = () => {
+    // Increment the cart count
+    setCartCount(cartCount + 1);
+  };
+
+  useEffect(() => {
+    setCartCount(0);
+  }, []);
 
   const navigate = useNavigate();
   const [collapse, setCollapsed] = useState(true);
@@ -55,7 +63,7 @@ const NewNavbar = () => {
         <div className="header_Links">
           <Link
             to="/"
-            className="N-home"
+            className={`N-home ${isLinkActive("/") ? "active" : ""}`}
             onClick={() => {
               scrollToTop;
             }}
@@ -63,62 +71,69 @@ const NewNavbar = () => {
             <a>Home</a>
           </Link>
 
-          <Link to="/#About" name={"aboutus"} onClick={executeScroll}>
-            <a
-              onClick={() => {
-                navigate("/", { replace: true });
-                executeScroll();
-              }}
-              className="N-about"
-            >
-              AboutUs
-            </a>{" "}
-          </Link>
           <Link
-            to="/contact"
-            name={"contactUs"}
+            to="/AboutUsMain"
+            name={"aboutus"}
             onClick={executeScroll}
-            className="N-contact"
+            className={`N-aboutUsMain ${
+              isLinkActive("/AboutUsMain") ? "active" : ""
+            }`}
           >
             <a
               onClick={() => {
                 navigate("/", { replace: true });
                 executeScroll();
               }}
-              className="N-contact"
+            >
+              AboutUs
+            </a>
+          </Link>
+          <Link
+            to="/contact"
+            name={"contactUs"}
+            onClick={executeScroll}
+            className={`N-Contact ${isLinkActive("/contact") ? "active" : ""}`}
+          >
+            <a
+              onClick={() => {
+                navigate("/", { replace: true });
+                executeScroll();
+              }}
             >
               ContactUs
             </a>
           </Link>
           <div className="dropdown">
-          <Link to="/Category">
-            Categories
-            <img src={chevron} alt="Chevron" />
-          </Link>
-          <div className="menu">
-            <Link to="/phones">Phones</Link>
-            <Link to="/laptops">Laptops</Link>
-            <Link to="/pc">PC</Link>
-            <Link to="/accessories">Accessories</Link>
+            <Link to="/Category">
+              Categories
+              <img src={chevron} alt="Chevron" />
+            </Link>
+            <div className="menu">
+              <Link to="/phones">Phones</Link>
+              <Link to="/laptops">Laptops</Link>
+              <Link to="/pc">PC</Link>
+              <Link to="/accessories">Accessories</Link>
+            </div>
+          </div>
+          <div className="dropdown">
+            <Link to="/customer-support">
+              Customer Service
+              <img src={chevron} alt="Chevron" />
+            </Link>
+            <div className="menu">
+              <Link to="/customer-support">Customer Support</Link>
+              <Link to="/shipping-policy">Shipping Policy</Link>
+              <Link to="/price-matching-policy">Price Matching Policy</Link>
+            </div>
           </div>
         </div>
-        <div className="dropdown">
-          <Link to= "/customer-support" >
-            Customer Service
-            <img src={chevron} alt="Chevron" />
-          </Link>
-          <div className="menu">
-            <Link to="/customer-support">Customer Support</Link>
-            <Link to="/shipping-policy">Shipping Policy</Link>
-            <Link to="/price-matching-policy">Price Matching Policy</Link>
-          </div>
+        <div className="Cart" onClick={handleClickCart}>
+          <IoCartOutline />
+          {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
         </div>
-        </div>
-        <div className='Cart' onClick={handleClickCart}>
-        <IoCartOutline />
-        {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
-      </div>
-      <Link to="/Register" className="join-link">Register</Link>
+        <Link to="/Register" className="join-link">
+          Register
+        </Link>
         <FontAwesomeIcon
           icon={collapse ? faBars : faXmark}
           className="header_icon"
@@ -128,10 +143,12 @@ const NewNavbar = () => {
       {!collapse ? (
         <nav className="header_mobile_nav">
           <div className="header_mobile_ul">
-          <div className='MobileCart' onClick={handleClickCart}>
-        <IoCartOutline />
-        {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
-      </div>
+            <div className="MobileCart" onClick={handleClickCart}>
+              <IoCartOutline />
+              {cartCount > 0 && (
+                <span className="cart-counter">{cartCount}</span>
+              )}
+            </div>
             <Link className="N-home" to="/">
               Home
             </Link>
@@ -168,32 +185,32 @@ const NewNavbar = () => {
               </a>
             </Link>
             <div className="Mobiledropdown">
-          <Link to="/Category">
-            Categories
-            <img src={chevron} alt="Chevron" />
+              <Link to="/Category">
+                Categories
+                <img src={chevron} alt="Chevron" />
+              </Link>
+              <div className="Mobilemenu">
+                <Link to="/phones">Phones</Link>
+                <Link to="/laptops">Laptops</Link>
+                <Link to="/pc">PC</Link>
+                <Link to="/accessories">Accessories</Link>
+              </div>
+            </div>
+            <div className="Mobiledropdown">
+              <Link>
+                Customer Service
+                <img src={chevron} alt="Chevron" />
+              </Link>
+              <div className="Mobilemenu">
+                <Link to="/customer-support">Customer Support</Link>
+                <Link to="/shipping-policy">Shipping Policy</Link>
+                <Link to="/price-matching-policy">Price Matching Policy</Link>
+              </div>
+            </div>
+          </div>
+          <Link to="/Register" className="Mobile-join-link">
+            Register
           </Link>
-          <div className="Mobilemenu">
-            <Link to="/phones">Phones</Link>
-            <Link to="/laptops">Laptops</Link>
-            <Link to="/pc">PC</Link>
-            <Link to="/accessories">Accessories</Link>
-          </div>
-        </div>
-        <div className="Mobiledropdown">
-          <Link>
-            Customer Service
-            <img src={chevron} alt="Chevron" />
-          </Link>
-          <div className="Mobilemenu">
-            <Link to="/customer-support">Customer Support</Link>
-            <Link to="/shipping-policy">Shipping Policy</Link>
-            <Link to="/price-matching-policy">Price Matching Policy</Link>
-          </div>
-        </div>
-        
-          </div>
-          <Link to="/Register" className="Mobile-join-link">Register</Link>
-       
         </nav>
       ) : null}
     </header>
