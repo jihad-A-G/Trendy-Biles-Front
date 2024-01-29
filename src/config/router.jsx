@@ -14,6 +14,8 @@ import AboutusPage from "../adminDashboard/aboutUsPage";
 import NotFound from "../Pages/NotFoundPage/NotFound";
 import OrdersTable from "../adminDashboard/orders/ordersTable";
 import AboutUsPageMain from "../Pages/AboutUsPage/AboutUs.jsx";
+import ProductPage from "../Pages/ProductPage/ProductPage.jsx";
+
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -54,6 +56,12 @@ const router = createBrowserRouter([
           console.log(response.data.aboutusContent);
           return response.data.aboutusContent;
         },
+      },
+      {
+      
+        path: "/phones",
+        element: <ProductPage />,
+      
       },
     ],
   },
