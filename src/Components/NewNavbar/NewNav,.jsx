@@ -7,12 +7,29 @@ import Logo from "../../assets/FullLogo2.jpg";
 import "../NewNavbar/NewNav.css";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
+import axios from "axios";
 
 const NewNavbar = () => {
   const initialCartCount = parseInt(localStorage.getItem("cartCount")) || 0;
   const [cartCount, setCartCount] = useState(initialCartCount);
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    // Fetch the categories
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/categories"
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     // Update the active link when the location changes
@@ -109,10 +126,11 @@ const NewNavbar = () => {
               <img src={chevron} alt="Chevron" />
             </Link>
             <div className="menu">
-              <Link to="/phones">Phones</Link>
-              <Link to="/laptops">Laptops</Link>
-              <Link to="/pc">PC</Link>
-              <Link to="/accessories">Accessories</Link>
+              {categories.map((category) => (
+                <Link  key={category.id} to={`/${category.name.toLowerCase()}`}>
+                  {category.name}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="dropdown">
@@ -190,10 +208,14 @@ const NewNavbar = () => {
                 <img src={chevron} alt="Chevron" />
               </Link>
               <div className="Mobilemenu">
-                <Link to="/phones">Phones</Link>
-                <Link to="/laptops">Laptops</Link>
-                <Link to="/pc">PC</Link>
-                <Link to="/accessories">Accessories</Link>
+                {categories.map((category) => (
+                  <Link
+                    key={category.id}
+                    to={`/${category.name.toLowerCase()}`}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
               </div>
             </div>
             <div className="Mobiledropdown">
