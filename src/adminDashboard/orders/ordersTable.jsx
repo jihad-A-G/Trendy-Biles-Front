@@ -1,40 +1,77 @@
 import { Table } from "react-bootstrap"
+import { useLoaderData } from "react-router-dom"
+import { useState } from "react"
 
-const OrdersTable = () =>{
+const OrdersTable = () => {
+ const data = useLoaderData();
+ const [currentPage, setCurrentPage] = useState(1);
+ const itemsPerPage = 10;
+ const totalPages = Math.ceil(data.length / itemsPerPage);
 
-    return(
-        <>
-        <Table responsive>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </Table>
-        </>
-    )
-}
+ const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+ };
 
-export default OrdersTable
+ const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+ };
+
+ const displayedData = data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+ return (
+    <>
+      <Table responsive bordered hover>
+        <thead>
+          <tr>
+            <th>Order number</th>
+            <th>Username</th>
+            <th>Products</th>
+            <th>Total price</th>
+            <th>Date</th>
+            <th>Phone number</th>
+            <th>Address</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayedData.map(row => {
+            var date = new Date(row.date);
+            return (
+              <tr key={row._id}>
+                <td>{row.orderNumber}</td>
+                <td>{row.userId.username}</td>
+                <td>{row.products.length}</td>
+                <td>{row.totalPrice}</td>
+                <td>{`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`}</td>
+                <td>{row.userId.phoneNumber}</td>
+                <td>{row.userId.address}</td>
+                <td className={`${row.status.toLowerCase() === "pending" ? 'bg-secondary' : row.status.toLowerCase() === 'recieved' ? 'bg-success' : 'bg-warning'}`}>{row.status}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+      <nav aria-label="Page navigation example">
+        <ul className="pagination">
+          <li className="page-item">
+            <a className="page-link" href="#" onClick={handlePrevPage}>Previous</a>
+          </li>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <li key={page} className={`page-item ${currentPage === page ? 'active' : null}`} onClick={() => setCurrentPage(page)}>
+              <a className="page-link" href="#">{page}</a>
+            </li>
+          ))}
+          <li className="page-item">
+            <a className="page-link" href="#" onClick={handleNextPage}>Next</a>
+          </li>
+        </ul>
+      </nav>
+    </>
+ );
+};
+
+export default OrdersTable;

@@ -3,16 +3,17 @@ import { Form } from 'react-router-dom'
 import { useLoaderData,useSubmit } from 'react-router-dom'
 import { useState } from 'react'
 import swal from 'sweetalert'
-const AboutusPage = () =>{
+const EditCategory = () =>{
   const submit = useSubmit()
-  const data = useLoaderData()
-  const [img, setImg] =useState(`http://localhost:4000/${data.logoImage}`);
+  const data= useLoaderData()
+  console.log(data);
+  const [img, setImg] =useState(`http://localhost:4000/${data.categoryImage}`);
   const [imgtoSubmit,setImgtoSubmit]=useState(null);
   const handleEditImg = (e)=>{
       if(e.target.files[0]){
           setImgtoSubmit(e.target.files[0]);
           const formData = new FormData();
-          formData.append('logoImage', imgtoSubmit);
+          formData.append('categoryImage', imgtoSubmit);
       }
 const file = e.target.files[0];
 const reader = new FileReader();
@@ -24,7 +25,7 @@ setImg(reader.result);
 if (file) {
   reader.readAsDataURL(file);
 } else {
-  setImg(`http://localhost:4000/${data.logoImage}`);
+  setImg(`http://localhost:4000/${data.categoryImage}`);
 }
   }
   // console.log(data);
@@ -33,35 +34,31 @@ if (file) {
     return(
         <Form  method='PUT' encType="multipart/form-data">
        <div className="mb-3">
-  <label htmlFor="companyName" className="form-label">Company Name</label>
-  <input type="text" name='companyName' className="form-control" id="companyName" defaultValue={data.companyName}/>
+  <label htmlFor="name" className="form-label">Category Name</label>
+  <input type="text" name='name' className="form-control" id="name" defaultValue={data.name}/>
 </div>
       <div className="mb-3">
-  <label htmlFor="logoImage" className="form-label">Company Logo</label>
-  <input type="file" name='logoImage' className="form-control" id="logoImage" onChange={handleEditImg}/>
+  <label htmlFor="categoryImage" className="form-label">Category Image</label>
+  <input type="file" name='categoryImage' className="form-control" id="categoryImage" onChange={handleEditImg}/>
 </div>
 <div className="mb-3">
-  {img?<img src={img} alt="" width={260} height={230}/>:<div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
+  {img?<img src={img} alt="" width={260} height={230}/>:<div className="spinner-border" role="status">
+      <span className="visually-hidden">Loading...</span>
     </div>}
 </div>
-<div className="mb-3">
-  <label htmlFor="aboutusContent" className="form-label">About us</label>
-  <textarea name='content' className="form-control" id="aboutusContent" rows="7" defaultValue={data.content}></textarea>
-</div>
-<input type="hidden" name="defaultImage" defaultValue={data.logoImage} />
+
       <Button onClick={(e)=>{
         e.preventDefault()
         swal({
-          title: "Are you sure you want to edit?",
+          title: "Are you sure you want to edit this category?",
           icon: "warning",
           buttons: true,
           dangerMode: true,
         })
         .then((willDelete) => {
           if (willDelete) {
-          submit(e.target.form)
-            swal("About us was edited successfully!", {
+         submit(e.target.form)
+            swal("Category was edited successfully!", {
               icon: "success",
             });
 
@@ -74,5 +71,5 @@ if (file) {
     )
 }
 
-export default AboutusPage
+export default EditCategory
 

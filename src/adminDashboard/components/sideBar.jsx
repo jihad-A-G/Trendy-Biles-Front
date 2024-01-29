@@ -20,6 +20,7 @@ const AdminSideBar = () => {
     </div>
     <NavLink className={'nav-link'} style={hoverLinks} to={'orders'}>Orders</NavLink>
     <NavLink className={'nav-link'} to={'/admin-dashboard/aboutus'} style={hoverLinks}>About us</NavLink>
+    <NavLink className={'nav-link'} to={'/admin-dashboard/categories'} style={hoverLinks}>Categories</NavLink>
     {/* Add more Nav.Link as needed */}
   </Nav>
   );

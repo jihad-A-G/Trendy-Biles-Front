@@ -12,3 +12,7 @@
     box-shadow: none !important;
     border-color: #57585a !important;
 }
+.product-card-imgs{
+    width: 100% !important;
+    height: auto !important;
+}
