@@ -5,6 +5,7 @@
   width: 350px;
   height: 500px;
   border: 1px solid #4cd964;
+  margin-top: 20px;
   transition: box-shadow 0.3s ease;
   position: relative;
 }
@@ -21,7 +22,7 @@
 }
 
 .imageProductComponent {
-  background-color: green;
+  background-color:white;
   display: block;
   height: 100%;
   width: 100%;
@@ -42,7 +43,9 @@
   transform: translate(-50%, -50%);
   background-color: transparent;
   border: 2px solid #fff;
+  border-radius: 10px;
   color: #fff;
+  
   padding: 10px 20px;
   cursor: pointer;
   z-index: 2;
@@ -59,8 +62,7 @@
   background-color: white;
   height: 35%;
   width: 100%;
-  padding: 0px;
-  margin: 0px;
+  padding-top: 10px;
   margin-bottom: 0;
   /* display: grid;
   align-content: center; */
