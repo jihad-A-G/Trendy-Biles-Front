@@ -1,11 +1,28 @@
 import {Image, Navbar, Container } from 'react-bootstrap';
 import logo from '../../assets/FullLogo2.jpg'
 import profile from '../../assets/images/user.png'
-const AdminNavBar = () => (
+import { useState,useEffect } from 'react';
+import axios from 'axios';
+const AdminNavBar = () => {
+  const [aboutus,setAboutus] = useState({})
+
+  const handleNavbarData = async() =>{
+    const response = await axios.get('http://localhost:4000/api/aboutus/info')
+    console.log(response.data.aboutus);
+    setAboutus(response.data.aboutus)    
+  }
+  console.log(aboutus);
+  useEffect(()=>{
+    handleNavbarData()
+  },[])
+  return(
+
   <Navbar bg="white" expand='lg' className='border-bottom px-2'>
     <Container className='' fluid>
-      <Navbar.Brand href="#home"><Image className='d-none d-md-inline-block' src={logo} style={{ width: '65px', height: '65px' }}/>  
-      </Navbar.Brand>
+      {aboutus?<Navbar.Brand href="#home"><Image className='d-none d-md-inline-block' src={`http://localhost:4000/${aboutus.logoImage}`} style={{ width: '80px', height: '80px' }}/>  
+      </Navbar.Brand>:<div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>}
       <div className="nav-item dropdown">
   <a
     className="nav-link dropdown-toggle"
@@ -39,6 +56,6 @@ const AdminNavBar = () => (
      
     </Container>
   </Navbar>
-);
+)};
 
 export default AdminNavBar

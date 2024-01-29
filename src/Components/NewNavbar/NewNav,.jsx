@@ -7,11 +7,23 @@ import Logo from "../../assets/FullLogo2.jpg";
 import "../NewNavbar/NewNav.css";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
+import axios from "axios";
 
 
 const NewNavbar = () => {
     const initialCartCount = parseInt(localStorage.getItem('cartCount')) || 0;
     const [cartCount, setCartCount] = useState(initialCartCount);
+  const [aboutus,setAboutus] = useState({})
+
+    const handleNavbarData = async() =>{
+      const response = await axios.get('http://localhost:4000/api/aboutus/info')
+      console.log(response.data.aboutus);
+      setAboutus(response.data.aboutus)    
+    }
+    console.log(aboutus);
+    useEffect(()=>{
+      handleNavbarData()
+    },[])
   
     // Update localStorage when cartCount changes
     useEffect(() => {
@@ -44,14 +56,16 @@ const NewNavbar = () => {
 
   return (
     <header className="headerNavbar sticky">
-      <img
+     {aboutus? <img
         className="Logo"
-        src={Logo}
+        src={`http://localhost:4000/${aboutus.logoImage}`}
         alt=""
         onClick={() => {
           navigate("/", { replace: true });
         }}
-      />
+      />:<div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>}
       <div className="Navbar">
         <div className="header_Links">
           <Link

@@ -1,11 +1,18 @@
-import {Card,Button} from 'react-bootstrap'
-import test from '../../assets/images/pexels-luis-quintero-3689532.jpg'
+import {Card,Button,Carousel} from 'react-bootstrap'
+import '../admin-style.css'
 // eslint-disable-next-line react/prop-types
 const ProductCard = ({data}) =>{
+  console.log(data);
     return(
         <>
         <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={test} />
+        <Carousel>
+                {data.details[0].images.map((image, index) => (
+                    <Carousel.Item key={index} className='w-100 h-25'>
+                        <img src={`http://localhost:4000/images/${image}`} className='d-block h-100 w-100' alt="Product Image"/>
+                    </Carousel.Item>
+                ))}
+            </Carousel>
       <Card.Body>
         <Card.Title>{data.productName}</Card.Title>
         <Card.Text>
