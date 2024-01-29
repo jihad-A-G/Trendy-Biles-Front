@@ -19,7 +19,7 @@ const AdminNavBar = () => {
 
   <Navbar bg="white" expand='lg' className='border-bottom px-2'>
     <Container className='' fluid>
-      {aboutus?<Navbar.Brand href="#home"><Image className='d-none d-md-inline-block' src={`http://localhost:4000/${aboutus.logoImage}`} style={{ width: '80px', height: '80px' }}/>  
+      {aboutus?<Navbar.Brand href="#home"><Image className='d-none d-md-inline-block' src={`http://localhost:4000/${aboutus.logoImage}`} style={{  height: '80px' }}/>  
       </Navbar.Brand>:<div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>}

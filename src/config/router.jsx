@@ -6,6 +6,7 @@ import ShippingPolicyPage from "../Pages/ShippingPolicyPage/ShippingPolicyPage";
 import PriceMatchingPolicyPage from "../Pages/PriceMatchingPolicyPage/PriceMatchingPolicyPage";
 import RegisterLogin from "../Pages/RegisterPage/RegisterPage";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import AboutUsPageMain from "../Pages/AboutUsPage/AboutUs.jsx"
 import CategoryPage from "../Pages/CategoriesPage/Categories.jsx";
 import AdminLayout from "../adminDashboard/dashboardLayout";
 import axios from "axios";
