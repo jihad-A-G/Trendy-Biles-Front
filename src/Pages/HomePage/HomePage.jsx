@@ -5,11 +5,9 @@ import AppleProducts from '../../assets/appleProducts.png'
 import AppleProducts2 from '../../assets/appleProducts2.webp'
 import Iphones from '../../assets/Iphones.jpg';
 import SamPhone from '../../assets/samphone.jpg';
-import Lenovo from '../../assets/Lenovo.png';
 import Apple from '../../assets/apple.jpg';
 import Samsung from '../../assets/samsung.jpg';
 import Tecno from '../../assets/tecno.png';
-import LenovoBrand from '../../assets/lenovo.png';
 import Huwawi from '../../assets/huwawi.jpg';
 import LG from '../../assets/lg.jpg';
 import './HomePage.css';
