@@ -62,6 +62,20 @@ const Footer = () => {
           <Link to="/privacy">Privacy</Link>
         </div>
       </footer>
+      <div className="Mobile-socials">
+              <a className="facebook" href="https://www.facebook.com">
+                <img className="img" src={Facebook} alt="" />
+              </a>
+              <a className="instagram" href="https://www.instagram.com">
+                <img className="img" src={Instagram} alt="" />
+              </a>
+              <a className="linkedin" href="https://www.linkedin.com">
+                <img className="img" src={Linkedin} alt="" />
+              </a>
+              <a className="Twitter" href="https://www.twitter.com">
+                <img className="img" src={Twitter} alt="" />
+              </a>
+            </div>
     </section>
   );
 };
