@@ -1,10 +1,10 @@
 // ProductPage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ProductPage.css';
+import './ProductPageComponent.css';
 
-import ProductComponent from '../../Components/ProductComponent/ProductComponent.jsx';
-import ProductViewComponent from '../../Components/ProductViewComponent/ProductViewCoponent.jsx';
+import ProductComponent from '../ProductComponent/ProductComponent.jsx';
+import ProductViewComponent from '../ProductViewComponent/ProductViewCoponent.jsx';
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [dataFromChild, setDataFromChild] = useState('');

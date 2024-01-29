@@ -1,6 +1,7 @@
 // ProductComponent.jsx
 import React, { useState } from "react";
 import "./ProductComponent.css";
+import { Carousel } from 'react-responsive-carousel';
 
 const ProductComponent = ({ product, onDataFromChild }) => {
   if (!product || !product.details || !product.categories || !product.brand) {
@@ -17,6 +18,13 @@ const ProductComponent = ({ product, onDataFromChild }) => {
     onDataFromChild(productID);
   };
 
+ const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+ const handleImageClick = (index) => {
+    setSelectedImageIndex(index);
+    onChange(index);
+ };
+
   const DealPrice = () => {
     if (deal) {
       return dealPrice !== undefined && dealPrice !== 0 ? (
@@ -30,18 +38,33 @@ const ProductComponent = ({ product, onDataFromChild }) => {
 
   return (
     <div className="mainProductComponent">
-      {images && images.length > 0 && (
-        <div className="imageContainer">
+      <Carousel className="imageContainer"
+      selectedItem={selectedImageIndex}
+      showArrows={true}
+      showStatus={false}
+      showThumbs={false}
+      emulateTouch={false}
+      swipeable={false}
+      autoPlay={true}
+      interval={3000}
+      renderIndicator={() => null} // This line removes the dots
+
+      infiniteLoop={true}>
+        {images && images.map((image, index) => (
+        <div  key={index} >
           <img
             className="imageProductComponent"
-            src={`http://localhost:4000/images/${images[0]}`}
-            alt="Product"
+            src={`http://localhost:4000/images/${image}`}
+            alt={`Image ${index}`}
           />
           <button className="overlayButton" onClick={sendDataToParent}>
             View Details
           </button>
         </div>
-      )}
+      ))}
+
+        </Carousel>
+     
 
       <div className="descriptionProductComponent">
         <ul className="productDescription productName">

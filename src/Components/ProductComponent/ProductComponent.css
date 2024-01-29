@@ -22,7 +22,7 @@
 }
 
 .imageProductComponent {
-  background-color:whitesmoke;
+  background-color:white;
   display: block;
   height: 100%;
   width: 100%;
@@ -45,6 +45,7 @@
   border: 2px solid #fff;
   border-radius: 10px;
   color: #fff;
+  
   padding: 10px 20px;
   cursor: pointer;
   z-index: 2;
@@ -61,8 +62,7 @@
   background-color: white;
   height: 35%;
   width: 100%;
-  padding: 0px;
-  margin: 0px;
+  padding-top: 10px;
   margin-bottom: 0;
   /* display: grid;
   align-content: center; */
