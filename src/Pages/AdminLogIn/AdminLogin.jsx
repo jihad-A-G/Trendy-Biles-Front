@@ -3,11 +3,10 @@ import axios from "axios";
 import "./AdminLogin.css";
 import { useNavigate,} from "react-router-dom";
 import FullLogo from "../../assets/FullLogo2.jpg";
-// import jwtDecode from 'jwt-decode';
 import { ToastContainer, toast } from "react-toastify";
 
 
-const RegisterLogin = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({
@@ -95,4 +94,4 @@ const RegisterLogin = () => {
   );
 };
 
-export default RegisterLogin;
+export default AdminLogin;
