@@ -14,6 +14,7 @@ import AboutusPage from "../adminDashboard/aboutUsPage";
 import NotFound from "../Pages/NotFoundPage/NotFound";
 import OrdersTable from "../adminDashboard/orders/ordersTable";
 import AboutUsPageMain from "../Pages/AboutUsPage/AboutUs.jsx";
+import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -23,6 +24,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/products/"
+          );
+          return response.data;
+        },
       },
       {
         path: "customer-support",
@@ -54,6 +61,10 @@ const router = createBrowserRouter([
           console.log(response.data.aboutusContent);
           return response.data.aboutusContent;
         },
+      },
+      {
+        path: "/adminlogin",
+        element: <AdminLogin />,
       },
     ],
   },
@@ -111,6 +122,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterLogin />,
+    action: async ({request}) => {
+      const formData = await request.formData();
+      const data = Object.fromEntries(formData);
+      console.log(data);
+
+      const response = await axios.post(
+        "http://localhost:4000/api/users/", {...data}
+      )
+      return response;
+    }
   },
   {
     path: "*",
