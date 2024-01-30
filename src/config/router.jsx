@@ -19,6 +19,7 @@ import Cookies from 'js-cookie'
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
+import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx"
 
 const router = createBrowserRouter([
   //Application main layout
@@ -45,6 +46,17 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUs />,
+      },
+      {
+        path: "/CheckOut",
+        element: <CheckOutPage />,
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/products/"
+          );
+          console.log(response.data);
+          return response.data;
+        },
       },
       {
         path: "/Category",

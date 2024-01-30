@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const CustomerSupportPage = () => {
   return (
     <div className="SupportHeading">
-       <div className="Links"> <Link to="/">Home / <Link to="/customer-support">customer-support</Link></Link></div>
+       <div className="Links"> <Link to="/">Home / <i >customer-support</i></Link></div>
       <h1>Customer Support</h1>
     <div className="customer-support-container">
       <p className="confidence-message">
