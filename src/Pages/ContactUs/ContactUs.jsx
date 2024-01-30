@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./ContactUs.css";
 import emailjs from "emailjs-com";
-
+import { AuthContext } from "../../utils/AuthContext";
 function ContactUs() {
+  const decoded = useContext(AuthContext);
+  console.log('The decodedId from the context', decoded);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     message: "",
   });
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,7 +23,6 @@ function ContactUs() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Use the same credentials you provided earlier
     const serviceId = "service_udck6x2";
     const templateId = "template_dc3y09a";
     const userId = "w2XEn16Vz2vNsS71k";
