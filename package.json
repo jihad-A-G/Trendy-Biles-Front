@@ -25,9 +25,18 @@
     "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
+    "react-multi-carousel": "^2.8.4",
+    "react-responsive": "^9.0.2",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.21.2",
+    "react-slick": "^0.30.1",
+    "react-swiper": "^0.1.5",
     "react-toastify": "^10.0.4",
+    "react-transition-group": "^4.4.5",
+    "slick-carousel": "^1.8.1",
+    "rollup": "^4.9.6",
     "sweetalert": "^2.1.2",
+    "swiper": "^11.0.5",
     "typeface-poppins": "^1.1.13"
   },
   "devDependencies": {
