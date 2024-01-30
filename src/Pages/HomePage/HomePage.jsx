@@ -6,11 +6,12 @@ import AppleProducts from '../../assets/appleProducts.png'
 import AppleProducts2 from '../../assets/appleProducts2.webp'
 import Iphones from '../../assets/Iphones.jpg';
 import SamPhone from '../../assets/samphone.jpg';
-import Lenovo from '../../assets/Lenovo.png';
+import Lenovo from '../../assets/LENOVO.png';
 import Samsung from '../../assets/samsung.jpg';
+import S24 from '../../assets/S24.png';
 import ACER from '../../assets/ACER.png';
 import Tecno from '../../assets/TECNO.png';
-import LenovoBrand from '../../assets/LENOVO.png';
+import LenovoBrand from '../../assets/Lenovo.png';
 import Huwawi from '../../assets/HUAWIE.png';
 import LG from '../../assets/LG.png';
 import AppleIcon from  '../../assets/APPLE.png';
@@ -21,7 +22,7 @@ import { AuthContext } from "../../utils/AuthContext";
 const images = [
   Lenovo,  AppleProducts2,
   ,SamPhone,
-  Iphones
+  Iphones,S24
 ];
 const popularPhoneBrands = [
   Samsung,
@@ -74,7 +75,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-    <Carousel interval={5000} style={{ background: 'red', height:'80vh' }}>
+    <Carousel interval={5000} style={{ height:'80vh' }}>
         {images.map((image, index) => (
           <Carousel.Item key={index}>
             <img className="custom-carousel-image" src={image} alt={`Slide ${index + 1}`} />
@@ -106,6 +107,8 @@ const HomePage = () => {
 
 
 <PopularPhoneBrandsBanner />
+
+<img className='S24-Image' src={S24} alt="s24" />
 
 
     </div>
