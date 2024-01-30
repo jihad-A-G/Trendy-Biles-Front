@@ -1,13 +1,15 @@
 import {Button, Container,Carousel,Card} from 'react-bootstrap'
 import { Form } from 'react-router-dom'
 import { useLoaderData,useSubmit } from 'react-router-dom'
+import LinearIndeterminate from './components/progressBar'
 const ProductsPage = () =>{
   const data = useLoaderData()
   const submit = useSubmit()
-  console.log(data);
     return(
-        <>
-        <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
+        <div>
+       {data?
+       (
+        <> <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
             <h3 className='text-black '>Products</h3>
             <div className="d-flex align-items-center column-gap-4">
                 <div className="dropdown">
@@ -56,7 +58,7 @@ const ProductsPage = () =>{
             <Carousel>
                     {product.details[0]?.images.map((image, index) => (
                         <Carousel.Item key={index} className='w-100 h-25'>
-                            <img src={`http://localhost:4000/images/${image}`} className='d-block h-100 w-100' alt="Product Image"/>
+                            <img src={`http://localhost:4000/images/${image}`} className='d-block h-100 w-100 bg-white' alt="Product Image"/>
                         </Carousel.Item>
                     ))}
                 </Carousel>
@@ -74,7 +76,7 @@ const ProductsPage = () =>{
                     <Button type='submit' onClick={(e)=>{
                        e.preventDefault()
                        swal({
-                         title: "Are you sure you want to edit?",
+                         title: "Are you sure you want to delete?",
                          icon: "warning",
                          buttons: true,
                          dangerMode: true,
@@ -82,7 +84,7 @@ const ProductsPage = () =>{
                        .then((willDelete) => {
                          if (willDelete) {
                            submit(e.target.form)
-                           swal("About us was edited successfully!", {
+                           swal("Product was deleted successfully!", {
                              icon: "success",
                            });
                
@@ -104,8 +106,11 @@ const ProductsPage = () =>{
           <span class="visually-hidden">Loading...</span>
         </div>}
         </Container>
+        </>):(
+        <LinearIndeterminate/>
+        )}
         
-        </>
+        </div>
     )
 
 }

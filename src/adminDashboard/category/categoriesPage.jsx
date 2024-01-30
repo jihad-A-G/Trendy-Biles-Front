@@ -1,6 +1,7 @@
 import { Table,Button, Container } from "react-bootstrap";
 import { useState } from "react";
 import { useLoaderData,Form,Link,useSubmit } from "react-router-dom";
+import LinearIndeterminate from "../components/progressBar";
 const Categories = () =>{
     const data = useLoaderData()
     const submit = useSubmit()
@@ -22,6 +23,8 @@ const Categories = () =>{
  const displayedData = data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return(
+    <>
+    {data?
     <>
       <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
             <h3 className='text-black '>Categories</h3>
@@ -90,7 +93,7 @@ const Categories = () =>{
           </li>
         </ul>
       </nav>
-
+      </>:<LinearIndeterminate/>}
      
     </>
     )

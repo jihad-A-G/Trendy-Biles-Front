@@ -19,6 +19,7 @@ import Cookies from 'js-cookie'
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
+import ProfilePage from "../adminDashboard/profilePage.jsx";
 
 const router = createBrowserRouter([
   //Application main layout
@@ -78,7 +79,15 @@ const router = createBrowserRouter([
           );
           return response.data;
         },
+        action:async({request}) =>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+          const response = await axios.delete(`http://localhost:4000/api/products/${data.id}`)
+          console.log(response);
+          return redirect('/admin-dashboard/products')
+        }
       },
+     
       {
         path: "aboutus",
         element: <AboutusPage />,
@@ -171,6 +180,15 @@ const router = createBrowserRouter([
             return redirect('/admin-dashboard/categories')
 
           }
+        },
+        {
+          path:'profile',
+          element:<ProfilePage/>,
+          // loader:async({params}) =>{
+          //   const response = await axios.get(`http://localhost:4000/api/admins/${params.id}`)
+          //   console.log(response.data);
+          //   return response.data
+          // }
         }
       ]
     },
