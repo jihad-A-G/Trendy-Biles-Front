@@ -63,19 +63,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/phones",
-        element: <AnyCategoryPage productPage={"Phones"} />,
+        element: <AnyCategoryPage categoryPage={"Phones"} />,
       },
       {
         path: "/laptops",
-        element: <AnyCategoryPage productPage={"Laptops"} />,
+        element: <AnyCategoryPage categoryPage={"Laptops"} />,
       },
       {
         path: "/pc",
-        element: <AnyCategoryPage productPage={"PC"} />,
+        element: <AnyCategoryPage categoryPage={"PC"} />,
       },
       {
         path: "/accessories",
-        element: <AnyCategoryPage productPage={"Accessories"} />,
+        element: <AnyCategoryPage categoryPage    ={"Accessories"} />,
       },
     ],
   },
