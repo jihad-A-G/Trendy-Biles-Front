@@ -19,7 +19,7 @@ import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
 import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx"
-
+import ProtectedRoute from "../utils/ProtectedRoute.jsx";
 // import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
 const router = createBrowserRouter([
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <HomePage />,
         loader: async () => {
           const response = await axios.get(
@@ -111,11 +111,11 @@ const router = createBrowserRouter([
   //Admin dashboard layout
   {
     path: "/admin-dashboard",
-    element: <AdminLayout />,
+    element: <ProtectedRoute> <AdminLayout /></ProtectedRoute>,
     children: [
       {
         path: "products",
-        element: <ProductsPage />,
+        element: <ProtectedRoute><ProductsPage /></ProtectedRoute>,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/products/"

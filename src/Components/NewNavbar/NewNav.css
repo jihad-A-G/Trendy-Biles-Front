@@ -3,6 +3,10 @@
   display: flex;
   border-bottom: 1px solid #e1e1e1; /* Add a line under the navigation bar */
 }
+.Home-User-Icon{
+  width: 3%;
+  display: flex;
+}
 
 .N-home.active,
 .N-about.active,
