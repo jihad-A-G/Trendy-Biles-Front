@@ -4,7 +4,7 @@ import "./ProductViewComponent.css";
 import ImageSlider from "./ImagesSlider/ImagesSlider.jsx";
 import closeIcon from "../../assets/images/CloseIcon.svg";
 
-const ProductViewComponent = ({ product, onClose }) => {
+const ProductViewComponent = ({ product, onClose, className }) => {
  const [currentImageIndex, setCurrentImageIndex] = useState(0);
  const currentDetailIndex = useRef(0);
 
@@ -28,7 +28,7 @@ const ProductViewComponent = ({ product, onClose }) => {
  const brand = product.brand.name;
 
  return (
-    <div className='overlay'>
+    <div className={`overlayProduct ${className}`}>
       <Carousel 
         showArrows={true}
         showStatus={false}

@@ -2,65 +2,70 @@
 .maiPage{
   margin-top: 10px;
   background-color: white;
-}
-
-.titlePage {
+ }
+ 
+ .titlePage {
   display: grid;
   justify-content: center ;
   font-size: 4em;
-  /* background-color: white; */
   color: #69a05d ;
-
-} 
-
-.mainProductPage {
+ } 
+ 
+ .mainProductPage {
   position: relative;
   width: 100%;
   height: 100%;
-}
-
-.productComponentMain {
+ }
+ 
+ .productComponentMain {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   gap: 10px
-}
-
-.productViewComponentMain {
+ }
+ 
+ .productViewComponentMain {
   width: 100%;
   height: 100%;
   display: block;
-}
-
-@media (max-width: 1200px) {
+  transition: transform 0.5s ease-out;
+  transform: translateY(-100%);
+ }
+ 
+ .productViewComponentMain.open {
+  transform: translateY(0);
+ }  
+ 
+ @media (max-width: 1200px) {
   .productComponentMain {
-      grid-template-columns: repeat(3, 1fr);
+       grid-template-columns: repeat(3, 1fr);
   }
   .productViewComponentMain {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-}
-
-@media (max-width: 700px) {
+     width: 100%;
+     height: 100%;
+     display: block;
+  }
+ }
+ 
+ @media (max-width: 700px) {
   .productComponentMain {
-      grid-template-columns: repeat(2, 1fr);
+       grid-template-columns: repeat(2, 1fr);
   }
   .productViewComponentMain {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-}
-
-@media (max-width: 400px) {
+     width: 100%;
+     height: 100%;
+     display: block;
+  }
+ }
+ 
+ @media (max-width: 400px) {
   .productComponentMain {
-      grid-template-columns: repeat(1, 1fr);
+       grid-template-columns: repeat(1, 1fr);
   }
   .productViewComponentMain {
-    width: 100%;
-    height: 100%;
-    display: block;
+     width: 100%;
+     height: 100%;
+     display: block;
   } 
-}
+ }
+ 

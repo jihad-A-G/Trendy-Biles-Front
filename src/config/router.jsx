@@ -18,10 +18,9 @@ import Cookies from "js-cookie";
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
-import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx"
-
-// import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
-import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
+import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
+import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
+import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -69,10 +68,12 @@ const router = createBrowserRouter([
       {
         path: "/Category",
         element: <CategoryPage />,
-        loader:async() =>{
-          const response = await axios.get('http://localhost:4000/api/categories/')
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/categories/"
+          );
           console.log(response.data);
-          return response.data
+          return response.data;
         },
       },
       {
@@ -90,22 +91,22 @@ const router = createBrowserRouter([
           return response.data.aboutusContent;
         },
       },
-      // {
-      //   path: "/phones",
-      //   element: <AnyCategoryPage productPage={"Phones"} />,
-      // },
-      // {
-      //   path: "/laptops",
-      //   element: <AnyCategoryPage productPage={"Laptops"} />,
-      // },
-      // {
-      //   path: "/pc",
-      //   element: <AnyCategoryPage productPage={"PC"} />,
-      // },
-      // {
-      //   path: "/accessories",
-      //   element: <AnyCategoryPage productPage={"Accessories"} />,
-      // },
+      {
+        path: "/phones",
+        element: <AnyCategoryPage categoryPage={"Phones"} />,
+      },
+      {
+        path: "/laptops",
+        element: <AnyCategoryPage categoryPage={"Laptops"} />,
+      },
+      {
+        path: "/pc",
+        element: <AnyCategoryPage categoryPage={"PC"} />,
+      },
+      {
+        path: "/accessories",
+        element: <AnyCategoryPage categoryPage={"Accessories"} />,
+      },
     ],
   },
   //End of application main layout
@@ -245,16 +246,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterLogin />,
-    action: async ({request}) => {
+    action: async ({ request }) => {
       const formData = await request.formData();
       const data = Object.fromEntries(formData);
       console.log(data);
 
-      const response = await axios.post(
-        "http://localhost:4000/api/users/", {...data}
-      )
+      const response = await axios.post("http://localhost:4000/api/users/", {
+        ...data,
+      });
       return response;
-    }
+    },
   },
   {
     path: "*",
