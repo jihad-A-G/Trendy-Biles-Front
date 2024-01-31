@@ -15,13 +15,11 @@ const NewNavbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    // Fetch the categories
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:4000/api/categories"
-        );
+        const response = await axios.get("http://localhost:4000/api/categories");
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -44,7 +42,6 @@ const NewNavbar = () => {
   }, [cartCount]);
 
   const handleClickCart = () => {
-    // Increment the cart count
     setCartCount(cartCount + 1);
   };
 

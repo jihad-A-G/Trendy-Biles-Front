@@ -73,17 +73,17 @@ const CheckOutPage = () => {
           <p>{item.price}$</p>
           <div className="quantity">
             <button
-              onClick={() => handleIncrement(item.id)}
+              onClick={() => handleDecrement(item.id)}
               className="btn plus"
             >
-              +
+              -
             </button>
             <p className="number">{item.quantity}</p>
             <button
-              onClick={() => handleDecrement(item.id)}
+              onClick={() => handleIncrement (item.id)}
               className="btn minus"
             >
-              -
+              +
             </button>
           </div>
           <h3 className="CheckOutPrice">

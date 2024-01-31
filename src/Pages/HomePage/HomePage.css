@@ -10,6 +10,7 @@
   margin-left: 50px;
   padding-left: 20px;
   border-left: 5px solid #69a05d;
+  color: #252424;
 }
 
 .card-container {
@@ -19,6 +20,8 @@
   height: 70.5vh;
   margin: 10px;
   align-items: center;
+  border-top: 0.5px solid #68a05c63;
+  border-bottom: 0.5px solid #68a05c63;
   
 }
 
@@ -27,14 +30,31 @@
 }
 
 .S24-Image{
-  margin-top: 10px;
-  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 80%;
+  height: 60vh;
+}
+.HomeImgOne {
+  justify-content: center;
   align-self: center;
-  width: 100%;
-  height: 50vh;
+  display: flex;
 }
 
+.HomeFourImages {
+  display: grid;
+  grid-template-columns: repeat(2, 40%);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px; 
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
 
+.HomeMiddleImg {
+  width: 100%; /* Make sure the image takes 100% of the cell width */
+  height: auto; /* Maintain the aspect ratio */
+}
 
 .card {
   display: flex;
@@ -66,9 +86,18 @@
   width: 100%;
   overflow: hidden;
   background-color: #69a05d;
+  /* background-color: #252424; */
   display: flex;
   align-items: center;
   height: 80px;
+  
+}
+.EndSliders {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  gap: 200px;
 }
 
 .movement-banner p {
@@ -92,10 +121,10 @@
   height: 100px;
   width: 100px;
   outline: green;
-  background-color: green;
+  background-color: black;
   background-size: 100%, 100%;
-  border-radius: 50%;
-  border: 1px solid green;
+  border-radius: 60%;
+  /* border: 1px solid green; */
   color: green;
 }
 
@@ -104,19 +133,21 @@
   text-align: center;
   padding: 20px;
   overflow: hidden; /* Ensure that the banner content doesn't overflow */
+  border-bottom: 0.5px solid #68a05c63;
 }
 
 .popular-brands-images {
   display: flex;
-  animation: moveBanner 13s linear infinite; /* Adjust the duration as needed */
+  animation: moveBanner 20s linear infinite; /* Adjust the duration as needed */
   justify-content: space-around;
   background-color: white;
   align-items: center;
+  gap: 150px;
 }
 
 .popular-brand-image {
   width: 10%; 
-  height: 30%; 
+  height: 10%;
 }
 
 /* Keyframes for moving banner */
@@ -160,4 +191,20 @@
       padding-left: 0;
       border-left: 0px;
     }
+    .S24-Image{
+      width: 90%;
+      height: 25vh;
+      margin-bottom: 20px;
+    }
+    .HomeFourImages {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-left: 40px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
   }
