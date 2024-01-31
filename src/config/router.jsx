@@ -18,8 +18,9 @@ import Cookies from "js-cookie";
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
+import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
-
+import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -29,6 +30,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/products/"
+          );
+          return response.data;
+        },
       },
       {
         path: "customer-support",
@@ -47,8 +54,30 @@ const router = createBrowserRouter([
         element: <ContactUs />,
       },
       {
+        path: "/CheckOut",
+        element: <CheckOutPage />,
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/products/"
+          );
+          console.log(response.data);
+          return response.data;
+        },
+      },
+      {
         path: "/Category",
         element: <CategoryPage />,
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/categories/"
+          );
+          console.log(response.data);
+          return response.data;
+        },
+      },
+      {
+        path: "/adminlogin",
+        element: <AdminLogin />,
       },
       {
         path: "/AboutUsMain",
@@ -75,7 +104,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/accessories",
-        element: <AnyCategoryPage categoryPage    ={"Accessories"} />,
+        element: <AnyCategoryPage categoryPage={"Accessories"} />,
       },
     ],
   },
@@ -216,6 +245,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterLogin />,
+    action: async ({ request }) => {
+      const formData = await request.formData();
+      const data = Object.fromEntries(formData);
+      console.log(data);
+
+      const response = await axios.post("http://localhost:4000/api/users/", {
+        ...data,
+      });
+      return response;
+    },
   },
   {
     path: "*",

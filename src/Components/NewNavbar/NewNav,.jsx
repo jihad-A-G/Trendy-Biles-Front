@@ -7,12 +7,29 @@ import Logo from "../../assets/FullLogo2.jpg";
 import "../NewNavbar/NewNav.css";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
+import axios from "axios";
 
 const NewNavbar = () => {
   const initialCartCount = parseInt(localStorage.getItem("cartCount")) || 0;
   const [cartCount, setCartCount] = useState(initialCartCount);
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    // Fetch the categories
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/categories"
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     // Update the active link when the location changes
@@ -68,7 +85,7 @@ const NewNavbar = () => {
               scrollToTop;
             }}
           >
-            <a>Home</a>
+            <span>Home</span>
           </Link>
 
           <Link
@@ -79,14 +96,14 @@ const NewNavbar = () => {
               isLinkActive("/AboutUsMain") ? "active" : ""
             }`}
           >
-            <a
+            <span
               onClick={() => {
                 navigate("/", { replace: true });
                 executeScroll();
               }}
             >
               AboutUs
-            </a>
+            </span>
           </Link>
           <Link
             to="/contact"
@@ -94,14 +111,14 @@ const NewNavbar = () => {
             onClick={executeScroll}
             className={`N-Contact ${isLinkActive("/contact") ? "active" : ""}`}
           >
-            <a
+            <span
               onClick={() => {
                 navigate("/", { replace: true });
                 executeScroll();
               }}
             >
               ContactUs
-            </a>
+            </span>
           </Link>
           <div className="dropdown">
             <Link to="/Category">
@@ -109,10 +126,11 @@ const NewNavbar = () => {
               <img src={chevron} alt="Chevron" />
             </Link>
             <div className="menu">
-              <Link to="/phones">Phones</Link>
-              <Link to="/laptops">Laptops</Link>
-              <Link to="/pc">PC</Link>
-              <Link to="/accessories">Accessories</Link>
+              {categories.map((category) => (
+                <Link key={category._id} to={`/${category.name.toLowerCase()}`}>
+                  {category.name}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="dropdown">
@@ -127,10 +145,10 @@ const NewNavbar = () => {
             </div>
           </div>
         </div>
-        <div className="Cart" onClick={handleClickCart}>
+        <Link to="/CheckOut" className="Cart" onClick={handleClickCart}>
           <IoCartOutline />
           {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
-        </div>
+        </Link>
         <Link to="/Register" className="join-link">
           Register
         </Link>
@@ -158,7 +176,7 @@ const NewNavbar = () => {
               onClick={executeScroll}
               className="N-about"
             >
-              <a
+              <span
                 onClick={() => {
                   navigate("/", { replace: true });
                   executeScroll();
@@ -166,7 +184,7 @@ const NewNavbar = () => {
                 className="N-about"
               >
                 About
-              </a>
+              </span>
             </Link>
             <Link
               to="/Contact"
@@ -174,7 +192,7 @@ const NewNavbar = () => {
               onClick={executeScroll}
               className="N-contact"
             >
-              <a
+              <span
                 onClick={() => {
                   navigate("/", { replace: true });
                   executeScroll();
@@ -182,7 +200,7 @@ const NewNavbar = () => {
                 className="N-contact"
               >
                 ContactUs
-              </a>
+              </span>
             </Link>
             <div className="Mobiledropdown">
               <Link to="/Category">
@@ -190,10 +208,14 @@ const NewNavbar = () => {
                 <img src={chevron} alt="Chevron" />
               </Link>
               <div className="Mobilemenu">
-                <Link to="/phones">Phones</Link>
-                <Link to="/laptops">Laptops</Link>
-                <Link to="/pc">PC</Link>
-                <Link to="/accessories">Accessories</Link>
+                {categories.map((category) => (
+                  <Link
+                    key={category.id}
+                    to={`/${category.name.toLowerCase()}`}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
               </div>
             </div>
             <div className="Mobiledropdown">

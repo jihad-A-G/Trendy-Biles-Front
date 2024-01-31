@@ -1,29 +1,35 @@
 // HomePage.jsx
-import React from 'react';
+import React ,{useContext} from 'react';
 import { Carousel, Container } from 'react-bootstrap';
+import { useLoaderData  } from 'react-router-dom'
+import AppleProducts from '../../assets/appleProducts.png'
 import AppleProducts2 from '../../assets/appleProducts2.webp'
 import Iphones from '../../assets/Iphones.jpg';
 import SamPhone from '../../assets/samphone.jpg';
-import Lenovo from '../../assets/Home2.jpg';
-import Apple from '../../assets/apple.jpg';
+import Lenovo from '../../assets/LENOVO.png';
 import Samsung from '../../assets/samsung.jpg';
-import Tecno from '../../assets/tecno.png';
-import LenovoBrand from '../../assets/Home3.jpg';
-import Huwawi from '../../assets/huwawi.jpg';
-import LG from '../../assets/lg.jpg';
+import S24 from '../../assets/S24.png';
+import ACER from '../../assets/ACER.png';
+import Tecno from '../../assets/TECNO.png';
+import LenovoBrand from '../../assets/Lenovo.png';
+import Huwawi from '../../assets/HUAWIE.png';
+import LG from '../../assets/LG.png';
+import AppleIcon from  '../../assets/APPLE.png';
+import PS from '../../assets/PS.png';
 import './HomePage.css';
+import { AuthContext } from "../../utils/AuthContext";
 
 const images = [
   Lenovo,  AppleProducts2,
   ,SamPhone,
-  Iphones
+  Iphones,S24
 ];
 const popularPhoneBrands = [
   Samsung,
-  Apple,
+  AppleIcon,
   Huwawi,
-  LenovoBrand,
-  LG,Tecno,
+  LenovoBrand,ACER,
+  LG,Tecno,PS
 ];
 
 const cardData = [
@@ -37,6 +43,11 @@ const cardData = [
 ];
 
 const HomePage = () => {
+  const data = useLoaderData()
+  const decoded = useContext(AuthContext);
+  console.log('The decodedId from the context', decoded);
+  
+
   const MovementBanner = () => {
     const bannerText = 'Welcome to TrendyBiles We sell phones, computers, accessories, and more!';
     // const bannerText = 'كافيه السعد: مشروبات ساخنة, قهوة,مشروبات باردة, عصيرات';
@@ -64,7 +75,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-    <Carousel interval={5000} style={{ background: 'white' }}>
+    <Carousel interval={5000} style={{ height:'80vh' }}>
         {images.map((image, index) => (
           <Carousel.Item key={index}>
             <img className="custom-carousel-image" src={image} alt={`Slide ${index + 1}`} />
@@ -96,6 +107,8 @@ const HomePage = () => {
 
 
 <PopularPhoneBrandsBanner />
+
+<img className='S24-Image' src={S24} alt="s24" />
 
 
     </div>
