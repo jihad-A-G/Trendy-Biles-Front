@@ -22,7 +22,6 @@ import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx"
 import ProtectedRoute from "../utils/ProtectedRoute.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
-import ProtectedRoute from "../utils/ProtectedRoute.jsx";
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -36,7 +35,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             "http://localhost:4000/api/products/"
           );
-          console.log(response.data);
           return response.data;
         },
       },
@@ -54,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <ContactUs />,
+        element: <ProtectedRoute><ContactUs /></ProtectedRoute>,
       },
       {
         path: "/CheckOut",
@@ -70,12 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/Category",
         element: <CategoryPage />,
-        loader: async () => {
-          const response = await axios.get(
-            "http://localhost:4000/api/categories/"
-          );
+        loader:async() =>{
+          const response = await axios.get('http://localhost:4000/api/categories/')
           console.log(response.data);
-          return response.data;
+          return response.data
         },
       },
       {
@@ -95,19 +91,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/phones",
-        element: <AnyCategoryPage categoryPage={"Phones"} />,
+        element: <AnyCategoryPage productPage={"Phones"} />,
       },
       {
         path: "/laptops",
-        element: <AnyCategoryPage categoryPage={"Laptops"} />,
+        element: <AnyCategoryPage productPage={"Laptops"} />,
       },
       {
         path: "/pc",
-        element: <AnyCategoryPage categoryPage={"PC"} />,
+        element: <AnyCategoryPage productPage={"PC"} />,
       },
       {
         path: "/accessories",
-        element: <AnyCategoryPage categoryPage={"Accessories"} />,
+        element: <AnyCategoryPage productPage={"Accessories"} />,
       },
     ],
   },
@@ -115,11 +111,11 @@ const router = createBrowserRouter([
   //Admin dashboard layout
   {
     path: "/admin-dashboard",
-    element: <ProtectedRoute> <AdminLayout /></ProtectedRoute>,
+    element: <AdminLayout />,
     children: [
       {
         path: "products",
-        element: <ProtectedRoute><ProductsPage /></ProtectedRoute>,
+        element: <ProductsPage />,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/products/"
@@ -248,16 +244,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterLogin />,
-    action: async ({ request }) => {
+    action: async ({request}) => {
       const formData = await request.formData();
       const data = Object.fromEntries(formData);
       console.log(data);
 
-      const response = await axios.post("http://localhost:4000/api/users/", {
-        ...data,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/users/", {...data}
+      )
       return response;
-    },
+    }
   },
   {
     path: "*",
