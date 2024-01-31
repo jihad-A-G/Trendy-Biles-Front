@@ -1,7 +1,7 @@
   import React,{useState} from "react";
   import axios from "axios";
   import "./RegisterPage.css";
-  import { useNavigate,} from "react-router-dom";
+  import { useNavigate} from "react-router-dom";
   import FullLogo from "../../assets/FullLogo2.jpg";
   import { ToastContainer, toast } from "react-toastify";
 
