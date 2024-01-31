@@ -19,8 +19,7 @@ import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
 import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx"
-
-// import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
+import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
 const router = createBrowserRouter([
   //Application main layout
@@ -89,22 +88,22 @@ const router = createBrowserRouter([
           return response.data.aboutusContent;
         },
       },
-      // {
-      //   path: "/phones",
-      //   element: <AnyCategoryPage productPage={"Phones"} />,
-      // },
-      // {
-      //   path: "/laptops",
-      //   element: <AnyCategoryPage productPage={"Laptops"} />,
-      // },
-      // {
-      //   path: "/pc",
-      //   element: <AnyCategoryPage productPage={"PC"} />,
-      // },
-      // {
-      //   path: "/accessories",
-      //   element: <AnyCategoryPage productPage={"Accessories"} />,
-      // },
+      {
+        path: "/phones",
+        element: <AnyCategoryPage categoryPage={"Phones"} />,
+      },
+      {
+        path: "/laptops",
+        element: <AnyCategoryPage categoryPage={"Laptops"} />,
+      },
+      {
+        path: "/pc",
+        element: <AnyCategoryPage categoryPage={"PC"} />,
+      },
+      {
+        path: "/accessories",
+        element: <AnyCategoryPage categoryPage={"Accessories"} />,
+      },
     ],
   },
   //End of application main layout

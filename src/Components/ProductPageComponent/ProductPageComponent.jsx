@@ -5,7 +5,7 @@ import './ProductPageComponent.css';
 
 import ProductComponent from '../ProductComponent/ProductComponent.jsx';
 import ProductViewComponent from '../ProductViewComponent/ProductViewCoponent.jsx';
-const ProductPage = () => {
+const ProductPage = ({categoryPage}) => {
   const [products, setProducts] = useState([]);
   const [dataFromChild, setDataFromChild] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -25,13 +25,13 @@ const ProductPage = () => {
   const handleCloseProductView = () => {
     setSelectedProduct(null);
   };
-  const category = "Phones";
+  const category = categoryPage;
 
   useEffect(() => {
-    const fetchProduct = async (category) => {
-       if (!category) return;
+    const fetchProduct = async (categories) => {
+       if (!categories) return;
        try {
-         const response = await axios.get(`http://localhost:4000/api/products/?category=${category}`);
+         const response = await axios.get(`http://localhost:4000/api/products/?category=${categories}`);
          setProducts(response.data);
        } catch (error) {
          console.error("Error fetching company data:", error);
