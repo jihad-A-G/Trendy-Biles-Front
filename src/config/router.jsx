@@ -10,7 +10,7 @@ import CategoryPage from "../Pages/CategoriesPage/Categories.jsx";
 import AdminLayout from "../adminDashboard/dashboardLayout";
 import axios from "axios";
 import App from "../App";
-import ProductsPage from "../adminDashboard/productsPage";
+import ProductsPage from "../adminDashboard/products/productsPage.jsx";
 import AboutusPage from "../adminDashboard/aboutUsPage";
 import NotFound from "../Pages/NotFoundPage/NotFound";
 import OrdersTable from "../adminDashboard/orders/ordersTable";
@@ -18,8 +18,12 @@ import Cookies from "js-cookie";
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
-import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
+// import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
+import ProfilePage from "../adminDashboard/profilePage.jsx";
+import AddProduct from '../adminDashboard/products/addProduct.jsx'
+import EditProduct from "../adminDashboard/products/editProduct.jsx";
+
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -49,11 +53,11 @@ const router = createBrowserRouter([
         element: <PriceMatchingPolicyPage />,
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <ContactUs />,
       },
       {
-        path: "/Category",
+        path: "Category",
         element: <CategoryPage />,
         loader:async() =>{
           const response = await axios.get('http://localhost:4000/api/categories/')
@@ -76,22 +80,22 @@ const router = createBrowserRouter([
           return response.data.aboutusContent;
         },
       },
-      {
-        path: "/phones",
-        element: <AnyCategoryPage productPage={"Phones"} />,
-      },
-      {
-        path: "/laptops",
-        element: <AnyCategoryPage productPage={"Laptops"} />,
-      },
-      {
-        path: "/pc",
-        element: <AnyCategoryPage productPage={"PC"} />,
-      },
-      {
-        path: "/accessories",
-        element: <AnyCategoryPage productPage={"Accessories"} />,
-      },
+      // {
+      //   path: "/phones",
+      //   element: <AnyCategoryPage productPage={"Phones"} />,
+      // },
+      // {
+      //   path: "/laptops",
+      //   element: <AnyCategoryPage productPage={"Laptops"} />,
+      // },
+      // {
+      //   path: "/pc",
+      //   element: <AnyCategoryPage productPage={"PC"} />,
+      // },
+      // {
+      //   path: "/accessories",
+      //   element: <AnyCategoryPage productPage={"Accessories"} />,
+      // },
     ],
   },
   //End of application main layout
@@ -109,7 +113,81 @@ const router = createBrowserRouter([
           );
           return response.data;
         },
+        action:async({request}) =>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+          const response = await axios.delete(`http://localhost:4000/api/products/${data.id}`)
+          console.log(response);
+          return redirect('/admin-dashboard/products')
+        }
       },
+      {
+        path:'products/add-product',
+        element:<AddProduct/>,
+        loader: async() =>{
+          const categoriesData = await axios.get('http://localhost:4000/api/categories')
+          const categories = categoriesData.data
+
+          const brandsData = await axios.get('http://localhost:4000/api/brands')
+          const brands = brandsData.data
+
+          const detailsData = await axios.get('http://localhost:4000/api/productDetails')
+          const details = detailsData.data
+
+          return {categories, details, brands}
+        },
+        action: async({request}) =>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+          const parsedData = JSON.parse(data.formData)
+          const dataToSubmit = {productName:data.productName,description:data.description,brand:data.brand,categories:parsedData.categories,details:parsedData.details}
+          console.log(dataToSubmit);
+          const response = await axios.post('http://localhost:4000/api/products',{...dataToSubmit})
+          console.log(response.data);
+
+          return redirect('/admin-dashboard/products')
+          // return null
+        
+        }
+
+      },
+      {
+        path:'products/edit-product/:id',
+        element:<EditProduct/>,
+        loader: async({params}) =>{
+          const categoriesData = await axios.get('http://localhost:4000/api/categories')
+          const categories = categoriesData.data
+
+          const brandsData = await axios.get('http://localhost:4000/api/brands')
+          const brands = brandsData.data
+
+          const detailsData = await axios.get('http://localhost:4000/api/productDetails')
+          const details = detailsData.data
+
+          const response = await axios.get(`http://localhost:4000/api/products/${params.id}`)
+          const data = response.data
+
+          return {data,categories,details,brands}
+
+        },
+        action : async ({params,request}) =>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+
+          // console.log(data);
+          const parsedData = JSON.parse(data.formData)
+          const dataToSubmit = {productName:data.productName,description:data.description,brand:data.brand,categories:parsedData.categories,details:parsedData.details}
+          // console.log(dataToSubmit);
+
+
+          const response = await axios.patch(`http://localhost:4000/api/products/${params.id}`,{...dataToSubmit})
+          console.table(response);
+
+          return redirect('/admin-dashboard/products')
+        }
+
+      },
+     
       {
         path: "aboutus",
         element: <AboutusPage />,
@@ -222,30 +300,30 @@ const router = createBrowserRouter([
           );
           console.log(response);
 
-          return redirect("/admin-dashboard/categories");
-        },
-      },
-    ],
-  },
-  //End admin layout
-  {
-    path: "/register",
-    element: <RegisterLogin />,
-    action: async ({request}) => {
-      const formData = await request.formData();
-      const data = Object.fromEntries(formData);
-      console.log(data);
+            return redirect('/admin-dashboard/categories')
 
-      const response = await axios.post(
-        "http://localhost:4000/api/users/", {...data}
-      )
-      return response;
+          }
+        },
+        {
+          path:'profile',
+          element:<ProfilePage/>,
+          // loader:async({params}) =>{
+          //   const response = await axios.get(`http://localhost:4000/api/admins/${params.id}`)
+          //   console.log(response.data);
+          //   return response.data
+          // }
+        }
+      ]
+    },
+    //End admin layout 
+    {
+      path:'/register',
+      element:<RegisterLogin/>
+    },
+    {
+      path:'*',
+      element:<NotFound/>
     }
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-]);
+])
 
 export default router;
