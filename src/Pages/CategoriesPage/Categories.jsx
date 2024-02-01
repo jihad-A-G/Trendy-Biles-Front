@@ -7,7 +7,7 @@ export default function Categories() {
   const data = useLoaderData();
   return (
     <div className="CategoryPage">
-      <div className="Links">
+      <div className="Links"> 
         {" "}
         <Link to="/">
           Home / <Link to="/Category">Categories</Link>
