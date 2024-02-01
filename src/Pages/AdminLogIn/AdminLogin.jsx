@@ -4,10 +4,11 @@ import "./AdminLogin.css";
 import { useNavigate,} from "react-router-dom";
 import FullLogo from "../../assets/FullLogo2.jpg";
 import { ToastContainer, toast } from "react-toastify";
-import { AuthContext } from "../../utils/AuthContext";
+import { useInfo } from "../../utils/AuthContext";
+import { jwtDecode } from "jwt-decode";
 const AdminLogin = () => {
  const navigate = useNavigate();
- const { setAuth } = useContext(AuthContext); // add this line
+ const {setId,setAuth,setRole} = useInfo();
 
  const [loginForm, setLoginForm] = useState({
     username:'',
@@ -20,10 +21,15 @@ const AdminLogin = () => {
         const response = await axios.post("http://localhost:4000/api/admins/login", loginForm)
         const token = response.data.token;
         document.cookie = `token=${token}; path=/;`;
-        setAuth(jwtDecode(token)); // add this line
-        navigate("/")
+        const decoded = (jwtDecode(token));
+        console.log('decoded role',decoded.roles.name);
+        setRole(decoded.roles.name);
+        setId(decoded.id);
+        setAuth(true);
+        navigate("/admin-dashboard");
     }
     catch (err) {
+      console.log(err)
       toast.error("Cannot login", err,{
         position: "top-right",
         autoClose: 3000,

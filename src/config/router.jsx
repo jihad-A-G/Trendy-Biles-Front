@@ -18,10 +18,10 @@ import Cookies from "js-cookie";
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
-import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx"
-import ProtectedRoute from "../utils/ProtectedRoute.jsx";
+import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
-import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
+import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
+import {ProtectedRoute, SuperAdminProtectedRoute} from "../utils/ProtectedRoute.jsx" 
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -29,12 +29,13 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "",
-        element: <ProtectedRoute><HomePage /></ProtectedRoute>,
+        path: "/",
+        element: <HomePage />,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/products/"
           );
+          console.log(response.data);
           return response.data;
         },
       },
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <ProtectedRoute><ContactUs /></ProtectedRoute>,
+        element: <ContactUs />,
       },
       {
         path: "/CheckOut",
@@ -68,10 +69,12 @@ const router = createBrowserRouter([
       {
         path: "/Category",
         element: <CategoryPage />,
-        loader:async() =>{
-          const response = await axios.get('http://localhost:4000/api/categories/')
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/categories/"
+          );
           console.log(response.data);
-          return response.data
+          return response.data;
         },
       },
       {
@@ -91,19 +94,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/phones",
-        element: <AnyCategoryPage productPage={"Phones"} />,
+        element: <AnyCategoryPage categoryPage={"Phones"} />,
       },
       {
         path: "/laptops",
-        element: <AnyCategoryPage productPage={"Laptops"} />,
+        element: <AnyCategoryPage categoryPage={"Laptops"} />,
       },
       {
         path: "/pc",
-        element: <AnyCategoryPage productPage={"PC"} />,
+        element: <AnyCategoryPage categoryPage={"PC"} />,
       },
       {
         path: "/accessories",
-        element: <AnyCategoryPage productPage={"Accessories"} />,
+        element: <AnyCategoryPage categoryPage={"Accessories"} />,
       },
     ],
   },
@@ -111,11 +114,11 @@ const router = createBrowserRouter([
   //Admin dashboard layout
   {
     path: "/admin-dashboard",
-    element: <AdminLayout />,
+    element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
     children: [
       {
         path: "products",
-        element: <ProductsPage />,
+        element: <ProtectedRoute><ProductsPage /></ProtectedRoute>,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/products/"
@@ -125,7 +128,7 @@ const router = createBrowserRouter([
       },
       {
         path: "aboutus",
-        element: <AboutusPage />,
+        element: <SuperAdminProtectedRoute><AboutusPage /></SuperAdminProtectedRoute>,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/aboutus/"
@@ -153,7 +156,7 @@ const router = createBrowserRouter([
       },
       {
         path: "orders",
-        element: <OrdersTable />,
+        element: <SuperAdminProtectedRoute><OrdersTable /></SuperAdminProtectedRoute>,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/orders/",
@@ -244,16 +247,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterLogin />,
-    action: async ({request}) => {
+    action: async ({ request }) => {
       const formData = await request.formData();
       const data = Object.fromEntries(formData);
       console.log(data);
 
-      const response = await axios.post(
-        "http://localhost:4000/api/users/", {...data}
-      )
+      const response = await axios.post("http://localhost:4000/api/users/", {
+        ...data,
+      });
       return response;
-    }
+    },
   },
   {
     path: "*",
