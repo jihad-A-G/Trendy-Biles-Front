@@ -21,8 +21,8 @@ const AuthProvider = ({ children }) => {
            setId(decodedId.id);
            setAuth(true);
            setRole(decodedId.roles.name);
-           if (decodedId.id !== id) { // Check if the id has changed
-             setInfo({ id: decodedId.id }); // Update the info state here
+           if (decodedId.id !== id) { 
+             setInfo({ id: decodedId.id }); 
            }
            setLoading(false);
          } catch (error) {

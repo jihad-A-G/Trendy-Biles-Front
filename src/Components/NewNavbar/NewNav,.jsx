@@ -113,7 +113,7 @@ const NewNavbar = () => {
           </Link>
 
           <Link
-            to="/AboutUsMain"
+            to="AboutUsMain"
             name={"aboutus"}
             onClick={executeScroll}
             className={`N-aboutUsMain ${
@@ -130,10 +130,10 @@ const NewNavbar = () => {
             </span>
           </Link>
           <Link
-            to="/contact"
+            to="contact"
             name={"contactUs"}
             onClick={executeScroll}
-            className={`N-Contact ${isLinkActive("/contact") ? "active" : ""}`}
+            className={`N-Contact ${isLinkActive("contact") ? "active" : ""}`}
           >
             <span
               onClick={() => {
