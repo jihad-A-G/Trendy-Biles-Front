@@ -18,7 +18,9 @@ import Cookies from "js-cookie";
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
-// import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
+import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx"
+import ProtectedRoute from "../utils/ProtectedRoute.jsx";
+import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx"
 import ProfilePage from "../adminDashboard/profilePage.jsx";
 import AddProduct from '../adminDashboard/products/addProduct.jsx'
@@ -31,8 +33,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
-        element: <HomePage />,
+        path: "",
+        element: <ProtectedRoute><HomePage /></ProtectedRoute>,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/products/"
@@ -53,8 +55,19 @@ const router = createBrowserRouter([
         element: <PriceMatchingPolicyPage />,
       },
       {
-        path: "contact",
-        element: <ContactUs />,
+        path: "/contact",
+        element: <ProtectedRoute><ContactUs /></ProtectedRoute>,
+      },
+      {
+        path: "/CheckOut",
+        element: <CheckOutPage />,
+        loader: async () => {
+          const response = await axios.get(
+            "http://localhost:4000/api/products/"
+          );
+          console.log(response.data);
+          return response.data;
+        },
       },
       {
         path: "Category",

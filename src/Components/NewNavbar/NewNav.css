@@ -3,6 +3,10 @@
   display: flex;
   border-bottom: 1px solid #e1e1e1; /* Add a line under the navigation bar */
 }
+.Home-User-Icon{
+  width: 3%;
+  display: flex;
+}
 
 .N-home.active,
 .N-about.active,
@@ -91,14 +95,16 @@
   font-size: 30px;
   margin-left: 190px;
   margin-bottom: 10px;
+  color: #57585a;
 }
 .cart-counter {
   position: absolute;
   transform: translate(-50%, -50%);
   color: #57585a; /* Choose your text color */
-  font-size: 17px; /* Choose your font size */
+  font-size: 14px; /* Choose your font size */
   border-radius: 50%; /* To make it a circle */
-  padding: 4px 8px; /* Adjust padding as needed */
+  margin-top: 10px;
+
 }
 a.join-link {
   display: grid;

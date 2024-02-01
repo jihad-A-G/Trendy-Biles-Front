@@ -3,10 +3,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./ContactUs.css";
 import emailjs from "emailjs-com";
-import { AuthContext } from "../../utils/AuthContext";
+import { useInfo } from "../../utils/AuthContext";
 function ContactUs() {
-  const decoded = useContext(AuthContext);
-  console.log('The decodedId from the context', decoded);
+  const {id} = useInfo();
+  console.log('The decodedId from the context', id);
 
   const [formData, setFormData] = useState({
     firstName: "",

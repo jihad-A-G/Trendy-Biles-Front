@@ -37,6 +37,7 @@
     "react-swiper": "^0.1.5",
     "react-toastify": "^10.0.4",
     "react-transition-group": "^4.4.5",
+    "rollup": "^4.9.6",
     "slick-carousel": "^1.8.1",
     "rollup": "^4.9.6",
     "styled-components": "^6.1.8",
@@ -52,6 +53,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "sass": "^1.70.0",
     "vite": "^5.0.8"
   }
 }

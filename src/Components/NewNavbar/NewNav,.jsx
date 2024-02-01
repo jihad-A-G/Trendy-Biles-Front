@@ -5,6 +5,7 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Logo from "../../assets/FullLogo2.jpg";
 import "../NewNavbar/NewNav.css";
+import UserIcon from "../../assets/USERICON.png";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
 import axios from "axios";
@@ -15,8 +16,14 @@ const NewNavbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
   const [categories, setCategories] = useState([]);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const isLoggedIn = document.cookie.includes("token");
+
+  const toggleUserDropdown = () => {
+    setShowUserDropdown(!showUserDropdown);
+  };
+
   useEffect(() => {
-    // Fetch the categories
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
@@ -44,7 +51,6 @@ const NewNavbar = () => {
   }, [cartCount]);
 
   const handleClickCart = () => {
-    // Increment the cart count
     setCartCount(cartCount + 1);
   };
 
@@ -66,6 +72,24 @@ const NewNavbar = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleLogout = async () => {
+    try {
+      // Make a request to the server to log the user out
+      await axios.post("http://localhost:4000/api/users/logout");
+
+      // Clear the token from the client-side by setting an expired cookie
+      document.cookie =
+        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+      // Navigate to the home page or any other desired location
+      navigate("/");
+
+      console.log("User logged out");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   return (
     <header className="headerNavbar sticky">
       <img
@@ -85,7 +109,7 @@ const NewNavbar = () => {
               scrollToTop;
             }}
           >
-            <a>Home</a>
+            <span>Home</span>
           </Link>
 
           <Link
@@ -96,14 +120,14 @@ const NewNavbar = () => {
               isLinkActive("/AboutUsMain") ? "active" : ""
             }`}
           >
-            <a
+            <span
               onClick={() => {
                 navigate("/", { replace: true });
                 executeScroll();
               }}
             >
               AboutUs
-            </a>
+            </span>
           </Link>
           <Link
             to="contact"
@@ -111,14 +135,14 @@ const NewNavbar = () => {
             onClick={executeScroll}
             className={`N-Contact ${isLinkActive("contact") ? "active" : ""}`}
           >
-            <a
+            <span
               onClick={() => {
                 navigate("/", { replace: true });
                 executeScroll();
               }}
             >
               ContactUs
-            </a>
+            </span>
           </Link>
           <div className="dropdown">
             <Link to="/Category">
@@ -127,7 +151,7 @@ const NewNavbar = () => {
             </Link>
             <div className="menu">
               {categories.map((category) => (
-                <Link  key={category.id} to={`/${category.name.toLowerCase()}`}>
+                <Link key={category._id} to={`/${category.name.toLowerCase()}`}>
                   {category.name}
                 </Link>
               ))}
@@ -145,13 +169,31 @@ const NewNavbar = () => {
             </div>
           </div>
         </div>
-        <div className="Cart" onClick={handleClickCart}>
+        <Link to="/CheckOut" className="Cart" onClick={handleClickCart}>
           <IoCartOutline />
           {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
-        </div>
-        <Link to="/Register" className="join-link">
-          Register
         </Link>
+        <Link to="/Register" className="join-link">
+          Login
+        </Link>
+
+        {isLoggedIn && (
+          <div className="user-icon-container">
+            <img
+              className="Home-User-Icon"
+              src={UserIcon}
+              alt="USERICON"
+              onClick={toggleUserDropdown}
+            />
+            {showUserDropdown && (
+              <div className="user-dropdown">
+                {/* <button onClick={goToProfile}>Go to Profile</button> */}
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
+          </div>
+        )}
+
         <FontAwesomeIcon
           icon={collapse ? faBars : faXmark}
           className="header_icon"
@@ -176,7 +218,7 @@ const NewNavbar = () => {
               onClick={executeScroll}
               className="N-about"
             >
-              <a
+              <span
                 onClick={() => {
                   navigate("/", { replace: true });
                   executeScroll();
@@ -184,7 +226,7 @@ const NewNavbar = () => {
                 className="N-about"
               >
                 About
-              </a>
+              </span>
             </Link>
             <Link
               to="/Contact"
@@ -192,7 +234,7 @@ const NewNavbar = () => {
               onClick={executeScroll}
               className="N-contact"
             >
-              <a
+              <span
                 onClick={() => {
                   navigate("/", { replace: true });
                   executeScroll();
@@ -200,7 +242,7 @@ const NewNavbar = () => {
                 className="N-contact"
               >
                 ContactUs
-              </a>
+              </span>
             </Link>
             <div className="Mobiledropdown">
               <Link to="/Category">
