@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
        if (token) {
          try {
            const decodedId = (jwtDecode(token));
+           console.log(decodedId);
            setId(decodedId.id);
            setAuth(true);
            setRole(decodedId.roles.name);
