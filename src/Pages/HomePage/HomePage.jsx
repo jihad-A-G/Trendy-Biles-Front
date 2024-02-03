@@ -101,20 +101,28 @@ const HomePage = () => {
 
 
 
-<Carousel interval={null} indicators={false} controls={true} className="card-carousel">
-  {[0, 1, 2].map((startIndex) => (
-    <Carousel.Item key={startIndex}>
-      <div className="card-container">
-        {cardData.slice(startIndex, startIndex + 3).map((card, index) => (
-          <div key={index} className="card" style={{ width: '300px', height: '400px' }}>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-          </div>
-        ))}
-      </div>
-    </Carousel.Item>
-  ))}
+      <Carousel interval={null} indicators={false} controls={true} className="card-carousel">
+      {[0, 1, 2].map((startIndex) => (
+  <Carousel.Item key={startIndex}>
+    <div className="card-container">
+      {data.slice(startIndex, startIndex + 3).map((card, index) => {
+        // Check if the product has a true deal before displaying
+        if (card) {
+          return (
+            <div key={index} className="card" style={{ width: '300px', height: '400px' }}>
+              <h3>{card.details[0].specificName}</h3>
+              <p>{card.description}</p>
+            </div>
+          );
+        } else {
+          return null; // or any other fallback if needed
+        }
+      })}
+    </div>
+  </Carousel.Item>
+))}
 </Carousel>
+
 <h2 className="deals-header">BRANDS</h2>
 
 
