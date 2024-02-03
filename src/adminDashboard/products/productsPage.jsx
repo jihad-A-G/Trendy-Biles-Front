@@ -1,13 +1,15 @@
 import {Button, Container,Carousel,Card} from 'react-bootstrap'
-import { Form } from 'react-router-dom'
+import { Form,Link } from 'react-router-dom'
 import { useLoaderData,useSubmit } from 'react-router-dom'
+import LinearIndeterminate from '../components/progressBar'
 const ProductsPage = () =>{
   const data = useLoaderData()
   const submit = useSubmit()
-  console.log(data);
     return(
-        <>
-        <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
+        <div>
+       {data?
+       (
+        <> <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
             <h3 className='text-black '>Products</h3>
             <div className="d-flex align-items-center column-gap-4">
                 <div className="dropdown">
@@ -45,6 +47,7 @@ const ProductsPage = () =>{
   </ul>
   </div>
                 <Button className='bg-danger border-0'><i className="bi bi-trash-fill"></i> Remove rejected</Button>
+                <Button variant='primary'><Link className="text-white " style={{textDecoration: "none"}} to={'add-product'}><i class="bi bi-plus-circle"></i> Add product</Link></Button>
             </div>
         </Container>
         <Container fluid className='d-flex justify-content-center flex-row flex-wrap column-gap-4 row-gap-4'>
@@ -56,7 +59,7 @@ const ProductsPage = () =>{
             <Carousel>
                     {product.details[0]?.images.map((image, index) => (
                         <Carousel.Item key={index} className='w-100 h-25'>
-                            <img src={`http://localhost:4000/images/${image}`} className='d-block h-100 w-100' alt="Product Image"/>
+                            <img src={`http://localhost:4000/images/${image}`} className='d-block h-100 w-100 bg-white' alt="Product Image"/>
                         </Carousel.Item>
                     ))}
                 </Carousel>
@@ -68,13 +71,13 @@ const ProductsPage = () =>{
                 {
                     product.status.toLowerCase() ==='new'?<div className="d-flex justify-content-center w-100"><Button className='bg-dark green-hover w-100 border-0'>Publish</Button></div> : product.status.toLowerCase() === 'accepted'?
                     <div className="d-flex justify-content-between align-items-center">
-                    <Button variant="primary"><i className="bi bi-pencil-square"></i> Edit</Button>
+                    <Button variant="primary"><Link className='text-white' style={{textDecoration:'none'}} to={`edit-product/${product._id}`}><i className="bi bi-pencil-square"></i> Edit</Link></Button>
                     <Form method="DELETE">
                       <input name='id' type='hidden' value={`${product._id}`}/>
                     <Button type='submit' onClick={(e)=>{
                        e.preventDefault()
                        swal({
-                         title: "Are you sure you want to edit?",
+                         title: "Are you sure you want to delete?",
                          icon: "warning",
                          buttons: true,
                          dangerMode: true,
@@ -82,7 +85,7 @@ const ProductsPage = () =>{
                        .then((willDelete) => {
                          if (willDelete) {
                            submit(e.target.form)
-                           swal("About us was edited successfully!", {
+                           swal("Product was deleted successfully!", {
                              icon: "success",
                            });
                
@@ -104,8 +107,11 @@ const ProductsPage = () =>{
           <span class="visually-hidden">Loading...</span>
         </div>}
         </Container>
+        </>):(
+        <LinearIndeterminate/>
+        )}
         
-        </>
+        </div>
     )
 
 }

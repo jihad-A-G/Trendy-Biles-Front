@@ -1,4 +1,4 @@
-import {Button} from 'react-bootstrap'
+import {Button,Container} from 'react-bootstrap'
 import { Form } from 'react-router-dom'
 import { useLoaderData,useSubmit } from 'react-router-dom'
 import { useState } from 'react'
@@ -13,6 +13,7 @@ const AboutusPage = () =>{
           setImgtoSubmit(e.target.files[0]);
           const formData = new FormData();
           formData.append('logoImage', imgtoSubmit);
+          console.log(formData);
       }
 const file = e.target.files[0];
 const reader = new FileReader();
@@ -31,6 +32,12 @@ if (file) {
 
 
     return(
+      <>
+      <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
+            <h3 className='text-black '>About us</h3>
+
+        </Container>
+      
         <Form  method='PUT' encType="multipart/form-data">
        <div className="mb-3">
   <label htmlFor="companyName" className="form-label">Company Name</label>
@@ -71,6 +78,7 @@ if (file) {
         });
       }} type='submit' className='green-btn'>Edit</Button>
     </Form>
+    </>
     )
 }
 

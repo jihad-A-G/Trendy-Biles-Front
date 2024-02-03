@@ -1,12 +1,15 @@
   import React,{useState} from "react";
   import axios from "axios";
   import "./RegisterPage.css";
-  import { useNavigate,} from "react-router-dom";
+  import { useNavigate} from "react-router-dom";
   import FullLogo from "../../assets/FullLogo2.jpg";
   import { ToastContainer, toast } from "react-toastify";
+  import { jwtDecode } from "jwt-decode";
+  import { useInfo } from "../../utils/AuthContext";
 
   const RegisterLogin = () => {
     const navigate = useNavigate();
+    const {setId} = useInfo();
 
     const [loginForm, setLoginForm] = useState({
       email:'',
@@ -28,8 +31,11 @@
           console.log("hiiiiiiiiii")
           const token = response.data.token;
           console.log('hyy',token);
+          const decoded = (jwtDecode(token));
+          console.log('decoooooooodeeeeeed',decoded.id);
+          setId(decoded.id);
           document.cookie = `token=${token}; path=/;`;
-          navigate("/contact")
+          navigate("/");
       }
 
       catch (err) {

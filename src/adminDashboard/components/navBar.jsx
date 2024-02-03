@@ -1,4 +1,5 @@
 import {Image, Navbar, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/FullLogo2.jpg'
 import profile from '../../assets/images/user.png'
 import { useState,useEffect } from 'react';
@@ -8,10 +9,8 @@ const AdminNavBar = () => {
 
   const handleNavbarData = async() =>{
     const response = await axios.get('http://localhost:4000/api/aboutus/info')
-    console.log(response.data.aboutus);
     setAboutus(response.data.aboutus)    
   }
-  console.log(aboutus);
   useEffect(()=>{
     handleNavbarData()
   },[])
@@ -41,9 +40,9 @@ const AdminNavBar = () => {
   </a>
   <ul className="dropdown-menu px-0 py-1 mt-2 " aria-labelledby="navbarDropdown" >
   <li className='border-bottom'>
-    <a className='py-1 link px-3 text-black d-block link-underline link-underline-opacity-0'>
+    <Link className='py-1 link px-3 text-black d-block link-underline link-underline-opacity-0' to={`/admin-dashboard/profile`}>
       profile
-    </a>
+    </Link>
     </li>
     <li className='' >
       <a className='py-1 px-3 text-black d-block link-underline link-underline-opacity-0'>

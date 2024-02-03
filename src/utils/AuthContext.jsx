@@ -1,26 +1,63 @@
+// AuthContext.jsx
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
- const [auth, setAuth] = useState(15124);
+  const [info, setInfo] = useState({});
+  const [role,setRole] = useState(null);
+  const [auth, setAuth] = useState(null);
+  const [id, setId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
- useEffect(() => {
-    const token = Cookies.get('token');
-    if (token) {
-        console.log("the token in provider is ", token);
-      const decodedId = jwtDecode(token);
-      setAuth(decodedId);
-    }
- }, []);
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+       const token = Cookies.get('token');
+       if (token) {
+         try {
+           const decodedId = (jwtDecode(token));
+           setId(decodedId.id);
+           setAuth(true);
+           setRole(decodedId.roles.name);
+           if (decodedId.id !== id) { 
+             setInfo({ id: decodedId.id }); 
+           }
+           setLoading(false);
+         } catch (error) {
+           console.error('Error decoding token:', error);
+           setLoading(false);
+         }
+       } else {
+         setLoading(false);
+       }
+    };
+   
+    fetchUserInfo();
+   }, [setId,setRole,setAuth]); 
 
- return (
-    <AuthContext.Provider value={auth}>
+  useEffect(() => {
+    console.log('the updated id in the context', id);
+    console.log('the updated auth in the context', auth);
+    console.log('the updated role in the context', role);
+
+  }, [id,auth,role]);
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
+  return (
+    <AuthContext.Provider value={{ auth, setAuth, info, setInfo, id, setId,role,setRole}}>
       {children}
     </AuthContext.Provider>
- );
+  );
 };
 
-export { AuthContext, AuthProvider };
+// Export useInfo, not info
+const useInfo = () => {
+  return React.useContext(AuthContext);
+};
+
+export { AuthContext, AuthProvider, useInfo };

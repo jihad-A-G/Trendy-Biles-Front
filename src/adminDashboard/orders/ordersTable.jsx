@@ -1,6 +1,7 @@
-import { Table } from "react-bootstrap"
+import { Table,Container } from "react-bootstrap"
 import { useLoaderData } from "react-router-dom"
 import { useState } from "react"
+import LinearIndeterminate from "../components/progressBar";
 
 const OrdersTable = () => {
  const data = useLoaderData();
@@ -24,6 +25,11 @@ const OrdersTable = () => {
 
  return (
     <>
+    {!data?<LinearIndeterminate/>:
+    <>
+    <Container className='d-flex justify-content-between align-items-center mb-3 p-2 border-bottom border-3'>
+            <h3 className='text-black '>Orders</h3>
+        </Container>
       <Table responsive bordered hover>
         <thead>
           <tr>
@@ -70,6 +76,7 @@ const OrdersTable = () => {
           </li>
         </ul>
       </nav>
+      </>}
     </>
  );
 };
