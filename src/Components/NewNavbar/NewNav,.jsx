@@ -5,6 +5,7 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Logo from "../../assets/FullLogo2.jpg";
 import "../NewNavbar/NewNav.css";
+import AnyCategoryPage from '../ProductPageComponent/ProductPageComponent.jsx'
 import UserIcon from "../../assets/USERICON.png";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
@@ -151,11 +152,12 @@ const NewNavbar = () => {
             </Link>
             <div className="menu">
               {categories.map((category) => (
-                <Link key={category._id} to={`/${category.name.toLowerCase()}`}>
-                  {category.name}
-                </Link>
-              ))}
-            </div>
+                  <Link key={category._id} to={`/?${category.name.toLowerCase()}`}>
+                    {category.name.toLowerCase()}
+                  </Link>
+                  
+                ))}
+          </div>
           </div>
           <div className="dropdown">
             <Link to="/customer-support">

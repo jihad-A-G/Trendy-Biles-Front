@@ -20,7 +20,13 @@
   position: relative;
   overflow: hidden;
 }
+.slider-wrapper{
+  height: 100%;
 
+}
+.mainDivImage{
+  height: 100%;
+}
 .imageProductComponent {
   background-color:white;
   display: block;
@@ -36,7 +42,7 @@
   transform: scale(1.05);
 }
 
-.overlayButton {
+.overlayButtonProduct {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -52,7 +58,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.overlayButton:hover {
+.overlayButtonProduct:hover {
   background-color: #fff;
   color: #4cd964;
 }
@@ -62,10 +68,9 @@
   background-color: white;
   height: 30%;
   width: 100%;
-  padding-top: 10px;
   margin-bottom: 0;
-  /* display: grid;
-  align-content: center; */
+  display: grid;
+  align-content: center;
 }
 
 .productDescription {

@@ -50,13 +50,13 @@ const ProductComponent = ({ product, onDataFromChild }) => {
         onChange={setSelectedImageIndex}
       >
         {images && images.map((image, index) => (
-          <div key={index}>
+          <div classNmae="mainDivImage" key={index}>
             <img
               className="imageProductComponent"
               src={`http://localhost:4000/images/${image}`}
               alt={`Image ${index}`}
             />
-            <button className="overlayButton" onClick={sendDataToParent}>
+            <button className="overlayButtonProduct" onClick={sendDataToParent}>
               View Details
             </button>
           </div>

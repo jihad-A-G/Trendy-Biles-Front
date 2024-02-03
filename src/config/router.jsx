@@ -17,13 +17,34 @@ import OrdersTable from "../adminDashboard/orders/ordersTable";
 import Cookies from "js-cookie";
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
-import AddProduct from "../adminDashboard/products/addProduct";
-import EditProduct from "../adminDashboard/products/editProduct";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
 import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
-import {ProtectedRoute, SuperAdminProtectedRoute} from "../utils/ProtectedRoute.jsx" 
+
+
+// Fetch the categories outside of the router configuration
+const fetchCategories = async () => {
+  try {
+     const response = await axios.get("http://localhost:4000/api/categories/");
+     return response.data;
+  } catch (error) {
+     console.error("Error fetching categories:", error);
+     return [];
+  }
+ };
+ 
+ // Create a function that initializes the router after fetching the categories
+ const initializeRouter = async () => {
+  const categories = await fetchCategories();
+  const categoryRoutes = categories.map((category) => ({
+     path: `/${category.name.toLowerCase()}`,
+     element: <AnyCategoryPage categoryPage={category.name} />,
+  }));  
+
+
+
+
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -37,7 +58,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             "http://localhost:4000/api/products/"
           );
-          console.log(response.data);
           return response.data;
         },
       },
@@ -69,7 +89,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "Category",
+        path: "/Category",
         element: <CategoryPage />,
         loader: async () => {
           const response = await axios.get(
@@ -94,6 +114,7 @@ const router = createBrowserRouter([
           return response.data.aboutusContent;
         },
       },
+
       {
         path: "/phones",
         element: <AnyCategoryPage categoryPage={"Phones"} />,
@@ -116,95 +137,21 @@ const router = createBrowserRouter([
   //Admin dashboard layout
   {
     path: "/admin-dashboard",
-    element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
+    element: <AdminLayout />,
     children: [
       {
         path: "products",
-        element: <ProtectedRoute><ProductsPage /></ProtectedRoute>,
+        element: <ProductsPage />,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/products/"
           );
           return response.data;
         },
-        action:async({request}) =>{
-          const formData = await request.formData()
-          const data = Object.fromEntries(formData)
-          const response = await axios.delete(`http://localhost:4000/api/products/${data.id}`)
-          console.log(response);
-          return redirect('/admin-dashboard/products')
-        }
       },
-      {
-        path:'products/add-product',
-        element:<AddProduct/>,
-        loader: async() =>{
-          const categoriesData = await axios.get('http://localhost:4000/api/categories')
-          const categories = categoriesData.data
-
-          const brandsData = await axios.get('http://localhost:4000/api/brands')
-          const brands = brandsData.data
-
-          const detailsData = await axios.get('http://localhost:4000/api/productDetails')
-          const details = detailsData.data
-
-          return {categories, details, brands}
-        },
-        action: async({request}) =>{
-          const formData = await request.formData()
-          const data = Object.fromEntries(formData)
-          const parsedData = JSON.parse(data.formData)
-          const dataToSubmit = {productName:data.productName,description:data.description,brand:data.brand,categories:parsedData.categories,details:parsedData.details}
-          console.log(dataToSubmit);
-          const response = await axios.post('http://localhost:4000/api/products',{...dataToSubmit})
-          console.log(response.data);
-
-          return redirect('/admin-dashboard/products')
-          // return null
-        
-        }
-
-      },
-      {
-        path:'products/edit-product/:id',
-        element:<EditProduct/>,
-        loader: async({params}) =>{
-          const categoriesData = await axios.get('http://localhost:4000/api/categories')
-          const categories = categoriesData.data
-
-          const brandsData = await axios.get('http://localhost:4000/api/brands')
-          const brands = brandsData.data
-
-          const detailsData = await axios.get('http://localhost:4000/api/productDetails')
-          const details = detailsData.data
-
-          const response = await axios.get(`http://localhost:4000/api/products/${params.id}`)
-          const data = response.data
-
-          return {data,categories,details,brands}
-
-        },
-        action : async ({params,request}) =>{
-          const formData = await request.formData()
-          const data = Object.fromEntries(formData)
-
-          // console.log(data);
-          const parsedData = JSON.parse(data.formData)
-          const dataToSubmit = {productName:data.productName,description:data.description,brand:data.brand,categories:parsedData.categories,details:parsedData.details}
-          // console.log(dataToSubmit);
-
-
-          const response = await axios.patch(`http://localhost:4000/api/products/${params.id}`,{...dataToSubmit})
-          console.table(response);
-
-          return redirect('/admin-dashboard/products')
-        }
-
-      },
-     
       {
         path: "aboutus",
-        element: <SuperAdminProtectedRoute><AboutusPage /></SuperAdminProtectedRoute>,
+        element: <AboutusPage />,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/aboutus/"
@@ -232,7 +179,7 @@ const router = createBrowserRouter([
       },
       {
         path: "orders",
-        element: <SuperAdminProtectedRoute><OrdersTable /></SuperAdminProtectedRoute>,
+        element: <OrdersTable />,
         loader: async () => {
           const response = await axios.get(
             "http://localhost:4000/api/orders/",
@@ -289,6 +236,8 @@ const router = createBrowserRouter([
           return redirect("/admin-dashboard/categories");
         },
       },
+       ...categoryRoutes,
+
       {
         path: "categories/:id/edit-category",
         element: <EditCategory />,
