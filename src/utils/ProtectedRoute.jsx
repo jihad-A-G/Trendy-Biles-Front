@@ -6,7 +6,7 @@ export const SuperAdminProtectedRoute = ({ children }) => {
   const { auth,role } = useContext(AuthContext);
     console.log("the auth in the protected" , auth)
      if (!auth || role != 'Super-Admin' ) {
-      return <Navigate to="/not-found" replace />;
+      return <Navigate to="/adminlogin" replace />;
     }
   
  return children;
@@ -20,7 +20,7 @@ export const ProtectedRoute = ({ children }) => {
     console.log("the auth in the protected" , auth)
 
      if (!auth) {
-      return <Navigate to="/not-found" replace />;
+      return <Navigate to="/adminlogin" replace />;
     }
   
  return children;
