@@ -21,6 +21,8 @@ import EditCategory from "../adminDashboard/category/categoryEditForm";
 import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
+import {ProtectedRoute, SuperAdminProtectedRoute} from "../utils/ProtectedRoute.jsx"
+axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
   //Application main layout
@@ -118,7 +120,9 @@ const router = createBrowserRouter([
         element: <AboutusPage />,
         loader: async () => {
           const response = await axios.get(
-            "http://localhost:4000/api/aboutus/"
+            "http://localhost:4000/api/aboutus/",{
+              withCredentials:true
+            }
           );
           console.log(response.data);
           return response.data.aboutus;

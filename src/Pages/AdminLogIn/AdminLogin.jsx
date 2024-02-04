@@ -6,6 +6,7 @@ import FullLogo from "../../assets/FullLogo2.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import { useInfo } from "../../utils/AuthContext";
 import { jwtDecode } from "jwt-decode";
+import socket from "../../config/socket-client.js";
 const AdminLogin = () => {
  const navigate = useNavigate();
  const {setId,setAuth,setRole} = useInfo();
@@ -26,6 +27,7 @@ const AdminLogin = () => {
         setRole(decoded.roles.name);
         setId(decoded.id);
         setAuth(true);
+        socket.emit('joinSuperAdminRoom',decoded)
         navigate("/admin-dashboard");
     }
     catch (err) {
