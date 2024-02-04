@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer/Footer.jsx";
-import NewNavbar from "./Components/NewNavbar/NewNav.jsx";
+import NewNavbar from "./Components/NewNavbar/NewNav,.jsx";
 import "./App.css";
 import socket from "./config/socket-client.js";
 const App = () => {
@@ -16,7 +16,7 @@ return ()=>{
   },[])
   return (
     <div>
-      <NewNavbar />
+      <NewNavbar/>
       <Outlet />
       <Footer />
     </div>

@@ -15,18 +15,12 @@
 }
 
 .imageContainer {
-  height: 70%;
+  height: 65%;
   width: 100%;
   position: relative;
   overflow: hidden;
 }
-.slider-wrapper{
-  height: 100%;
 
-}
-.mainDivImage{
-  height: 100%;
-}
 .imageProductComponent {
   background-color:white;
   display: block;
@@ -42,7 +36,7 @@
   transform: scale(1.05);
 }
 
-.overlayButtonProduct {
+.overlayButton {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -58,7 +52,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.overlayButtonProduct:hover {
+.overlayButton:hover {
   background-color: #fff;
   color: #4cd964;
 }
@@ -66,11 +60,12 @@
 /* Other styles remain unchanged */
 .descriptionProductComponent {
   background-color: white;
-  height: 30%;
+  height: 35%;
   width: 100%;
+  padding-top: 10px;
   margin-bottom: 0;
-  display: grid;
-  align-content: center;
+  /* display: grid;
+  align-content: center; */
 }
 
 .productDescription {
