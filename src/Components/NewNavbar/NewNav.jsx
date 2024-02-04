@@ -5,6 +5,8 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Logo from "../../assets/FullLogo2.jpg";
 import "../NewNavbar/NewNav.css";
+// import AnyCategoryPage from "../AnyCategoryPage/ProductPageComponent.jsx";
+import UserIcon from "../../assets/USERICON.png";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
 import axios from "axios";
@@ -15,11 +17,19 @@ const NewNavbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
   const [categories, setCategories] = useState([]);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const isLoggedIn = document.cookie.includes("token");
+
+  const toggleUserDropdown = () => {
+    setShowUserDropdown(!showUserDropdown);
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/categories");
+        const response = await axios.get(
+          "http://localhost:4000/api/categories"
+        );
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -63,6 +73,24 @@ const NewNavbar = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleLogout = async () => {
+    try {
+      // Make a request to the server to log the user out
+      await axios.post("http://localhost:4000/api/users/logout");
+
+      // Clear the token from the client-side by setting an expired cookie
+      document.cookie =
+        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+      // Navigate to the home page or any other desired location
+      navigate("/");
+
+      console.log("User logged out");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   return (
     <header className="headerNavbar sticky">
       <img
@@ -86,7 +114,7 @@ const NewNavbar = () => {
           </Link>
 
           <Link
-            to="/AboutUsMain"
+            to="AboutUsMain"
             name={"aboutus"}
             onClick={executeScroll}
             className={`N-aboutUsMain ${
@@ -103,10 +131,10 @@ const NewNavbar = () => {
             </span>
           </Link>
           <Link
-            to="/contact"
+            to="contact"
             name={"contactUs"}
             onClick={executeScroll}
-            className={`N-Contact ${isLinkActive("/contact") ? "active" : ""}`}
+            className={`N-Contact ${isLinkActive("contact") ? "active" : ""}`}
           >
             <span
               onClick={() => {
@@ -118,14 +146,14 @@ const NewNavbar = () => {
             </span>
           </Link>
           <div className="dropdown">
-            <Link to="/Category">
+            <Link to="/categories">
               Categories
               <img src={chevron} alt="Chevron" />
             </Link>
             <div className="menu">
               {categories.map((category) => (
-                <Link key={category._id} to={`/${category.name.toLowerCase()}`}>
-                  {category.name}
+                <Link key={category._id} to={`categories/${category.name.toLowerCase()}`}>
+                  {category.name.toLowerCase()}
                 </Link>
               ))}
             </div>
@@ -147,8 +175,26 @@ const NewNavbar = () => {
           {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
         </Link>
         <Link to="/Register" className="join-link">
-          Register
+          Login
         </Link>
+
+        {isLoggedIn && (
+          <div className="user-icon-container">
+            <img
+              className="Home-User-Icon"
+              src={UserIcon}
+              alt="USERICON"
+              onClick={toggleUserDropdown}
+            />
+            {showUserDropdown && (
+              <div className="user-dropdown">
+                {/* <button onClick={goToProfile}>Go to Profile</button> */}
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
+          </div>
+        )}
+
         <FontAwesomeIcon
           icon={collapse ? faBars : faXmark}
           className="header_icon"

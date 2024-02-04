@@ -26,7 +26,8 @@ import LG from '../../assets/LG.png';
 import AppleIcon from  '../../assets/APPLE.png';
 import PS from '../../assets/PS.png';
 import './HomePage.css';
-import { AuthContext } from "../../utils/AuthContext";
+// import { AuthContext } from "../../utils/AuthContext";
+import { useInfo } from '../../utils/AuthContext';
 
 const images = [
   HomeSliderimg11,
@@ -58,8 +59,9 @@ const cardData = [
 
 const HomePage = () => {
   const data = useLoaderData()
-  const decoded = useContext(AuthContext);
-  console.log('The decodedId from the context', decoded);
+  const { info } = useInfo();
+  const {id} = useInfo();
+  console.log('The decodedId from the context', id);
   
 
   const MovementBanner = () => {

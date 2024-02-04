@@ -10,7 +10,7 @@ import CategoryPage from "../Pages/CategoriesPage/Categories.jsx";
 import AdminLayout from "../adminDashboard/dashboardLayout";
 import axios from "axios";
 import App from "../App";
-import ProductsPage from "../adminDashboard/productsPage";
+import ProductsPage from "../adminDashboard/products/productsPage.jsx";
 import AboutusPage from "../adminDashboard/aboutUsPage";
 import NotFound from "../Pages/NotFoundPage/NotFound";
 import OrdersTable from "../adminDashboard/orders/ordersTable";
@@ -21,6 +21,9 @@ import EditCategory from "../adminDashboard/category/categoryEditForm";
 import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
+import {ProtectedRoute, SuperAdminProtectedRoute} from "../utils/ProtectedRoute.jsx"
+axios.defaults.withCredentials = true;
+
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -34,7 +37,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             "http://localhost:4000/api/products/"
           );
-          console.log(response.data);
           return response.data;
         },
         // loader: async () => {
@@ -73,7 +75,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/Category",
+        path: "/categories",
         element: <CategoryPage />,
         loader: async () => {
           const response = await axios.get(
@@ -99,20 +101,8 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/phones",
-        element: <AnyCategoryPage categoryPage={"Phones"} />,
-      },
-      {
-        path: "/laptops",
-        element: <AnyCategoryPage categoryPage={"Laptops"} />,
-      },
-      {
-        path: "/pc",
-        element: <AnyCategoryPage categoryPage={"PC"} />,
-      },
-      {
-        path: "/accessories",
-        element: <AnyCategoryPage categoryPage={"Accessories"} />,
+        path: "categories/:categoryIdName",
+        element: <AnyCategoryPage />,
       },
     ],
   },
@@ -137,7 +127,9 @@ const router = createBrowserRouter([
         element: <AboutusPage />,
         loader: async () => {
           const response = await axios.get(
-            "http://localhost:4000/api/aboutus/"
+            "http://localhost:4000/api/aboutus/",{
+              withCredentials:true
+            }
           );
           console.log(response.data);
           return response.data.aboutus;
