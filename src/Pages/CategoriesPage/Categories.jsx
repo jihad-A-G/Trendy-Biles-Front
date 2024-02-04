@@ -10,7 +10,7 @@ export default function Categories() {
       <div className="Links"> 
         {" "}
         <Link to="/">
-          Home / <Link to="/Category">Categories</Link>
+          Home / <Link to="/category">Categories</Link>
         </Link>{" "}
       </div>
       <h1>Categories</h1>

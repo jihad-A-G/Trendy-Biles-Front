@@ -22,29 +22,6 @@ import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
 
-
-// Fetch the categories outside of the router configuration
-const fetchCategories = async () => {
-  try {
-     const response = await axios.get("http://localhost:4000/api/categories/");
-     return response.data;
-  } catch (error) {
-     console.error("Error fetching categories:", error);
-     return [];
-  }
- };
- 
- // Create a function that initializes the router after fetching the categories
- const initializeRouter = async () => {
-  const categories = await fetchCategories();
-  const categoryRoutes = categories.map((category) => ({
-     path: `/${category.name.toLowerCase()}`,
-     element: <AnyCategoryPage categoryPage={category.name} />,
-  }));  
-
-
-
-
 const router = createBrowserRouter([
   //Application main layout
   {
@@ -89,7 +66,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/Category",
+        path: "/categories",
         element: <CategoryPage />,
         loader: async () => {
           const response = await axios.get(
@@ -114,22 +91,9 @@ const router = createBrowserRouter([
           return response.data.aboutusContent;
         },
       },
-
       {
-        path: "/phones",
-        element: <AnyCategoryPage categoryPage={"Phones"} />,
-      },
-      {
-        path: "/laptops",
-        element: <AnyCategoryPage categoryPage={"Laptops"} />,
-      },
-      {
-        path: "/pc",
-        element: <AnyCategoryPage categoryPage={"PC"} />,
-      },
-      {
-        path: "/accessories",
-        element: <AnyCategoryPage categoryPage={"Accessories"} />,
+        path: "categories/:categoryIdName",
+        element: <AnyCategoryPage />,
       },
     ],
   },
@@ -236,8 +200,6 @@ const router = createBrowserRouter([
           return redirect("/admin-dashboard/categories");
         },
       },
-       ...categoryRoutes,
-
       {
         path: "categories/:id/edit-category",
         element: <EditCategory />,
