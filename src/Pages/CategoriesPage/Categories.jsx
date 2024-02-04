@@ -7,10 +7,10 @@ export default function Categories() {
   const data = useLoaderData();
   return (
     <div className="CategoryPage">
-      <div className="Links"> 
+      <div className="Links">
         {" "}
         <Link to="/">
-          Home / <Link to="/category">Categories</Link>
+          Home / <Link to="/Category">Categories</Link>
         </Link>{" "}
       </div>
       <h1>Categories</h1>

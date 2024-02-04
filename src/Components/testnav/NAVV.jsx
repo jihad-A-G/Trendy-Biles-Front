@@ -5,32 +5,10 @@ import { IoCartOutline } from "react-icons/io5";
 import Logo from "../../assets/FullLogo2.jpg";
 import "./nav.css";
 
-
-
-
-
-
 const CustomNavbar = () => {
   const initialCartCount = parseInt(localStorage.getItem("cartCount")) || 0;
   const [cartCount, setCartCount] = useState(initialCartCount);
-  const [categories, setCategories] = useState([]);
 
-
-  useEffect(() => {
-    const fetchProduct = async (categories) => {
-      try {
-        const response = await axios.get(`http://localhost:4000/api/categories`);
-        setCategories(response.data.name);
-      } catch (error) {
-        console.error("Error fetching company data:", error);
-      }
-    };
-    fetchProduct(categories);
-  }
-  ); 
-
-
-  
   useEffect(() => {
     localStorage.setItem("cartCount", cartCount.toString());
   }, [cartCount]);
@@ -74,14 +52,21 @@ const CustomNavbar = () => {
               Contact Us
             </Nav.Link>
 
-      {/* Dropdown for Categories */}
-      {/* <NavDropdown title="Categories" id="basic-nav-dropdown">
-        {categories.map((category, index) => (
-          <NavDropdown.Item key={index} as={Link} to={`/?${category}`}>
-            {category}.toLowerCase
-          </NavDropdown.Item>
-        ))}
-      </NavDropdown> */}
+            {/* Dropdown for Categories */}
+            <NavDropdown title="Categories" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/phones">
+                Phones
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/laptops">
+                Laptops
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/pc">
+                PC
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/accessories">
+                Accessories
+              </NavDropdown.Item>
+            </NavDropdown>
 
             {/* Dropdown for Customer Service */}
             <NavDropdown title="Customer Service" id="basic-nav-dropdown">

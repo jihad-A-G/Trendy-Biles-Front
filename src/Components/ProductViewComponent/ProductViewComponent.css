@@ -7,16 +7,16 @@
  
  /* Class selectors */
  .overlayProduct {
-  position: fixed; /* Keep the overlay fixed */
-  top: 0; /* Start from the top */
-  left: 0; /* Start from the left */
-  width: 100%; /* Cover the full width */
-  height: 100%; /* Cover the full height */
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  display: flex; /* Flexbox for centering */
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
-  z-index: 999; /* High z-index to stay on top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
  }
  
  .mainCarousel{
@@ -33,15 +33,14 @@
  }
  
  .mainProductView {
-  border-radius: 10px; /* Rounded corners */
-  background-color: white; /* White background */
-  display: flex; /* Flexbox for layout */
-  border: 1px solid #4cd964; /* Green border */
-  width: 100%; /* Full width */
-  height: 650px; /* Fixed height */
-  position: relative; /* Relative positioning */
-  justify-content: center; /* Horizontal centering */
-  /* No need for align-items since it's already centered by the flex container */
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  border: 1px solid #4cd964;
+  width: 100%;
+  height: 650px;
+  position: relative;
+  justify-content: center;
  }
  
  .mainImageView {
@@ -141,21 +140,23 @@
  }
  
  .closeButton {
-  position: absolute; /* Absolute positioning within the mainProductView */
-  top: 10px; /* Top offset */
-  right: 10px; /* Right offset */
-  width: 30px; /* Button width */
-  height: 30px; /* Button height */
-  background: none; /* Transparent background */
-  border: none; /* No border */
-  cursor: pointer; /* Pointer cursor on hover */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px; /* Control the width of the button */
+  height: 30px; /* Control the height of the button */
+  background: none;
+  border: none;
+  cursor: pointer;
  }
+ 
 
  .closeButton img {
-  width: 100%; /* Full width of the button */
-  height: 100%; /* Full height of the button */
-  fill: black; /* Black fill color for SVG images */
+  width: 100%; /* Make the image take up the full width of the button */
+  height: 100%; /* Make the image take up the full height of the button */
+  fill: black;
  }
+ 
  .productTitle {
   font-size: 2em; /* Control the size of the title */
   color: black; /* Control the color of the title */
