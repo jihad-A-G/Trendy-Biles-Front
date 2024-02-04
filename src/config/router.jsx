@@ -37,6 +37,13 @@ const router = createBrowserRouter([
           console.log(response.data);
           return response.data;
         },
+        // loader: async () => {
+        //   const response = await axios.get(
+        //     "http://localhost:4000/api/productDetails/"
+        //   );
+        //   console.log(response.data);
+        //   return response.data;
+        // },
       },
       {
         path: "customer-support",

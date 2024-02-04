@@ -3,23 +3,23 @@ import React ,{useContext} from 'react';
 import { Carousel, Container } from 'react-bootstrap';
 import HomePageSlider from "../../Components/HomePageSlider/HomePageSlider.jsx"
 import { useLoaderData  } from 'react-router-dom'
-import AppleProducts2 from '../../assets/appleProducts2.webp'
 import HomeSliderimg1 from "../../assets/Home1.jpg"
 import HomeSliderimg2 from "../../assets/Home2.jpg"
 import HomeSliderimg3 from "../../assets/Home3.jpg"
 import HomeSliderimg5 from "../../assets/Home7.jpg"
+import HomeSliderimg6 from "../../assets/Home15.jpg"
+import HomeSliderimg8 from "../../assets/Home17.jpg"
+import HomeSliderimg11 from "../../assets/Home20.jpg"
 import HomeCenter1 from "../../assets/Home10.jpg"
 import HomeCenter2 from "../../assets/Home11.jpg"
 import HomeCenter3 from "../../assets/Home12.jpg"
 import HomeCenter4 from "../../assets/Home13.jpg"
 import HomeCenter5 from "../../assets/Home14.jpg"
-import Iphones from '../../assets/Iphones.jpg';
-import SamPhone from '../../assets/samphone.jpg';
-import Lenovo from '../../assets/LENOVO.png';
 import Samsung from '../../assets/samsung.jpg';
 import S24 from '../../assets/S24.png';
 import ACER from '../../assets/ACER.png';
 import Tecno from '../../assets/TECNO.png';
+import MSI from "../../assets/MSI-Logo.png";
 import LenovoBrand from '../../assets/LENOVO-LOGO.png';
 import Huwawi from '../../assets/HUAWIE.png';
 import LG from '../../assets/LG.png';
@@ -29,9 +29,9 @@ import './HomePage.css';
 import { AuthContext } from "../../utils/AuthContext";
 
 const images = [
-  Lenovo,  AppleProducts2,
-  ,SamPhone,
-  Iphones,S24,
+  HomeSliderimg11,
+  HomeSliderimg6,
+  HomeSliderimg8,
   HomeSliderimg1,
   HomeSliderimg2,
   HomeSliderimg3,
@@ -43,6 +43,7 @@ const popularPhoneBrands = [
   LenovoBrand,ACER,
   LG,Tecno,PS,
   AppleIcon,
+  MSI,
 ];
 
 const cardData = [
@@ -96,23 +97,35 @@ const HomePage = () => {
       <MovementBanner /> 
 
       <h2 className="deals-header">DEALS</h2>
-
-
-
-<Carousel interval={null} indicators={false} controls={true} className="card-carousel">
-  {[0, 1, 2].map((startIndex) => (
+      <Carousel interval={null} indicators={false} controls={true} className="card-carousel">
+ {[0, 1, 2].map((startIndex) => (
     <Carousel.Item key={startIndex}>
       <div className="card-container">
-        {cardData.slice(startIndex, startIndex + 3).map((card, index) => (
-          <div key={index} className="card" style={{ width: '300px', height: '400px' }}>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-          </div>
-        ))}
+        {data
+          .filter(item => item.details && item.details[0].deal)
+          .slice(startIndex, startIndex + 3)
+          .map((item, index) => {
+            // Assuming item.details[0] has the necessary properties
+            const detail = item.details[0];
+            const image = detail.images[0]; // Select the first image from the array
+            console.log(`Image URL for ${detail.specificName}: http://localhost:4000/${image}`); // Log the image URL
+            return (
+              <div key={detail._id} className="card" style={{ width: '300px', height: '400px' }}>
+                <img src={`http://localhost:4000/${image}`} alt={detail.specificName} />
+                <p>Deal Price: ${detail.dealPrice}</p>
+              </div>
+            );
+          })}
       </div>
     </Carousel.Item>
   ))}
 </Carousel>
+
+
+
+
+
+
 <h2 className="deals-header">BRANDS</h2>
 
 
