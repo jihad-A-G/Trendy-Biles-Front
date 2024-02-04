@@ -18,18 +18,18 @@ const Footer = () => {
             <h2>NAVIGATE</h2>
             <Link to="/">Home</Link>
             <Link to="/products">Products</Link>
-            <Link to="/Category">Categories</Link>
+            <Link to="/categories">Categories</Link>
             <Link to="/contact">ContactUs</Link>
             <Link to="/about">AboutUs</Link>
             <Link to="/Register">Register</Link>
           </div>
           <div className="links-column">
             <h2>CATEGORIES</h2>
-            <Link to="/deals">DEALS</Link>
-            <Link to="/laptops">LAPTOPS</Link>
-            <Link to="/phones">PHONES</Link>
-            <Link to="/accessories">Accessories</Link>
-            <Link to="/pc">PC</Link>
+            <Link to="/categories/deals">DEALS</Link>
+            <Link to="categories/laptops">LAPTOPS</Link>
+            <Link to="categories/phones">PHONES</Link>
+            <Link to="categories/accessories">Accessories</Link>
+            <Link to="categories/pc">PC</Link>
           </div>
           <div className="links-column socials-column">
             <h2>Social Media</h2>
