@@ -21,7 +21,7 @@ const AdminLogin = () => {
     try {
         const response = await axios.post("http://localhost:4000/api/admins/login", loginForm)
         const token = response.data.token;
-        document.cookie = `token=${token}; path=/;`;
+        localStorage.setItem('token', token);
         const decoded = (jwtDecode(token));
         console.log('decoded role',decoded.roles.name);
         setRole(decoded.roles.name);
@@ -37,6 +37,7 @@ const AdminLogin = () => {
       });
     }
  }
+ 
 
 
 

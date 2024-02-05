@@ -9,7 +9,7 @@
 
   const RegisterLogin = () => {
     const navigate = useNavigate();
-    const {setId} = useInfo();
+    const {setId,setUserLogin} = useInfo();
 
     const [loginForm, setLoginForm] = useState({
       email:'',
@@ -24,17 +24,19 @@
       address:''
     });
 
+    
+
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
           const response = await axios.post("http://localhost:4000/api/users/login", loginForm)
-          console.log("hiiiiiiiiii")
           const token = response.data.token;
-          console.log('hyy',token);
+          localStorage.setItem('token', token);
           const decoded = (jwtDecode(token));
-          console.log('decoooooooodeeeeeed',decoded.id);
+          console.log(decoded);
           setId(decoded.id);
-          document.cookie = `token=${token}; path=/;`;
+          console.log(setId);
+          setUserLogin(true);
           navigate("/");
       }
 

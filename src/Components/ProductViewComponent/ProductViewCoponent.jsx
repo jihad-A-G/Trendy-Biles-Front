@@ -6,6 +6,7 @@ import closeIcon from "../../assets/images/CloseIcon.svg";
 
 const ProductViewComponent = ({ product, onClose, className }) => {
  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+ const [selectedItem, setSelectedItem] = useState();
  const currentDetailIndex = useRef(0);
 
  const handleImageChange = (index) => {
@@ -19,11 +20,32 @@ const ProductViewComponent = ({ product, onClose, className }) => {
     setCurrentImageIndex(index);
  };
 
+ const handleAddToCart = (detail) => {
+  console.log('detailsss in cart', detail);
+  // Ensure that detail exists
+  if (detail) {
+    // Add the detail to the cart (local storage)
+    const existingCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const existingItem = existingCartItems.find(item => item._id === detail._id);
+
+    if (!existingItem) {
+      existingCartItems.push(detail);
+      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      alert('Item added to cart!');
+    } else {
+      alert('Item is already in the cart!');
+    }
+  } else {
+    alert('Invalid detail.');
+  }
+};
+
  if (!product || !product.details || !product.categories || !product.brand) {
     return null;
  }
 
- const { productName } = product;
+ const { productName,_id } = product;
+ console.log("productttttttttttt",product);
  const details = product.details || [];
  const brand = product.brand.name;
 
@@ -98,7 +120,7 @@ const ProductViewComponent = ({ product, onClose, className }) => {
                  </div>
                 </div>
                 <div className="mainButtonsView">
-                 <button className="addCartButtonView">Add to Cart</button>
+                <button className="addCartButtonView" onClick={() => handleAddToCart(detail)}>Add to Cart</button>
                  <button className="buyButtonView">Buy</button>
                 </div>
               </div>
