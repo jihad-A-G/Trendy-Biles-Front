@@ -27,8 +27,7 @@ import AppleIcon from  '../../assets/APPLE.png';
 import PS from '../../assets/PS.png';
 import './HomePage.css';
 // import { AuthContext } from "../../utils/AuthContext";
-import { useInfo } from '../../utils/AuthContext';
-
+import { useInfo } from '../../utils/AuthContext.jsx';
 const images = [
   HomeSliderimg11,
   HomeSliderimg6,
@@ -59,7 +58,6 @@ const cardData = [
 
 const HomePage = () => {
   const data = useLoaderData()
-  const { info } = useInfo();
   const {id} = useInfo();
   console.log('The decodedId from the context', id);
   
@@ -99,34 +97,30 @@ const HomePage = () => {
       <MovementBanner /> 
 
       <h2 className="deals-header">DEALS</h2>
+
+
+
       <Carousel interval={null} indicators={false} controls={true} className="card-carousel">
- {[0, 1, 2].map((startIndex) => (
-    <Carousel.Item key={startIndex}>
-      <div className="card-container">
-        {data
-          .filter(item => item.details && item.details[0].deal)
-          .slice(startIndex, startIndex + 3)
-          .map((item, index) => {
-            // Assuming item.details[0] has the necessary properties
-            const detail = item.details[0];
-            const image = detail.images[0]; // Select the first image from the array
-            console.log(`Image URL for ${detail.specificName}: http://localhost:4000/${image}`); // Log the image URL
-            return (
-              <div key={detail._id} className="card" style={{ width: '300px', height: '400px' }}>
-                <img src={`http://localhost:4000/${image}`} alt={detail.specificName} />
-                <p>Deal Price: ${detail.dealPrice}</p>
-              </div>
-            );
-          })}
-      </div>
-    </Carousel.Item>
-  ))}
+      {[0, 1, 2].map((startIndex) => (
+  <Carousel.Item key={startIndex}>
+    <div className="card-container">
+      {data.slice(startIndex, startIndex + 3).map((card, index) => {
+        // Check if the product has a true deal before displaying
+        if (card) {
+          return (
+            <div key={index} className="card" style={{ width: '300px', height: '400px' }}>
+              <h3>{card.details[0].specificName}</h3>
+              <p>{card.description}</p>
+            </div>
+          );
+        } else {
+          return null; // or any other fallback if needed
+        }
+      })}
+    </div>
+  </Carousel.Item>
+))}
 </Carousel>
-
-
-
-
-
 
 <h2 className="deals-header">BRANDS</h2>
 
