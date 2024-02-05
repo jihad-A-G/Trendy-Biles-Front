@@ -9,6 +9,7 @@ import "../NewNavbar/NewNav.css";
 import UserIcon from "../../assets/USERICON.png";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
+import { useInfo } from "../../utils/AuthContext"; 
 import axios from "axios";
 
 const NewNavbar = () => {
@@ -18,7 +19,8 @@ const NewNavbar = () => {
   const location = useLocation();
   const [categories, setCategories] = useState([]);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const isLoggedIn = document.cookie.includes("token");
+  const {userlogin} = useInfo();
+  console.log("the icon is ",userlogin);
 
   const toggleUserDropdown = () => {
     setShowUserDropdown(!showUserDropdown);
@@ -73,24 +75,19 @@ const NewNavbar = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      // Make a request to the server to log the user out
-      await axios.post("http://localhost:4000/api/users/logout");
-
-      // Clear the token from the client-side by setting an expired cookie
-      document.cookie =
-        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      // Clear the token from the local storage
+      localStorage.removeItem("token");
 
       // Navigate to the home page or any other desired location
       navigate("/");
 
-      console.log("User logged out");
+      console.log("Token deleted");
     } catch (error) {
-      console.error("Logout error:", error);
+      console.error("Delete token error:", error);
     }
   };
-
   return (
     <header className="headerNavbar sticky">
       <img
@@ -178,7 +175,7 @@ const NewNavbar = () => {
           Login
         </Link>
 
-        {isLoggedIn && (
+        {userlogin && (
           <div className="user-icon-container">
             <img
               className="Home-User-Icon"
