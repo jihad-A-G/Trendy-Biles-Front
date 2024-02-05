@@ -27,8 +27,7 @@ import AppleIcon from  '../../assets/APPLE.png';
 import PS from '../../assets/PS.png';
 import './HomePage.css';
 // import { AuthContext } from "../../utils/AuthContext";
-import { useInfo } from '../../utils/AuthContext';
-
+import { useInfo } from '../../utils/AuthContext.jsx';
 const images = [
   Lenovo,  AppleProducts2,
   ,SamPhone,
@@ -58,7 +57,6 @@ const cardData = [
 
 const HomePage = () => {
   const data = useLoaderData()
-  const { info } = useInfo();
   const {id} = useInfo();
   console.log('The decodedId from the context', id);
   

@@ -5,6 +5,7 @@ import { AuthContext } from './AuthContext';
 export const SuperAdminProtectedRoute = ({ children }) => {
   const { auth,role } = useContext(AuthContext);
     console.log("the auth in the protected" , auth)
+    console.log("the role in the protected" , role)
      if (!auth || role != 'Super-Admin' ) {
       return <Navigate to="/not-found" replace />;
     }
