@@ -27,7 +27,6 @@ const AdminLogin = () => {
         setRole(decoded.roles.name);
         setId(decoded.id);
         setAuth(true);
-        socket.emit('joinSuperAdminRoom',decoded)
         navigate("/admin-dashboard");
     }
     catch (err) {

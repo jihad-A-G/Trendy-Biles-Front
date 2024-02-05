@@ -10,6 +10,8 @@ import CategoryPage from "../Pages/CategoriesPage/Categories.jsx";
 import AdminLayout from "../adminDashboard/dashboardLayout";
 import axios from "axios";
 import App from "../App";
+import AddProduct from "../adminDashboard/products/addProduct";
+import EditProduct from "../adminDashboard/products/editProduct";
 import ProductsPage from "../adminDashboard/products/productsPage.jsx";
 import AboutusPage from "../adminDashboard/aboutUsPage";
 import NotFound from "../Pages/NotFoundPage/NotFound";
@@ -17,8 +19,6 @@ import OrdersTable from "../adminDashboard/orders/ordersTable";
 import Cookies from "js-cookie";
 import Categories from "../adminDashboard/category/categoriesPage";
 import AddCategory from "../adminDashboard/category/categoryAddForm";
-import AddProduct from "../adminDashboard/products/addProduct";
-import EditProduct from "../adminDashboard/products/editProduct";
 import EditCategory from "../adminDashboard/category/categoryEditForm";
 import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
@@ -39,7 +39,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             "http://localhost:4000/api/products/"
           );
-          console.log(response.data);
           return response.data;
         },
       },
@@ -71,7 +70,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "Category",
+        path: "/categories",
         element: <CategoryPage />,
         loader: async () => {
           const response = await axios.get(
@@ -97,20 +96,8 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/phones",
-        element: <AnyCategoryPage categoryPage={"Phones"} />,
-      },
-      {
-        path: "/laptops",
-        element: <AnyCategoryPage categoryPage={"Laptops"} />,
-      },
-      {
-        path: "/pc",
-        element: <AnyCategoryPage categoryPage={"PC"} />,
-      },
-      {
-        path: "/accessories",
-        element: <AnyCategoryPage categoryPage={"Accessories"} />,
+        path: "categories/:categoryIdName",
+        element: <AnyCategoryPage />,
       },
     ],
   },
@@ -163,7 +150,7 @@ const router = createBrowserRouter([
 
           return redirect('/admin-dashboard/products')
           // return null
-        
+
         }
 
       },
@@ -203,7 +190,8 @@ const router = createBrowserRouter([
         }
 
       },
-     
+
+      
       {
         path: "aboutus",
         element: <SuperAdminProtectedRoute><AboutusPage /></SuperAdminProtectedRoute>,
@@ -345,3 +333,7 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
+
+
+
