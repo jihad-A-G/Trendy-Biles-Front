@@ -57,12 +57,21 @@ const cardData = [
   { title: 'Card 7', description: 'Description 7' },
 ];
 
+
 const HomePage = () => {
-  const data = useLoaderData()
-  const { info } = useInfo();
-  const {id} = useInfo();
-  console.log('The decodedId from the context', id);
+  const products = useLoaderData();
+
+  const productsWithDeals = products.filter(product =>
+     product.details.some(detail => detail.deal === true)
+  );
+
+
+
+
+
   
+    const { info, id } = useInfo(); // Call useInfo once and store the result
+  console.log('The decodedId from the context', id);
 
   const MovementBanner = () => {
     const bannerText = 'Welcome to TrendyBiles We sell phones, computers, accessories, and more!';
@@ -71,7 +80,7 @@ const HomePage = () => {
         <p>{bannerText}</p>
       </div>
     );
-  };
+  };    
 
   const PopularPhoneBrandsBanner = () => {
     const data  = useLoaderData();
@@ -88,7 +97,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-    <Carousel interval={5000} style={{ height:'80vh' }}>
+      <Carousel interval={5000} style={{ height: '80vh' }}>
         {images.map((image, index) => (
           <Carousel.Item key={index}>
             <img className="custom-carousel-image" src={image} alt={`Slide ${index + 1}`} />
@@ -96,39 +105,33 @@ const HomePage = () => {
         ))}
       </Carousel>
 
-      <MovementBanner /> 
+      <MovementBanner />
 
       <h2 className="deals-header">DEALS</h2>
       <Carousel interval={null} indicators={false} controls={true} className="card-carousel">
- {[0, 1, 2].map((startIndex) => (
-    <Carousel.Item key={startIndex}>
-      <div className="card-container">
-        {data
-          .filter(item => item.details && item.details[0].deal)
-          .slice(startIndex, startIndex + 3)
-          .map((item, index) => {
-            // Assuming item.details[0] has the necessary properties
-            const detail = item.details[0];
-            const image = detail.images[0]; // Select the first image from the array
-            console.log(`Image URL for ${detail.specificName}: http://localhost:4000/${image}`); // Log the image URL
-            return (
-              <div key={detail._id} className="card" style={{ width: '300px', height: '400px' }}>
-                <img src={`http://localhost:4000/${image}`} alt={detail.specificName} />
-                <p>Deal Price: ${detail.dealPrice}</p>
+        {productsWithDeals.map((product, index) => {
+          const dealDetail = product.details.find(detail => detail.deal === true);
+          if (!dealDetail) return null; // Skip if no deal detail found
+
+          // Extract category names from the categories array
+          const categoryNames = product.categories.map(category => category.name).join(', ');
+
+          return (
+            <Carousel.Item key={index}>
+            <div className="card-container">
+              <div className="card" style={{ width: '300px', height: '400px' }}>
+               <img src={`http://localhost:4000/images/${dealDetail.images[0]}`} alt={product.productName} />
+               <p>Product Name: {product.productName}</p>
+               <p>Category: {categoryNames}</p>
+               <p>Deal Price: ${dealDetail.dealPrice}</p>
               </div>
-            );
-          })}
-      </div>
-    </Carousel.Item>
-  ))}
-</Carousel>
+            </div>
+          </Carousel.Item>
+        );
+      })}
+    </Carousel>
 
-
-
-
-
-
-<h2 className="deals-header">BRANDS</h2>
+      <h2 className="deals-header">BRANDS</h2>
 
 
 <PopularPhoneBrandsBanner />
@@ -148,5 +151,5 @@ const HomePage = () => {
     </div>
   );
 };
-
+  
 export default HomePage;

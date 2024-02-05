@@ -84,7 +84,7 @@
       })
 
       setLoginForm({
-        ...form,
+        ...loginForm,
         [name]:value,
       })
     }
