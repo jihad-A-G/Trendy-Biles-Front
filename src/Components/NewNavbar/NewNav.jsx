@@ -9,7 +9,7 @@ import "../NewNavbar/NewNav.css";
 import UserIcon from "../../assets/USERICON.png";
 import chevron from "../../assets/chevron.png";
 import { IoCartOutline } from "react-icons/io5";
-import { useInfo } from "../../utils/AuthContext"; 
+import { useInfo } from "../../utils/AuthContext";
 import axios from "axios";
 
 const NewNavbar = () => {
@@ -19,8 +19,8 @@ const NewNavbar = () => {
   const location = useLocation();
   const [categories, setCategories] = useState([]);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const {userlogin} = useInfo();
-  console.log("the icon is ",userlogin);
+  const { userlogin,setUserLogin } = useInfo();
+  console.log("the icon is ", userlogin);
 
   const toggleUserDropdown = () => {
     setShowUserDropdown(!showUserDropdown);
@@ -80,14 +80,19 @@ const NewNavbar = () => {
       // Clear the token from the local storage
       localStorage.removeItem("token");
 
+  
+      // Reset user login state
+      setUserLogin(false);
+  
       // Navigate to the home page or any other desired location
       navigate("/");
-
+      
       console.log("Token deleted");
     } catch (error) {
       console.error("Delete token error:", error);
     }
   };
+  
   return (
     <header className="headerNavbar sticky">
       <img
@@ -149,7 +154,10 @@ const NewNavbar = () => {
             </Link>
             <div className="menu">
               {categories.map((category) => (
-                <Link key={category._id} to={`categories/${category.name.toLowerCase()}`}>
+                <Link
+                  key={category._id}
+                  to={`categories/${category.name.toLowerCase()}`}
+                >
                   {category.name.toLowerCase()}
                 </Link>
               ))}
@@ -167,13 +175,16 @@ const NewNavbar = () => {
             </div>
           </div>
         </div>
-        <Link to="/CheckOut" className="Cart" onClick={handleClickCart}>
-          <IoCartOutline />
-          {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
-        </Link>
-        <Link to="/Register" className="join-link">
-          Login
-        </Link>
+        {userlogin ? (
+          <Link to="/CheckOut" className="Cart">
+            <IoCartOutline />
+            {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
+          </Link>
+        ) : (
+          <Link to="/Register" className="join-link">
+            Login
+          </Link>
+        )}
 
         {userlogin && (
           <div className="user-icon-container">

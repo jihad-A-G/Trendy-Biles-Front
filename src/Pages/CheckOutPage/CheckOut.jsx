@@ -1,36 +1,52 @@
-// CheckOutPage.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./CheckOut.css";
 import { Link } from "react-router-dom";
 import { useInfo } from "../../utils/AuthContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CheckOutPage = () => {
   const { id } = useInfo();
   const navigate = useNavigate();
-  const initialItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const itemsWithQuantity = initialItems.map(item => ({
-    ...item,
-    quantity: item.quantity || 1,
-  }));
 
-  const [items, setItems] = useState(itemsWithQuantity);
+  // Define a function to get initial items from local storage
+  const getInitialItems = () => {
+    const initialItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    // Initialize quantity of each product to 1
+    return initialItems.map(item => ({
+      ...item,
+      quantity: 1,
+      initialQuantity: item.quantity || 1, // Store initial quantity in a new variable
+    }));
+  };
+
+  // Use state and set initial items using the function defined above
+  const [items, setItems] = useState(getInitialItems());
 
   const handleDeleteAll = () => {
     setItems([]);
     localStorage.removeItem("cartItems");
   };
 
-  const updateQuantity = (itemId, delta) => {
+  const updateQuantity = (index, delta) => {
     setItems(prevItems =>
-      prevItems.map(item =>
-        item.id === itemId && item.quantity + delta >= 1 && item.quantity + delta <= item.maxQuantity
-          ? { ...item, quantity: item.quantity + delta }
-          : item
-      )
+      prevItems.map((item, i) => {
+        if (index === i) {
+          const newQuantity = item.quantity + delta;
+          // Check if the new quantity exceeds the maximum allowed quantity
+          if (newQuantity < 1 || newQuantity > item.initialQuantity) {
+            toast.error("Maximum quantity exceeded.");
+            return item; // Do not update quantity if it exceeds the maximum
+          }
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      })
     );
   };
+  
 
   const calculateTotalAmount = () => {
     return items.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -43,6 +59,11 @@ const CheckOutPage = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
+      if (items.length === 0) {
+        toast.error("Cart is empty. Please add items before placing an order.");
+        return; 
+      }
+  
       const orderData = {
         userId: id,
         products: items.map(item => ({
@@ -51,21 +72,24 @@ const CheckOutPage = () => {
         })),
         totalPrice: calculateTotalAmount(),
       };
-
-      const add = await axios.post("http://localhost:4000/api/orders/", orderData);
+  
+      await axios.post("http://localhost:4000/api/orders/", orderData);
       navigate("/");
+      toast.success("Order placed successfully!");
+      localStorage.removeItem("cartItems"); 
     } catch (err) {
       console.log(err);
+      toast.error("Error placing order"); // Show error toast
     }
   };
-
+  
   return (
     <div className="checkout-container">
       <div className="navigation-links">
         <Link to="/">Home</Link> / <span className="current-page">Cart</span>
       </div>
       <h1 className="page-heading">Shopping Cart ({items.length})</h1>
-
+  
       {/* Headers for the cart */}
       <div className="cart-headers">
         <h3 className="header-product">Product</h3>
@@ -74,19 +98,25 @@ const CheckOutPage = () => {
         <h3 className="header-total">Total</h3>
       </div>
       <div className="cart-items">
-        {items.map(item => (
+        {items.map((item, index) => (
           <div className="cart-item" key={item.id}>
             <div className="product-info">
-              <img src={item.images} alt={item.name} className="product-image" />
+              {item.images.length > 0 && (
+                <img src={item.images[0]} alt={item.name} className="product-image" />
+              )}
               <span className="product-name">{item.name}</span>
             </div>
-            <span className="product-price">${item.price}</span>
+            <span className="product-price">
+              ${item.dealPrice ? item.dealPrice : item.price}
+            </span>
             <div className="quantity-controls">
-              <button onClick={() => updateQuantity(item.id, -1)} className="quantity-btn">-</button>
+              <button onClick={() => updateQuantity(index, -1)} className="quantity-btn">-</button>
               <span className="quantity">{item.quantity}</span>
-              <button onClick={() => updateQuantity(item.id, 1)} className="quantity-btn">+</button>
+              <button onClick={() => updateQuantity(index, 1)} className="quantity-btn">+</button>
             </div>
-            <span className="total-price">${item.price * item.quantity}</span>
+            <span className="total-price">
+              ${item.dealPrice ? item.dealPrice * item.quantity : item.price * item.quantity}
+            </span>
           </div>
         ))}
       </div>
@@ -100,6 +130,8 @@ const CheckOutPage = () => {
       </div>
     </div>
   );
+  
+  
 };
 
 export default CheckOutPage;

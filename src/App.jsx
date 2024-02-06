@@ -4,6 +4,7 @@ import Footer from "./Components/Footer/Footer.jsx";
 import NewNavbar from "./Components/NewNavbar/NewNav.jsx";
 import "./App.css";
 import socket from "./config/socket-client.js";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   useEffect(()=>{
     
@@ -16,6 +17,7 @@ return ()=>{
   },[])
   return (
     <div>
+      <ToastContainer />
       <NewNavbar />
       <Outlet />
       <Footer />
