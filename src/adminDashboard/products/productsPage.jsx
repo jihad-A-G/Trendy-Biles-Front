@@ -46,7 +46,7 @@ const ProductsPage = () =>{
     </li>
   </ul>
   </div>
-                <Button className='bg-danger border-0'><i className="bi bi-trash-fill"></i> Remove rejected</Button>
+                <Button variant='primary'><Link className="text-white " style={{textDecoration: "none"}} to={'add-product-details'}><i class="bi bi-plus-circle"></i> Add product details</Link></Button>
                 <Button variant='primary'><Link className="text-white " style={{textDecoration: "none"}} to={'add-product'}><i class="bi bi-plus-circle"></i> Add product</Link></Button>
             </div>
         </Container>

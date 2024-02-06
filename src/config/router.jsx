@@ -24,6 +24,7 @@ import CheckOutPage from "../Pages/CheckOutPage/CheckOut.jsx";
 import AnyCategoryPage from "../Components/ProductPageComponent/ProductPageComponent.jsx";
 import AdminLogin from "../Pages/AdminLogIn/AdminLogin.jsx";
 import {ProtectedRoute, SuperAdminProtectedRoute} from "../utils/ProtectedRoute.jsx"
+import AddProductDetails from "../adminDashboard/products/addProductDetails.jsx";
 axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
@@ -65,7 +66,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             "http://localhost:4000/api/products/"
           );
-          console.log(response.data);
           return response.data;
         },
       },
@@ -76,7 +76,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             "http://localhost:4000/api/categories/"
           );
-          console.log(response.data);
           return response.data;
         },
       },
@@ -108,6 +107,26 @@ const router = createBrowserRouter([
     element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
     children: [
       {
+        path:'readNotification',
+        action:async({request}) =>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+          const response = await axios.post('http://localhost:4000/api/notifications',{...data})
+          // return redirect(`/admin-dashboard/${data.table}`)
+          return null
+        }
+      },
+      {
+        path:'readNotificationAndRedirect',
+        action:async({request}) =>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+          const response = await axios.post('http://localhost:4000/api/notifications',{...data})
+          return redirect(`/admin-dashboard/${data.table}`)
+          // return null
+        }
+      },
+      {
         path: "products",
         element: <ProtectedRoute><ProductsPage /></ProtectedRoute>,
         loader: async () => {
@@ -120,7 +139,6 @@ const router = createBrowserRouter([
           const formData = await request.formData()
           const data = Object.fromEntries(formData)
           const response = await axios.delete(`http://localhost:4000/api/products/${data.id}`)
-          console.log(response);
           return redirect('/admin-dashboard/products')
         }
       },
@@ -144,9 +162,7 @@ const router = createBrowserRouter([
           const data = Object.fromEntries(formData)
           const parsedData = JSON.parse(data.formData)
           const dataToSubmit = {productName:data.productName,description:data.description,brand:data.brand,categories:parsedData.categories,details:parsedData.details}
-          console.log(dataToSubmit);
           const response = await axios.post('http://localhost:4000/api/products',{...dataToSubmit})
-          console.log(response.data);
 
           return redirect('/admin-dashboard/products')
           // return null
@@ -184,11 +200,29 @@ const router = createBrowserRouter([
 
 
           const response = await axios.patch(`http://localhost:4000/api/products/${params.id}`,{...dataToSubmit})
-          console.table(response);
 
           return redirect('/admin-dashboard/products')
         }
 
+      },
+      {
+        path:'products/add-product-details',
+        element:<AddProductDetails/>,
+         action:async({request}) =>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+          if(data.deal =="on"){
+            data.deal = true
+          }else{
+            data.deal = false
+          }
+          console.log(data);
+
+          const response = await axios.post("http://localhost:4000/api/productDetails")
+
+          return redirect('/admin-dashboard/products')
+          return null
+         }
       },
 
       
@@ -207,7 +241,6 @@ const router = createBrowserRouter([
         action: async ({ request }) => {
           const formData = await request.formData();
           const data = Object.fromEntries(formData);
-          console.log(data);
 
           const response = await axios.put(
             "http://localhost:4000/api/aboutus/",
@@ -236,7 +269,6 @@ const router = createBrowserRouter([
               },
             }
           );
-          console.log(response.data);
           return response.data;
         },
       },
@@ -247,7 +279,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             "http://localhost:4000/api/categories/"
           );
-          console.log(response.data);
           return response.data;
         },
       },
@@ -267,7 +298,6 @@ const router = createBrowserRouter([
               },
             }
           );
-          console.log(response);
           return redirect("/admin-dashboard/categories");
         },
       },
@@ -277,7 +307,6 @@ const router = createBrowserRouter([
           const response = await axios.delete(
             `http://localhost:4000/api/categories/${params.id}`
           );
-          console.log(response);
           return redirect("/admin-dashboard/categories");
         },
       },
@@ -288,7 +317,6 @@ const router = createBrowserRouter([
           const response = await axios.get(
             `http://localhost:4000/api/categories/${params.id}`
           );
-          console.log(response);
           return response.data;
         },
         action: async ({ request, params }) => {
@@ -304,10 +332,16 @@ const router = createBrowserRouter([
               },
             }
           );
-          console.log(response);
 
           return redirect("/admin-dashboard/categories");
         },
+      },
+      {
+        path:'logout',
+        action:async()=>{
+          const response = await axios.post('http://localhost:4000/api/admins/logout')
+          return redirect('/adminlogin')
+        }
       },
     ],
   },
@@ -318,7 +352,6 @@ const router = createBrowserRouter([
     action: async ({ request }) => {
       const formData = await request.formData();
       const data = Object.fromEntries(formData);
-      console.log(data);
 
       const response = await axios.post("http://localhost:4000/api/users/", {
         ...data,

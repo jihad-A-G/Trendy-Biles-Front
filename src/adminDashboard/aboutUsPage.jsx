@@ -43,10 +43,10 @@ if (file) {
   <label htmlFor="companyName" className="form-label">Company Name</label>
   <input type="text" name='companyName' className="form-control" id="companyName" defaultValue={data.companyName}/>
 </div>
-      <div className="mb-3">
-  <label htmlFor="logoImage" className="form-label">Company Logo</label>
-  <input type="file" name='logoImage' className="form-control" id="logoImage" onChange={handleEditImg}/>
-</div>
+        <div className="mb-3">
+    <label htmlFor="logoImage" className="form-label">Company Logo</label>
+    <input type="file" name='logoImage' className="form-control" id="logoImage" onChange={handleEditImg}/>
+  </div>
 <div className="mb-3">
   {img?<img src={img} alt="" width={260} height={230}/>:<div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
