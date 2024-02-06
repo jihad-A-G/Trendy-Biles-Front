@@ -33,3 +33,31 @@
 .bg-white{
     background-color: white !important;
 }
+
+.scrollable-menu {
+    max-height: 200px !important; /* Adjust the max-height according to your needs */
+    overflow-y: auto !important;
+   }
+
+   .dropdown-width{
+    width: 200px !important;
+   }
+   .fs-7{
+    font-size:small !important;
+   }
+  .cancel:focus, .cancel:active{
+    outline: none !important;
+  }
+
+  .link-btn{
+    border: 0 !important;
+    outline: none !important;
+    background-color: white !important;
+    color: blue !important;
+
+  }
+  .logout-btn{
+    border: 0 !important;
+    outline: none !important;
+    background-color: white !important;
+  }

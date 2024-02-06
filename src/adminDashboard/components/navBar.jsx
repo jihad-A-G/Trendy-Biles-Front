@@ -1,5 +1,5 @@
 import {Image, Navbar, Container } from 'react-bootstrap';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Form, Link, useFetcher} from 'react-router-dom';
 import logo from '../../assets/FullLogo2.jpg'
 import profile from '../../assets/images/user.png'
 import { useState,useEffect } from 'react';
@@ -7,18 +7,29 @@ import axios from 'axios';
 import { useInfo } from '../../utils/AuthContext';
 import socket from '../../config/socket-client';
 const AdminNavBar = () => {
+  const fetcher = useFetcher()
   const [aboutus,setAboutus] = useState(null)
   const [displayedNotifications,setDisplayedNotifications] = useState([])
   const {role} = useInfo()
+  // const [notifications,setNotifications] = useState([])
 
+  const handleNotification = async() =>{
+    const response = await axios.get('http://localhost:4000/api/notifications')
+    setDisplayedNotifications(response.data.notifications)
+    console.log('notification displayed from the navbar ');
+  }
   
   const handleAboutus = async() =>{
     const response = await axios.get('http://localhost:4000/api/aboutus')
     setAboutus(response.data.aboutus) 
   }
   useEffect(()=>{
-    console.log('effect');
     handleAboutus()
+    handleNotification()
+    socket.on('notification',handleNotification)
+    socket.on('connect',()=>{
+      console.log('connected from navbar');
+    })
   },[])
   
   return(
@@ -26,7 +37,7 @@ const AdminNavBar = () => {
   <Navbar bg="white" expand='lg' className='border-bottom px-2'>
     <Container className='' fluid>
       {aboutus?<Navbar.Brand href="#home"><Image className='d-none d-md-inline-block' src={`http://localhost:4000/${aboutus.logoImage}`} style={{  height: '80px' }}/>  
-      </Navbar.Brand>:<div class="spinner-border" role="status">
+      </Navbar.Brand>:<div className="spinner-border" role="status">
       <span className="visually-hidden">Loading...</span>
     </div>}
     <div className="nav-item d-flex gap-4 me-5">
@@ -42,11 +53,27 @@ const AdminNavBar = () => {
   >
     <i className="bi bi-bell"></i>
   </a>
-  <ul className="dropdown-menu scrollable-dropdown px-0 py-1 mt-2 " aria-labelledby="navbarDropdown" >
+  <ul className="dropdown-menu scrollable-menu dropdown-width px-0 py-1 mt-2 " aria-labelledby="navbarDropdown" >
   {displayedNotifications? displayedNotifications.map(n =>{
+    let time = new Date(n.time)
     return <li key={n._id} className='border-bottom py-1 px-3 text-black d-block'>
+      <div className="d-flex justify-content-between align-items-baseline">
+      <p className='fs-7 text-end m-0 p-0'>
+      <span >{`${time.getHours()} : ${time.getMinutes()}`}</span>
+      </p>
+      <fetcher.Form method='POST' action='/admin-dashboard/readNotification'>
+        <input type="hidden" name="id" id="" defaultValue={n._id} />
+        <input type="hidden" name='table' defaultValue={n.table} />
+        <button  className='btn rounded-circle cancel' type="submit"><i class="bi bi-x"></i></button>
+      </fetcher.Form>
+      </div>
       <p>{n.title}</p>
-      <Link className='link-underline link-underline-opacity-0' to={``}>{n.message}</Link>
+
+      <fetcher.Form method='POST' action='/admin-dashboard/readNotificationAndRedirect'>
+        <input type="hidden" name="id" id="" defaultValue={n._id} />
+        <input type="hidden" name='table' defaultValue={n.table} />
+        <button className='link-btn' type="submit">{n.message}</button>
+      </fetcher.Form>
       </li>
   }):<li className='border-bottom py-1 px-3 text-black d-block'>Empty</li>}
   </ul>
@@ -75,9 +102,11 @@ const AdminNavBar = () => {
     </Link>
     </li>
     <li className='' >
-      <a className='py-1 px-3 text-black d-block link-underline link-underline-opacity-0'>
+      <Form method='POST' action='/admin-dashboard/logout'>
+      <button type='submit' className='logout-btn py-1 px-3 text-black d-block link-underline link-underline-opacity-0'>
       logout
-      </a>
+      </button>
+      </Form>
     </li>
   </ul>
 </div>

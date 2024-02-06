@@ -6,7 +6,6 @@ import FullLogo from "../../assets/FullLogo2.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import { useInfo } from "../../utils/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import socket from "../../config/socket-client.js";
 const AdminLogin = () => {
  const navigate = useNavigate();
  const {setId,setAuth,setRole} = useInfo();
