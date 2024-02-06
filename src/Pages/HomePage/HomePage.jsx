@@ -3,6 +3,8 @@ import React ,{useContext} from 'react';
 import { Carousel, Container } from 'react-bootstrap';
 import HomePageSlider from "../../Components/HomePageSlider/HomePageSlider.jsx"
 import { useLoaderData  } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 import HomeSliderimg1 from "../../assets/Home1.jpg"
 import HomeSliderimg2 from "../../assets/Home2.jpg"
 import HomeSliderimg3 from "../../assets/Home3.jpg"
@@ -65,6 +67,11 @@ const HomePage = () => {
      product.details.some(detail => detail.deal === true)
   );
 
+  const navigate = useNavigate();
+
+  const handleCardClick = (categoryName) => {
+    navigate(`/categories/${categoryName}`);
+ };
 
 
 
@@ -108,22 +115,24 @@ const HomePage = () => {
       <MovementBanner />
 
       <h2 className="deals-header">DEALS</h2>
-      <Carousel interval={null} indicators={false} controls={true} className="card-carousel">
+        <Carousel interval={null} indicators={false} controls={true} className="card-carousel">
         {productsWithDeals.map((product, index) => {
           const dealDetail = product.details.find(detail => detail.deal === true);
           if (!dealDetail) return null; // Skip if no deal detail found
 
           // Extract category names from the categories array
           const categoryNames = product.categories.map(category => category.name).join(', ');
-
+          const categoryNamesSpliting = categoryNames.split(",")
           return (
             <Carousel.Item key={index}>
-            <div className="card-container">
+              
+              <div className="card-container" onClick={() => handleCardClick(categoryNamesSpliting[0].toLowerCase())}>
               <div className="card" style={{ width: '300px', height: '400px' }}>
                <img src={`http://localhost:4000/images/${dealDetail.images[0]}`} alt={product.productName} />
                <p>Product Name: {product.productName}</p>
                <p>Category: {categoryNames}</p>
                <p>Deal Price: ${dealDetail.dealPrice}</p>
+               <p> <del>Price: ${dealDetail.price}</del></p>
               </div>
             </div>
           </Carousel.Item>
